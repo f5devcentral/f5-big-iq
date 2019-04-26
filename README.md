@@ -15,7 +15,7 @@ Instructions on how to import AS3 templates using Postman
 
 1. [Install the Postman app](https://learning.getpostman.com/docs/postman/launching_postman/installation_and_updates/)
 
-2. Import the 2 Postman collections available in `f5-appsvcs-templates > default > postman`
+2. Import the tow Postman collections available on this github repository under `f5-appsvcs-templates > default > postman`
 
 ![postman_collection_import](./images/postman_collection_import.png)
 
