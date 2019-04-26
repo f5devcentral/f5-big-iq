@@ -27,7 +27,7 @@ Instructions on how to import AS3 templates using Postman
 
 ![postman_collection_bigiq_auth](./images/postman_collection_bigiq_auth.png)
 
-5. Open the Postman runner, select the Collection and Environement called `default-as3-f5-all-templates` and click `Start Run`
+5. Open the Postman runner, select the Collection and Environement called `default-as3-f5-all-templates` and click `Run default-a3-f5...`
 
 ![postman_collection_runner](./images/postman_collection_runner.png)
 
