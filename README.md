@@ -33,11 +33,11 @@ Instructions on how to import AS3 templates using Postman
 
 6. The result of the Postman running should be `200 OK`
 
-*WILL ADD SCREENSHOT 200 OK*
+![postman_collection_runner_passed](./images/postman_collection_runner_passed.png)
 
 7. Login to your `Primary BIG-IQ CM` and navigate to the `Applications` tab > `APPLICATION TEMPLATES` > `AS3 Templates` and verify they are all showing correctly.
 
-*WILL ADD SCREENSHOT BIG-IQ*
+![bigiq_as3_templates_ui](./images/bigiq_as3_templates_ui)
 
 **Note:** In order to use the templates, you will need to publish them first.
 

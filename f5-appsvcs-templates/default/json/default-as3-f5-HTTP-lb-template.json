@@ -1,6 +1,7 @@
 {
     "description": "For load balancing an HTTP application on port 80.",
-    "name": "Default-as3-f5-HTTP-lb-template",
+    "name": "Default-as3-f5-HTTP-lb-template-v4",
+    "published": false,
     "tenant": {
         "name": "default",
         "override": false,
@@ -169,7 +170,8 @@
                                 ],
                                 "addressDiscovery": "static",
                                 "serverAddresses": [],
-                                "servicePort": 80
+                                "servicePort": 80,
+                                "shareNodes": true
                             }
                         ]
                     },
