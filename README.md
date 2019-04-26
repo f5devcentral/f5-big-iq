@@ -35,9 +35,11 @@ Instructions on how to import AS3 templates using Postman
 
 *WILL ADD SCREENSHOT 200 OK*
 
-7. Login to your `Primary BIG-IQ CM` and navigate to the Applications tab > APPLICATION TEMPLATES > AS3 Templates and verify they are all showing correctly.
+7. Login to your `Primary BIG-IQ CM` and navigate to the `Applications` tab > `APPLICATION TEMPLATES` > `AS3 Templates` and verify they are all showing correctly.
 
 *WILL ADD SCREENSHOT BIG-IQ*
+
+**Note:** In order to use the templates, you will need to publish them first.
 
 8. For more information on how to use the template to deploy AS3 Application using the BIG-IQ, see [BIG-IQ documentation](https://support.f5.com/csp/knowledge-center/software/BIG-IQ?module=BIG-IQ%20Centralized%20Management&version=7.0.0)
 
