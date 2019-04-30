@@ -7,23 +7,23 @@ Use this API to define an [Application Services 3 Extension (AS3)](https://cloud
 
 You can find a list of default AS3 templates in this repository in 2 different forms:
 
-* Postman Collection (see below instructions)
-* JSON file (see the [BIG-IQ API documentation](https://clouddocs.f5.com/products/big-iq/mgmt-api/latest/ApiReferences/bigiq_public_api_ref/r_as3_template.html) for details related to creating AS3 templates)
+* A Postman collection. Instructions for using these in the BIG-IQ user interface are provided below.
+* A JSON file. The [BIG-IQ API documentation](https://clouddocs.f5.com/products/big-iq/mgmt-api/latest/ApiReferences/bigiq_public_api_ref/r_as3_template.html) provides instruction for using API calls to use AS3 templates.
 
 Instructions on how to import AS3 templates using Postman
 ---------------------------------------------------------
 
-1. [Install the Postman app](https://learning.getpostman.com/docs/postman/launching_postman/installation_and_updates/)
+1. [Install the Postman application.](https://learning.getpostman.com/docs/postman/launching_postman/installation_and_updates/)
 
-2. Import the tow Postman collections available on this github repository under `f5-appsvcs-templates > default > postman`
+2. Use the Postman Import feature to import the Postman collections available on this github repository under `f5-appsvcs-templates > default > postman`
 
 ![postman_collection_import](./images/postman_collection_import.png)
 
-3. Set your `Primary BIG-IQ CM IP address` in the Postman Environement.
+3. Set your `Primary BIG-IQ CM IP address` in the Postman environment. To do this, you set the value of the `bigiq_mgmt` variable to the management IP address of your BIG-IQ.
 
 ![postman_collection_environment](./images/postman_collection_environment.png)
 
-4. Set your BIG-IQ admin user `username` & `password` in the `POST` called `Authenticate to BIG-IQ`
+4. Specify the  BIG-IQ device's admin user `username` & `password`so that Postman can access it. To do this, edit the `POST` named `Authenticate to BIG-IQ`, as shown in the screen shot.
 
 ![postman_collection_bigiq_auth](./images/postman_collection_bigiq_auth.png)
 
@@ -35,11 +35,11 @@ Instructions on how to import AS3 templates using Postman
 
 ![postman_collection_runner_passed](./images/postman_collection_runner_passed.png)
 
-7. Login to your `Primary BIG-IQ CM` and navigate to the `Applications` tab > `APPLICATION TEMPLATES` > `AS3 Templates` and verify they are all showing correctly.
+7. Login to your `Primary BIG-IQ CM` and navigate to the `Applications` tab > `APPLICATION TEMPLATES` > `AS3 Templates` and verify that the AS3 templates you imported are listed.
 
 ![bigiq_as3_templates_ui](./images/bigiq_as3_templates_ui.png)
 
-**Note:** In order to use the templates, you will need to publish them first.
+**Note:** Before you can a template, it must be Published (read-only).
 
 8. For more information on how to use the template to deploy AS3 Application using the BIG-IQ, see [BIG-IQ documentation](https://support.f5.com/csp/knowledge-center/software/BIG-IQ?module=BIG-IQ%20Centralized%20Management&version=7.0.0)
 
