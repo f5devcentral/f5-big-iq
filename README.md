@@ -7,7 +7,7 @@ Use this API to define an [Application Services 3 Extension (AS3)](https://cloud
 
 You can find a list of default AS3 templates in this repository in 2 different forms:
 
-* A Postman collection. Instructions for using these in the BIG-IQ user interface are provided below.
+* A Postman Collection & Environment. Instructions for using these in the BIG-IQ user interface are provided below.
 * A JSON file. The [BIG-IQ API documentation](https://clouddocs.f5.com/products/big-iq/mgmt-api/latest/ApiReferences/bigiq_public_api_ref/r_as3_template.html) provides instruction for using API calls to use AS3 templates.
 
 Instructions on how to import AS3 templates using Postman
@@ -15,15 +15,15 @@ Instructions on how to import AS3 templates using Postman
 
 1. [Install the Postman application.](https://learning.getpostman.com/docs/postman/launching_postman/installation_and_updates/)
 
-2. Use the Postman Import feature to import the Postman collection and environment.
+2. Use the Postman Import feature to import the Postman Collection and Environment.
    1. Click the **Import** button.
    1. Click **Import From Link**.
-   1. Paste in the following for the Postman collection: `https://raw.githubusercontent.com/f5devcentral/f5-big-iq/7.0.0/f5-appsvcs-templates/default/postman/default-as3-f5-all-templates.postman_collection.json` and then click **Import**.
+   1. Paste in the following for the Postman Collection: `https://raw.githubusercontent.com/f5devcentral/f5-big-iq/7.0.0/f5-appsvcs-templates/default/postman/default-as3-f5-all-templates.postman_collection.json` and then click **Import**.
    1. Repeast the last 3 sub-steps, but this type paste in the following for the Postman environment:  `https://raw.githubusercontent.com/f5devcentral/f5-big-iq/7.0.0/f5-appsvcs-templates/default/postman/default-as3-f5-all-templates.postman_environment.json`.
 
 ![postman_collection_import](./images/postman_collection_import.png)
 
-3. Set your `Primary BIG-IQ CM IP address` in the Postman environment. To do this:
+3. Set your `Primary BIG-IQ CM IP address` in the Postman Environment. To do this:
    1. Click the Settings icon to open the Manage Environments screen.
    1. Click `default-as3-f5-all-templates`.
    1. For the `bigiq_mgmt` variable, type the management IP address of your BIG-IQ.
@@ -42,25 +42,25 @@ Instructions on how to import AS3 templates using Postman
 
 ![postman_collection_bigiq_auth](./images/postman_collection_bigiq_auth.png)
 
-5. Run the Import collection in this environment. To do this:
+5. Run the Import Collection in this environment. To do this:
    1. Open the Postman runner.
    1. For the Collection, select **default-as3-f5-all-templates**.
-   1. For the Environement , select **default-as3-f5-all-templates**.
+   1. For the Environment, select **default-as3-f5-all-templates**.
    1. Click **Run default-as3-f5-all-templates**.
 
 ![postman_collection_runner](./images/postman_collection_runner.png)
 
-6. When the Post collection finishes, the result should be green status icons and  `200 OK` for each post.
+6. When the Post Collection finishes, the result should be green status icons and  `200 OK` for each post.
 
 ![postman_collection_runner_passed](./images/postman_collection_runner_passed.png)
 
-7. Login to your primary BIG-IQ device and navigate to **Applications > APPLICATION TEMPLATES > AS3 Templates** and verify that the AS3 templates you imported are listed.
+7. Log in to your primary BIG-IQ device and navigate to **Applications > APPLICATION TEMPLATES > AS3 Templates** and verify that the AS3 templates you imported are listed.
 
 ![bigiq_as3_templates_ui](./images/bigiq_as3_templates_ui.png)
 
 **Note:** Before you can a template, it must be Published (read-only).
 
-8. For more information on how to use the template to deploy AS3 Application using the BIG-IQ, see [BIG-IQ documentation](https://support.f5.com/csp/knowledge-center/software/BIG-IQ?module=BIG-IQ%20Centralized%20Management&version=7.0.0)
+8. For more information on how to use the template to deploy an AS3 Application using the BIG-IQ, see [BIG-IQ documentation](https://support.f5.com/csp/knowledge-center/software/BIG-IQ?module=BIG-IQ%20Centralized%20Management&version=7.0.0)
 
 Support
 -------
