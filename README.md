@@ -33,17 +33,19 @@ Instructions on how to import AS3 templates using Postman
 ![postman_collection_environment](./images/postman_collection_environment.png)
 
 4. Specify the  BIG-IQ device's admin user `username` & `password`so that Postman can access it. To do this:
-   1.Select the `POST` named `Authenticate to BIG-IQ`, as shown in the screen shot.
+   1. Select the `POST` named `Authenticate to BIG-IQ`, as shown in the screen shot.
    1. On the Body tab, type:
+   
+   ```
    >"username": "admin",
    >"username": "admin",
    >"loginProviderName": "tmos",
-   
+   ```
 
 ![postman_collection_bigiq_auth](./images/postman_collection_bigiq_auth.png)
 
 5. Run the Import Collection in this environment. To do this:
-   1. Open the Postman runner.
+   1. Open the Postman Runner.
    1. For the Collection, select **default-as3-f5-all-templates**.
    1. For the Environment, select **default-as3-f5-all-templates**.
    1. Click **Run default-as3-f5-all-templates**.
