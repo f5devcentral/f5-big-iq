@@ -15,27 +15,46 @@ Instructions on how to import AS3 templates using Postman
 
 1. [Install the Postman application.](https://learning.getpostman.com/docs/postman/launching_postman/installation_and_updates/)
 
-2. Use the Postman Import feature to import the Postman collections available on this github repository under `f5-appsvcs-templates > default > postman`
+2. Use the Postman Import feature to import  two Postman collections.
+   1. Click the **Import** button.
+   1. Click **Import From Link**.
+   1. Paste in the following for the first collection: `https://raw.githubusercontent.com/f5devcentral/f5-big-iq/7.0.0/f5-appsvcs-templates/default/postman/default-as3-f5-all-templates.postman_collection.json` and then click **Import**.
+   1. Repeast the last 3 sub-steps, but this type paste in the following for the second collection: `https://raw.githubusercontent.com/f5devcentral/f5-big-iq/7.0.0/f5-appsvcs-templates/default/postman/default-as3-f5-all-templates.postman_environment.json`.
 
 ![postman_collection_import](./images/postman_collection_import.png)
 
-3. Set your `Primary BIG-IQ CM IP address` in the Postman environment. To do this, you set the value of the `bigiq_mgmt` variable to the management IP address of your BIG-IQ.
+3. Set your `Primary BIG-IQ CM IP address` in the Postman environment. To do this:
+   1. Click the Settings icon to open the Manage Environments screen.
+   1. Click `default-as3-f5-all-templates`.
+   1. For the `bigiq_mgmt` variable, type the management IP address of your BIG-IQ.
+   1. Click **Update**.
+   1. Close the Manage Environments screen.
 
 ![postman_collection_environment](./images/postman_collection_environment.png)
 
-4. Specify the  BIG-IQ device's admin user `username` & `password`so that Postman can access it. To do this, edit the `POST` named `Authenticate to BIG-IQ`, as shown in the screen shot.
+4. Specify the  BIG-IQ device's admin user `username` & `password`so that Postman can access it. To do this:
+   1.Select the `POST` named `Authenticate to BIG-IQ`, as shown in the screen shot.
+   1. On the Body tab, type:
+   >"username": "admin",
+   >"username": "admin",
+   >"loginProviderName": "tmos",
+   
 
 ![postman_collection_bigiq_auth](./images/postman_collection_bigiq_auth.png)
 
-5. Open the Postman runner, select the Collection and Environement called `default-as3-f5-all-templates` and click `Run default-a3-f5...`
+5. Run the Import collection in this environment. To do this:
+   1. Open the Postman runner.
+   1. For the Collection, select **default-as3-f5-all-templates**.
+   1. For the Environement , select **default-as3-f5-all-templates**.
+   1. Click **Run default-as3-f5-all-templates**.
 
 ![postman_collection_runner](./images/postman_collection_runner.png)
 
-6. The result of the Postman running should be `200 OK`
+6. When the Post collection finishes, the result should be green status icons and  `200 OK` for each post.
 
 ![postman_collection_runner_passed](./images/postman_collection_runner_passed.png)
 
-7. Login to your `Primary BIG-IQ CM` and navigate to the `Applications` tab > `APPLICATION TEMPLATES` > `AS3 Templates` and verify that the AS3 templates you imported are listed.
+7. Login to your primary BIG-IQ device and navigate to **Applications > APPLICATION TEMPLATES > AS3 Templates** and verify that the AS3 templates you imported are listed.
 
 ![bigiq_as3_templates_ui](./images/bigiq_as3_templates_ui.png)
 
