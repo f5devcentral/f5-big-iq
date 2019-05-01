@@ -60,9 +60,9 @@ Instructions on how to import AS3 templates using Postman
 
 ![bigiq_as3_templates_ui](./images/bigiq_as3_templates_ui.png)
 
-**Note:** Before you can a template, it must be Published (read-only).
+**Note:** Before you can use a AS3 template, it must be Published (read-only).
 
-8. For more information on how to use the template to deploy an AS3 Application using the BIG-IQ, see [BIG-IQ documentation](https://support.f5.com/csp/knowledge-center/software/BIG-IQ?module=BIG-IQ%20Centralized%20Management&version=7.0.0)
+8. For more information on how to use the AS3 template to deploy an AS3 Application using the BIG-IQ, see [BIG-IQ documentation](https://support.f5.com/csp/knowledge-center/software/BIG-IQ?module=BIG-IQ%20Centralized%20Management&version=7.0.0)
 
 Support
 -------
