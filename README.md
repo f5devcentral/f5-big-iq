@@ -1,16 +1,16 @@
-BIG-IQ Templates
+BIG-IQ AS3 Templates
 ================
 
 **Note:** These templates are supported only with BIG-IQ 7.0.0 and above.
 
-Use this API to define an [Application Services 3 Extension (AS3)](https://clouddocs.f5.com/products/extensions/f5-appsvcs-extension/latest/) template on BIG-IQ. You can use AS3 on BIG-IQ in largely the same way as on BIG-IP and described in the AS3 documentation: [Using AS3 with BIG-IQ](https://clouddocs.f5.com/products/extensions/f5-appsvcs-extension/latest/userguide/big-iq.html). With BIG-IQ, declarations use an AS3 template which is defined in BIG-IQ. For an example of an AS3 declaration that uses an AS3 template, see the AS3 documentation: [Using declarations with AS3 templates](https://clouddocs.f5.com/products/extensions/f5-appsvcs-extension/latest/userguide/big-iq.html#template). You can use the [AS3 Declare API](https://clouddocs.f5networks.net/products/big-iq/mgmt-api/v7.0.0/ApiReferences/bigiq_public_api_ref/r_as3_declare.html) to post the AS3 declaration to BIG-IP and you can use the [AS3 Deploy API](https://clouddocs.f5networks.net/products/big-iq/mgmt-api/v7.0.0/ApiReferences/bigiq_public_api_ref/r_as3_deploy.html) from BIG-IQ to deploy an application.
+F5 maintains this BIG-IQ Application Services 3 Extension (AS3) template library to provide you with templates that you can either use directly or with just a few changes of your own. Use the instructions here to download these templates to your BIG-IQ system. Once downloaded, you can use these templates just as you would any other AS3 application template. AS3 templates perform on the BIG-IQ in uch  the same way as they do on BIG-IP. For more detail on how AS3 and how it works, refer to the CloudDocs content: [Using AS3 with BIG-IQ](https://clouddocs.f5.com/products/extensions/f5-appsvcs-extension/latest/userguide/big-iq.html). 
 
-You can find a list of default AS3 templates in this repository in 2 different forms:
+The AS3 templates in this repository are available in 2 formats:
 
-* A Postman Collection & Environment. Instructions for using these in the BIG-IQ user interface are provided below.
-* A JSON file. The [BIG-IQ API documentation](https://clouddocs.f5.com/products/big-iq/mgmt-api/latest/ApiReferences/bigiq_public_api_ref/r_as3_template.html) provides instruction for using API calls to use AS3 templates.
+* A Postman Collection & Environment. Instructions for downloading and importing these templates to your BIG-IQ user interface are provided below.
+* A JSON file. Instructions for using this JSON file and API calls to use AS3 templates are provided in our CloudDocs content: BIG-IQ API documentation](https://clouddocs.f5.com/products/big-iq/mgmt-api/latest/ApiReferences/bigiq_public_api_ref/r_as3_template.html).
 
-Instructions on how to import AS3 templates using Postman
+Importing AS3 templates to your BIG-IQ using Postman
 ---------------------------------------------------------
 
 1. [Install the Postman application.](https://learning.getpostman.com/docs/postman/launching_postman/installation_and_updates/)
