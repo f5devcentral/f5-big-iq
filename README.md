@@ -1,4 +1,4 @@
-BIG-IQ AS3 Templates
+BIG-IQ AS3 Template Library
 ================
 
 **Note:** These templates are supported only with BIG-IQ 7.0.0 and above.
