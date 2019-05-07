@@ -1,6 +1,6 @@
 {
     "description": "For load balancing an HTTP application on port 80.",
-    "name": "AS3-F5-HTTP-lb-template--default-v4",
+    "name": "AS3-F5-HTTP-lb-template--default-v5",
     "published": false,
     "tenant": {
         "name": "default",
@@ -33,6 +33,13 @@
                         {
                             "properties": {
                                 "class": {
+                                    "const": "HTTP_Profile"
+                                }
+                            }
+                        },
+                        {
+                            "properties": {
+                                "class": {
                                     "const": "Pool"
                                 }
                             }
@@ -41,20 +48,6 @@
                             "properties": {
                                 "class": {
                                     "const": "Service_HTTP"
-                                }
-                            }
-                        },
-                        {
-                            "properties": {
-                                "class": {
-                                    "const": "HTTP_Profile"
-                                }
-                            }
-                        },
-                        {
-                            "properties": {
-                                "class": {
-                                    "const": "Monitor"
                                 }
                             }
                         }
@@ -70,6 +63,18 @@
                     },
                     "then": {
                         "$ref": "#/definitions/Analytics_Profile"
+                    }
+                },
+                {
+                    "if": {
+                        "properties": {
+                            "class": {
+                                "const": "HTTP_Profile"
+                            }
+                        }
+                    },
+                    "then": {
+                        "$ref": "#/definitions/HTTP_Profile"
                     }
                 },
                 {
@@ -95,30 +100,6 @@
                     "then": {
                         "$ref": "#/definitions/Service_HTTP"
                     }
-                },
-                {
-                    "if": {
-                        "properties": {
-                            "class": {
-                                "const": "HTTP_Profile"
-                            }
-                        }
-                    },
-                    "then": {
-                        "$ref": "#/definitions/HTTP_Profile"
-                    }
-                },
-                {
-                    "if": {
-                        "properties": {
-                            "class": {
-                                "const": "Monitor"
-                            }
-                        }
-                    },
-                    "then": {
-                        "$ref": "#/definitions/Monitor"
-                    }
                 }
             ]
         },
@@ -129,121 +110,126 @@
             "Analytics_Profile": {
                 "properties": {
                     "class": {},
-                    "collectedStatsInternalLogging": {
-                        "type": "boolean",
-                        "default": true,
-                        "const": true
+                    "collectUserAgent": {
+                        "type": "boolean"
                     },
                     "collectClientSideStatistics": {
                         "type": "boolean",
-                        "default": true,
-                        "const": true
+                        "default": true
                     },
-                    "collectMethod": {
-                        "type": "boolean",
-                        "default": true,
-                        "const": true
+                    "collectGeo": {
+                        "type": "boolean"
                     },
-                    "collectResponseCode": {
-                        "type": "boolean",
-                        "default": false,
-                        "const": false
+                    "collectUrl": {
+                        "type": "boolean"
+                    },
+                    "collectPageLoadTime": {
+                        "type": "boolean"
                     },
                     "collectOsAndBrowser": {
                         "type": "boolean",
-                        "default": false,
-                        "const": false
+                        "default": false
+                    },
+                    "collectMethod": {
+                        "type": "boolean",
+                        "default": false
+                    },
+                    "collectResponseCode": {
+                        "type": "boolean",
+                        "default": true
                     }
                 },
                 "type": "object",
-                "additionalProperties": false
+                "additionalproperties": false
+            },
+            "HTTP_Profile": {
+                "properties": {
+                    "class": {},
+                    "fallbackRedirect": {
+                        "type": "string",
+                        "default": "https://www.f5.com/filenotfound"
+                    },
+                    "fallbackStatusCodes": {
+                        "type": "array",
+                        "default": [
+                            404
+                        ]
+                    }
+                },
+                "type": "object",
+                "additionalproperties": false
             },
             "Pool": {
                 "properties": {
                     "class": {},
                     "members": {
                         "type": "array",
-                        "default": [
-                            {
-                                "monitors": [
-                                    "http"
-                                ],
-                                "addressDiscovery": "static",
-                                "serverAddresses": [],
-                                "servicePort": 80,
-                                "shareNodes": true
-                            }
-                        ]
-                    },
-                    "monitors": {
-                        "type": "array",
-                        "default": [
-                            "http"
-                        ],
-                        "const": [
-                            "http"
-                        ]
+                        "items": {
+                            "type": "object",
+                            "properties": {
+                                "servicePort": {
+                                    "type": "number"
+                                },
+                                "monitors": {
+                                    "type": "array",
+                                    "default": [
+                                        "http"
+                                    ],
+                                    "const": [
+                                        "http"
+                                    ]
+                                },
+                                "adminState": {
+                                    "type": "string",
+                                    "default": "enable"
+                                },
+                                "shareNodes": {
+                                    "type": "boolean",
+                                    "default": true,
+                                    "const": true
+                                },
+                                "serverAddresses": {
+                                    "type": "array"
+                                }
+                            },
+                            "additionalProperties": "false"
+                        }
                     }
                 },
                 "type": "object",
-                "additionalProperties": false
+                "additionalproperties": false
             },
             "Service_HTTP": {
                 "properties": {
                     "class": {},
                     "virtualPort": {
-                        "type": "integer",
+                        "type": "number",
                         "default": 80
                     },
-                    "virtualAddresses": {
-                        "type": "array"
-                    },
                     "profileAnalytics": {
-                        "type": "object"
-                    },
-                    "pool": {
-                        "type": "string"
+                        "type": "object",
+                        "properties": {
+                            "use": {
+                                "type": "string"
+                            }
+                        },
+                        "additionalProperties": "false"
                     },
                     "profileHTTP": {
                         "type": "object",
-                        "default": "basic"
-                    }
-                },
-                "type": "object",
-                "additionalProperties": false
-            },
-            "HTTP_Profile": {
-                "properties": {
-                    "class": {},
-                    "fallbackRedirect": {
-                        "type": "string"
+                        "properties": {
+                            "use": {
+                                "type": "string"
+                            }
+                        },
+                        "additionalProperties": "false"
                     },
-                    "fallbackStatusCodes": {
+                    "virtualAddresses": {
                         "type": "array"
                     }
                 },
                 "type": "object",
-                "additionalProperties": false
-            },
-            "Monitor": {
-                "properties": {
-                    "class": {},
-                    "monitorType": {
-                        "type": "string",
-                        "default": "http",
-                        "const": "http"
-                    },
-                    "send": {
-                        "type": "string",
-                        "default": "HEAD / HTTP/1.0\\r\\n\\r\\n"
-                    },
-                    "receiveDown": {
-                        "type": "string",
-                        "default": ""
-                    }
-                },
-                "type": "object",
-                "additionalProperties": false
+                "additionalproperties": false
             }
         }
     }
