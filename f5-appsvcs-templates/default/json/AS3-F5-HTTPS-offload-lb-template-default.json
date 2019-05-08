@@ -231,6 +231,10 @@
                     "pool": {
                         "type": "string",
                         "default": "Pool"
+                    },
+                    "virtualPort": {
+                        "type": "number",
+                        "default": 443
                     }
                 },
                 "type": "object",
