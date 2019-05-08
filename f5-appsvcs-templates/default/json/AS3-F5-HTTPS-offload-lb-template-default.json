@@ -1,6 +1,6 @@
 {
-    "description": "For load balancing an HTTP application on port 80.",
-    "name": "AS3-F5-HTTP-lb-template-default-v5",
+    "description": "For load balancing an HTTPS application on port 443 with SSL offloading on BIG-IP.",
+    "name": "AS3-F5-HTTPS-offload-lb-template-default-v5",
     "published": false,
     "tenant": {
         "name": "default",
@@ -33,13 +33,6 @@
                         {
                             "properties": {
                                 "class": {
-                                    "const": "HTTP_Profile"
-                                }
-                            }
-                        },
-                        {
-                            "properties": {
-                                "class": {
                                     "const": "Pool"
                                 }
                             }
@@ -47,7 +40,21 @@
                         {
                             "properties": {
                                 "class": {
-                                    "const": "Service_HTTP"
+                                    "const": "Service_HTTPS"
+                                }
+                            }
+                        },
+                        {
+                            "properties": {
+                                "class": {
+                                    "const": "TLS_Client"
+                                }
+                            }
+                        },
+                        {
+                            "properties": {
+                                "class": {
+                                    "const": "Certificate"
                                 }
                             }
                         }
@@ -69,18 +76,6 @@
                     "if": {
                         "properties": {
                             "class": {
-                                "const": "HTTP_Profile"
-                            }
-                        }
-                    },
-                    "then": {
-                        "$ref": "#/definitions/HTTP_Profile"
-                    }
-                },
-                {
-                    "if": {
-                        "properties": {
-                            "class": {
                                 "const": "Pool"
                             }
                         }
@@ -93,12 +88,36 @@
                     "if": {
                         "properties": {
                             "class": {
-                                "const": "Service_HTTP"
+                                "const": "Service_HTTPS"
                             }
                         }
                     },
                     "then": {
-                        "$ref": "#/definitions/Service_HTTP"
+                        "$ref": "#/definitions/Service_HTTPS"
+                    }
+                },
+                {
+                    "if": {
+                        "properties": {
+                            "class": {
+                                "const": "TLS_Client"
+                            }
+                        }
+                    },
+                    "then": {
+                        "$ref": "#/definitions/TLS_Client"
+                    }
+                },
+                {
+                    "if": {
+                        "properties": {
+                            "class": {
+                                "const": "Certificate"
+                            }
+                        }
+                    },
+                    "then": {
+                        "$ref": "#/definitions/Certificate"
                     }
                 }
             ]
@@ -142,23 +161,6 @@
                 "type": "object",
                 "additionalproperties": false
             },
-            "HTTP_Profile": {
-                "properties": {
-                    "class": {},
-                    "fallbackRedirect": {
-                        "type": "string",
-                        "default": "https://www.f5.com/filenotfound"
-                    },
-                    "fallbackStatusCodes": {
-                        "type": "array",
-                        "default": [
-                            404
-                        ]
-                    }
-                },
-                "type": "object",
-                "additionalproperties": false
-            },
             "Pool": {
                 "properties": {
                     "class": {},
@@ -191,20 +193,28 @@
                                 "serverAddresses": {
                                     "type": "array"
                                 }
-                            },
-                            "additionalProperties": "false"
+                            }
                         }
+                    },
+                    "monitors": {
+                        "type": "array",
+                        "default": [
+                            "http"
+                        ],
+                        "const": [
+                            "http"
+                        ]
                     }
                 },
                 "type": "object",
                 "additionalproperties": false
             },
-            "Service_HTTP": {
+            "Service_HTTPS": {
                 "properties": {
                     "class": {},
-                    "virtualPort": {
-                        "type": "number",
-                        "default": 80
+                    "clientTLS": {
+                        "type": "string",
+                        "default": "TLS_Client"
                     },
                     "profileAnalytics": {
                         "type": "object",
@@ -213,18 +223,7 @@
                                 "type": "string",
                                 "default": "Analytics_Profile"
                             }
-                        },
-                        "additionalProperties": "false"
-                    },
-                    "profileHTTP": {
-                        "type": "object",
-                        "properties": {
-                            "use": {
-                                "type": "string",
-                                "default": "HTTP_Profile"
-                            }
-                        },
-                        "additionalProperties": "false"
+                        }
                     },
                     "virtualAddresses": {
                         "type": "array"
@@ -235,7 +234,41 @@
                     }
                 },
                 "type": "object",
-                "additionalproperties": false
+                "additionalProperties": false
+            },
+            "TLS_Client": {
+                "properties": {
+                    "class": {},
+                    "clientCertificate": {
+                        "type": "string",
+                        "default": "Certificate"
+                    }
+                },
+                "type": "object",
+                "additionalProperties": false
+            },
+            "Certificate": {
+                "properties": {
+                    "class": {},
+                    "certificate": {
+                        "type": "object",
+                        "properties": {
+                            "text": {
+                                "type": "string"
+                            }
+                        }
+                    },
+                    "privateKey": {
+                        "type": "object",
+                        "properties": {
+                            "text": {
+                                "type": "string"
+                            }
+                        }
+                    }
+                },
+                "type": "object",
+                "additionalProperties": false
             }
         }
     }

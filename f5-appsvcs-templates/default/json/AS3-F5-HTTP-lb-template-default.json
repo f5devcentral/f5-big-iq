@@ -191,8 +191,7 @@
                                 "serverAddresses": {
                                     "type": "array"
                                 }
-                            },
-                            "additionalProperties": "false"
+                            }
                         }
                     }
                 },
@@ -213,8 +212,7 @@
                                 "type": "string",
                                 "default": "Analytics_Profile"
                             }
-                        },
-                        "additionalProperties": "false"
+                        }
                     },
                     "profileHTTP": {
                         "type": "object",
@@ -223,8 +221,7 @@
                                 "type": "string",
                                 "default": "HTTP_Profile"
                             }
-                        },
-                        "additionalProperties": "false"
+                        }
                     },
                     "virtualAddresses": {
                         "type": "array"
