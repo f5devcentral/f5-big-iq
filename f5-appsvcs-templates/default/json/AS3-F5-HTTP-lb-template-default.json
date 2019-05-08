@@ -1,6 +1,6 @@
 {
     "description": "For load balancing an HTTP application on port 80.",
-    "name": "AS3-F5-HTTP-lb-template--default-v5",
+    "name": "AS3-F5-HTTP-lb-template-default-v5",
     "published": false,
     "tenant": {
         "name": "default",
@@ -210,7 +210,8 @@
                         "type": "object",
                         "properties": {
                             "use": {
-                                "type": "string"
+                                "type": "string",
+                                "default": "Analytics_Profile"
                             }
                         },
                         "additionalProperties": "false"
@@ -219,13 +220,18 @@
                         "type": "object",
                         "properties": {
                             "use": {
-                                "type": "string"
+                                "type": "string",
+                                "default": "HTTP_Profile"
                             }
                         },
                         "additionalProperties": "false"
                     },
                     "virtualAddresses": {
                         "type": "array"
+                    },
+                    "pool": {
+                        "type": "string",
+                        "default": "Pool"
                     }
                 },
                 "type": "object",
