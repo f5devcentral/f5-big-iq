@@ -1,9 +1,26 @@
 BIG-IQ AS3 Template Library
-================
+===========================
 
 **Note:** These templates are supported only with BIG-IQ 7.0.0 and above.
 
 F5 maintains this BIG-IQ Application Services 3 Extension (AS3) template library to provide you with templates that you can either use directly or with just a few changes of your own. Use the instructions here to download these templates to your BIG-IQ system. Once downloaded, you can use these templates just as you would any other AS3 application template. AS3 templates perform on the BIG-IQ in uch  the same way as they do on BIG-IP. For more detail on how AS3 and how it works, refer to the CloudDocs content: [Using AS3 with BIG-IQ](https://clouddocs.f5.com/products/extensions/f5-appsvcs-extension/latest/userguide/big-iq.html). 
+
+List of AS3 Templates
+---------------------
+
+Templates | Description
+--------- | -----------
+| AS3-F5-HTTP-lb-template-default | For load balancing an HTTP application on port 80.
+| AS3-F5-HTTPS-offload-lb-template-default | For load balancing an HTTPS application on port 443 with SSL offloading on BIG-IP.
+| AS3-F5-HTTPS-WAF-lb-template-default | For load balancing an HTTPS application on port 443 with a Web Application Firewall using an OWASP protection settings with minimum false positive.
+| AS3-F5-TCP-lb-template-default | For load balancing a TCP-based application.
+| AS3-F5-FastL4-TCP-lb-template-default | For load balancing a TCP-based application with a FastL4 profile.
+| AS3-F5-UDP-lb-template-default | For load balancing a UDP-based application.
+| AS3-F5-HTTP-url-routing-lb-template-default | For load balancing an HTTP application with url routing.
+| AS3-F5-DNS-FQDN-A-template-default | For global load balancing distribution of DNS name resolution requests A type.
+| AS3-F5-DNS-FQDN-AAAA-template-default | For global load balancing distribution of DNS name resolution requests AAAA type.
+| AS3-F5-DNS-FQDN-MX-template-default |  For global load balancing distribution of DNS name resolution requests MX type.
+
 
 The AS3 templates in this repository are available in 2 formats:
 
@@ -11,7 +28,7 @@ The AS3 templates in this repository are available in 2 formats:
 * A JSON file. Instructions for using this JSON file and API calls to use AS3 templates are provided in our CloudDocs content: [BIG-IQ API documentation](https://clouddocs.f5.com/products/big-iq/mgmt-api/latest/ApiReferences/bigiq_public_api_ref/r_as3_template.html).
 
 Importing AS3 templates to your BIG-IQ using Postman
----------------------------------------------------------
+----------------------------------------------------
 
 1. [Install the Postman application.](https://learning.getpostman.com/docs/postman/launching_postman/installation_and_updates/)
 
