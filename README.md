@@ -8,7 +8,7 @@ F5 maintains this BIG-IQ Application Services 3 Extension (AS3) template library
 The AS3 templates in this repository are available in 2 formats:
 
 * A Postman Collection & Environment. Instructions for downloading and importing these templates to your BIG-IQ user interface are provided below.
-* A JSON file. Instructions for using this JSON file and API calls to use AS3 templates are provided in our CloudDocs content: BIG-IQ API documentation](https://clouddocs.f5.com/products/big-iq/mgmt-api/latest/ApiReferences/bigiq_public_api_ref/r_as3_template.html).
+* A JSON file. Instructions for using this JSON file and API calls to use AS3 templates are provided in our CloudDocs content: [BIG-IQ API documentation](https://clouddocs.f5.com/products/big-iq/mgmt-api/latest/ApiReferences/bigiq_public_api_ref/r_as3_template.html).
 
 Importing AS3 templates to your BIG-IQ using Postman
 ---------------------------------------------------------
