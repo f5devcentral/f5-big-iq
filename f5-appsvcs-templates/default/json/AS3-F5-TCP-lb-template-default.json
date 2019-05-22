@@ -1,6 +1,6 @@
 {
-    "description": "For load balancing an HTTP application on port 80.",
-    "name": "AS3-F5-HTTP-lb-template-default-v5",
+    "description": "For load balancing a TCP-based application.",
+    "name": "AS3-F5-TCP-lb-template-default-v5",
     "published": false,
     "tenant": {
         "name": "default",
@@ -26,20 +26,6 @@
                         {
                             "properties": {
                                 "class": {
-                                    "const": "Analytics_Profile"
-                                }
-                            }
-                        },
-                        {
-                            "properties": {
-                                "class": {
-                                    "const": "HTTP_Profile"
-                                }
-                            }
-                        },
-                        {
-                            "properties": {
-                                "class": {
                                     "const": "Pool"
                                 }
                             }
@@ -47,35 +33,18 @@
                         {
                             "properties": {
                                 "class": {
-                                    "const": "Service_HTTP"
+                                    "const": "Service_TCP"
+                                }
+                            }
+                        },
+                        {
+                            "properties": {
+                                "class": {
+                                    "const": "TCP_Profile"
                                 }
                             }
                         }
                     ]
-                },
-                {
-                    "if": {
-                        "properties": {
-                            "class": {
-                                "const": "Analytics_Profile"
-                            }
-                        }
-                    },
-                    "then": {
-                        "$ref": "#/definitions/Analytics_Profile"
-                    }
-                },
-                {
-                    "if": {
-                        "properties": {
-                            "class": {
-                                "const": "HTTP_Profile"
-                            }
-                        }
-                    },
-                    "then": {
-                        "$ref": "#/definitions/HTTP_Profile"
-                    }
                 },
                 {
                     "if": {
@@ -93,12 +62,24 @@
                     "if": {
                         "properties": {
                             "class": {
-                                "const": "Service_HTTP"
+                                "const": "Service_TCP"
                             }
                         }
                     },
                     "then": {
-                        "$ref": "#/definitions/Service_HTTP"
+                        "$ref": "#/definitions/Service_TCP"
+                    }
+                },
+                {
+                    "if": {
+                        "properties": {
+                            "class": {
+                                "const": "TCP_Profile"
+                            }
+                        }
+                    },
+                    "then": {
+                        "$ref": "#/definitions/TCP_Profile"
                     }
                 }
             ]
@@ -107,58 +88,6 @@
             "class"
         ],
         "definitions": {
-            "Analytics_Profile": {
-                "properties": {
-                    "class": {},
-                    "collectUserAgent": {
-                        "type": "boolean"
-                    },
-                    "collectClientSideStatistics": {
-                        "type": "boolean",
-                        "default": true
-                    },
-                    "collectGeo": {
-                        "type": "boolean"
-                    },
-                    "collectUrl": {
-                        "type": "boolean"
-                    },
-                    "collectPageLoadTime": {
-                        "type": "boolean"
-                    },
-                    "collectOsAndBrowser": {
-                        "type": "boolean",
-                        "default": false
-                    },
-                    "collectMethod": {
-                        "type": "boolean",
-                        "default": false
-                    },
-                    "collectResponseCode": {
-                        "type": "boolean",
-                        "default": true
-                    }
-                },
-                "type": "object",
-                "additionalproperties": false
-            },
-            "HTTP_Profile": {
-                "properties": {
-                    "class": {},
-                    "fallbackRedirect": {
-                        "type": "string",
-                        "default": "https://www.f5.com/filenotfound"
-                    },
-                    "fallbackStatusCodes": {
-                        "type": "array",
-                        "default": [
-                            404
-                        ]
-                    }
-                },
-                "type": "object",
-                "additionalproperties": false
-            },
             "Pool": {
                 "properties": {
                     "class": {},
@@ -173,10 +102,10 @@
                                 "monitors": {
                                     "type": "array",
                                     "default": [
-                                        "http"
+                                        "tcp"
                                     ],
                                     "const": [
-                                        "http"
+                                        "tcp"
                                     ]
                                 },
                                 "adminState": {
@@ -197,51 +126,57 @@
                     "monitors": {
                         "type": "array",
                         "default": [
-                            "http"
+                            "tcp"
                         ],
                         "const": [
-                            "http"
+                            "tcp"
                         ]
                     }
                 },
                 "type": "object",
                 "additionalproperties": false
             },
-            "Service_HTTP": {
+            "Service_TCP": {
                 "properties": {
                     "class": {},
+                    "pool": {
+                        "type": "string",
+                        "default": "Pool"
+                    },
                     "virtualPort": {
                         "type": "number",
-                        "default": 80
+                        "default": 8080
                     },
-                    "profileAnalytics": {
+                    "profileTCP": {
                         "type": "object",
                         "properties": {
                             "use": {
                                 "type": "string",
-                                "default": "Analytics_Profile"
-                            }
-                        }
-                    },
-                    "profileHTTP": {
-                        "type": "object",
-                        "properties": {
-                            "use": {
-                                "type": "string",
-                                "default": "HTTP_Profile"
+                                "default": "TCP_Profile"
                             }
                         }
                     },
                     "virtualAddresses": {
                         "type": "array"
-                    },
-                    "pool": {
-                        "type": "string",
-                        "default": "Pool"
                     }
                 },
                 "type": "object",
-                "additionalproperties": false
+                "additionalProperties": false
+            },
+            "TCP_Profile": {
+                "properties": {
+                    "class": {},
+                    "synMaxRetrans": {
+                        "type": "number",
+                        "default": 3
+                    },
+                    "finWaitTimeout": {
+                        "type": "number",
+                        "default": 5
+                    }
+                },
+                "type": "object",
+                "additionalProperties": false
             }
         }
     }
