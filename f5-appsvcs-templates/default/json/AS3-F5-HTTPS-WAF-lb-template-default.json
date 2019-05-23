@@ -1,6 +1,6 @@
 {
     "description": "For load balancing an HTTPS application on port 443 with a Web Application Firewall using an OWASP protection settings with minimum false positive.",
-    "name": "AS3-F5-HTTPS-WAF-lb-template-default-v5",
+    "name": "AS3-F5-HTTPS-WAF-lb-template-default-v6",
     "published": false,
     "tenant": {
         "name": "default",
@@ -47,13 +47,6 @@
                         {
                             "properties": {
                                 "class": {
-                                    "const": "TLS_Client"
-                                }
-                            }
-                        },
-                        {
-                            "properties": {
-                                "class": {
                                     "const": "Certificate"
                                 }
                             }
@@ -62,6 +55,20 @@
                             "properties": {
                                 "class": {
                                     "const": "WAF_Policy"
+                                }
+                            }
+                        },
+                        {
+                            "properties": {
+                                "class": {
+                                    "const": "TLS_Server"
+                                }
+                            }
+                        },
+                        {
+                            "properties": {
+                                "class": {
+                                    "const": "Security_Log_Profile"
                                 }
                             }
                         }
@@ -107,18 +114,6 @@
                     "if": {
                         "properties": {
                             "class": {
-                                "const": "TLS_Client"
-                            }
-                        }
-                    },
-                    "then": {
-                        "$ref": "#/definitions/TLS_Client"
-                    }
-                },
-                {
-                    "if": {
-                        "properties": {
-                            "class": {
                                 "const": "Certificate"
                             }
                         }
@@ -137,6 +132,30 @@
                     },
                     "then": {
                         "$ref": "#/definitions/WAF_Policy"
+                    }
+                },
+                {
+                    "if": {
+                        "properties": {
+                            "class": {
+                                "const": "TLS_Server"
+                            }
+                        }
+                    },
+                    "then": {
+                        "$ref": "#/definitions/TLS_Server"
+                    }
+                },
+                {
+                    "if": {
+                        "properties": {
+                            "class": {
+                                "const": "Security_Log_Profile"
+                            }
+                        }
+                    },
+                    "then": {
+                        "$ref": "#/definitions/Security_Log_Profile"
                     }
                 }
             ]
@@ -231,10 +250,6 @@
             "Service_HTTPS": {
                 "properties": {
                     "class": {},
-                    "clientTLS": {
-                        "type": "string",
-                        "default": "TLS_Client"
-                    },
                     "profileAnalytics": {
                         "type": "object",
                         "properties": {
@@ -263,17 +278,22 @@
                                 "default": "WAF_Policy"
                             }
                         }
-                    }
-                },
-                "type": "object",
-                "additionalProperties": false
-            },
-            "TLS_Client": {
-                "properties": {
-                    "class": {},
-                    "clientCertificate": {
+                    },
+                    "serverTLS": {
                         "type": "string",
-                        "default": "Certificate"
+                        "default": "TLS_Server"
+                    },
+                    "securityLogProfiles": {
+                        "type": "array",
+                        "items": {
+                            "type": "object",
+                            "properties": {
+                                "use": {
+                                    "type": "string",
+                                    "default": "Security_Log_Profile"
+                                }
+                            }
+                        }
                     }
                 },
                 "type": "object",
@@ -308,6 +328,82 @@
                     "url": {
                         "type": "string",
                         "default": "https://raw.githubusercontent.com/f5devcentral/f5-asm-policy-template-v13/master/owasp_ready_template/owasp-autotune.xml"
+                    }
+                },
+                "type": "object",
+                "additionalProperties": false
+            },
+            "TLS_Server": {
+                "properties": {
+                    "class": {},
+                    "certificates": {
+                        "type": "array",
+                        "items": {
+                            "type": "object",
+                            "properties": {
+                                "certificate": {
+                                    "type": "string",
+                                    "default": "Certificate"
+                                }
+                            }
+                        }
+                    }
+                },
+                "type": "object",
+                "additionalProperties": false
+            },
+            "Security_Log_Profile": {
+                "properties": {
+                    "class": {},
+                    "application": {
+                        "type": "object",
+                        "properties": {
+                            "maxEntryLength": {
+                                "type": "string",
+                                "default": "64k",
+                                "const": "64k"
+                            },
+                            "servers": {
+                                "type": "array",
+                                "items": {
+                                    "type": "object",
+                                    "properties": {
+                                        "address": {
+                                            "type": "string",
+                                            "default": "10.1.10.6"
+                                        },
+                                        "port": {
+                                            "type": "string",
+                                            "default": "8514"
+                                        }
+                                    }
+                                }
+                            },
+                            "localStorage": {
+                                "type": "boolean",
+                                "default": false,
+                                "const": false
+                            },
+                            "remoteStorage": {
+                                "type": "string",
+                                "default": "bigiq",
+                                "const": "bigiq"
+                            },
+                            "reportAnomaliesEnabled": {
+                                "type": "boolean",
+                                "default": true,
+                                "const": true
+                            },
+                            "storageFilter": {
+                                "type": "object",
+                                "properties": {
+                                    "requestType": {
+                                        "type": "string",
+                                        "default": "illegal"
+                                    }
+                                }
+                            }
+                        }
                     }
                 },
                 "type": "object",

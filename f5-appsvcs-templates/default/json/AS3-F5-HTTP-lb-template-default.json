@@ -1,6 +1,6 @@
 {
     "description": "For load balancing an HTTP application on port 80.",
-    "name": "AS3-F5-HTTP-lb-template-default-v5",
+    "name": "AS3-F5-HTTP-lb-template-default-v6",
     "published": false,
     "tenant": {
         "name": "default",

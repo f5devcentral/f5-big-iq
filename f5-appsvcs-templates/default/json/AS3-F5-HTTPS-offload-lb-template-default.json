@@ -1,6 +1,6 @@
 {
-    "description": "For load balancing an HTTPS application on port 443 with SSL offloading on BIG-IP.",
-    "name": "AS3-F5-HTTPS-offload-lb-template-default-v5",
+    "description": "For load balancing an HTTPS application on port 443 with SSL offloading on BIG-IP and custom HTTP monitor.",
+    "name": "AS3-F5-HTTPS-offload-lb-template-default-v6",
     "published": false,
     "tenant": {
         "name": "default",
@@ -47,14 +47,14 @@
                         {
                             "properties": {
                                 "class": {
-                                    "const": "TLS_Client"
+                                    "const": "Certificate"
                                 }
                             }
                         },
                         {
                             "properties": {
                                 "class": {
-                                    "const": "Certificate"
+                                    "const": "TLS_Server"
                                 }
                             }
                         }
@@ -100,24 +100,24 @@
                     "if": {
                         "properties": {
                             "class": {
-                                "const": "TLS_Client"
-                            }
-                        }
-                    },
-                    "then": {
-                        "$ref": "#/definitions/TLS_Client"
-                    }
-                },
-                {
-                    "if": {
-                        "properties": {
-                            "class": {
                                 "const": "Certificate"
                             }
                         }
                     },
                     "then": {
                         "$ref": "#/definitions/Certificate"
+                    }
+                },
+                {
+                    "if": {
+                        "properties": {
+                            "class": {
+                                "const": "TLS_Server"
+                            }
+                        }
+                    },
+                    "then": {
+                        "$ref": "#/definitions/TLS_Server"
                     }
                 }
             ]
@@ -212,10 +212,6 @@
             "Service_HTTPS": {
                 "properties": {
                     "class": {},
-                    "clientTLS": {
-                        "type": "string",
-                        "default": "TLS_Client"
-                    },
                     "profileAnalytics": {
                         "type": "object",
                         "properties": {
@@ -235,17 +231,10 @@
                     "virtualPort": {
                         "type": "number",
                         "default": 443
-                    }
-                },
-                "type": "object",
-                "additionalProperties": false
-            },
-            "TLS_Client": {
-                "properties": {
-                    "class": {},
-                    "clientCertificate": {
+                    },
+                    "serverTLS": {
                         "type": "string",
-                        "default": "Certificate"
+                        "default": "TLS_Server"
                     }
                 },
                 "type": "object",
@@ -267,6 +256,25 @@
                         "properties": {
                             "text": {
                                 "type": "string"
+                            }
+                        }
+                    }
+                },
+                "type": "object",
+                "additionalProperties": false
+            },
+            "TLS_Server": {
+                "properties": {
+                    "class": {},
+                    "certificates": {
+                        "type": "array",
+                        "items": {
+                            "type": "object",
+                            "properties": {
+                                "certificate": {
+                                    "type": "string",
+                                    "default": "Certificate"
+                                }
                             }
                         }
                     }
