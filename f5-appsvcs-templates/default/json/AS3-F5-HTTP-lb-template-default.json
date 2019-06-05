@@ -1,7 +1,8 @@
 {
     "description": "For load balancing an HTTP application on port 80.",
-    "name": "AS3-F5-HTTP-lb-template-default-v6",
+    "name": "AS3-F5-HTTP-lb-template-default-v7",
     "published": false,
+    "isUICompatible": true,
     "tenant": {
         "name": "default",
         "override": false,
@@ -238,6 +239,10 @@
                     "pool": {
                         "type": "string",
                         "default": "Pool"
+                    },
+                    "enable": {
+                        "type": "boolean",
+                        "default": true
                     }
                 },
                 "type": "object",

@@ -1,183 +1,188 @@
 {
     "description": "For load balancing a TCP-based application with a FastL4 profile.",
-    "name": "AS3-F5-FastL4-TCP-lb-template-default-v5",
+    "name": "AS3-F5-FastL4-TCP-lb-template-default-v7",
     "published": false,
+    "isUICompatible": true,
     "tenant": {
         "name": "default",
         "override": false,
         "editable": true
     },
     "schemaOverlay": {
-    "type": "object",
-    "properties": {
-        "class": {
-            "type": "string",
-            "const": "Application"
+        "type": "object",
+        "properties": {
+            "class": {
+                "type": "string",
+                "const": "Application"
+            },
+            "template": {},
+            "schemaOverlay": {},
+            "label": {},
+            "remark": {}
         },
-        "template": {},
-        "schemaOverlay": {},
-        "label": {},
-        "remark": {}
-    },
-    "additionalProperties": {
-        "allOf": [
-            {
-                "anyOf": [
-                    {
+        "additionalProperties": {
+            "allOf": [
+                {
+                    "anyOf": [
+                        {
+                            "properties": {
+                                "class": {
+                                    "const": "Pool"
+                                }
+                            }
+                        },
+                        {
+                            "properties": {
+                                "class": {
+                                    "const": "Service_L4"
+                                }
+                            }
+                        },
+                        {
+                            "properties": {
+                                "class": {
+                                    "const": "L4_Profile"
+                                }
+                            }
+                        }
+                    ]
+                },
+                {
+                    "if": {
                         "properties": {
                             "class": {
                                 "const": "Pool"
                             }
                         }
                     },
-                    {
+                    "then": {
+                        "$ref": "#/definitions/Pool"
+                    }
+                },
+                {
+                    "if": {
                         "properties": {
                             "class": {
                                 "const": "Service_L4"
                             }
                         }
                     },
-                    {
+                    "then": {
+                        "$ref": "#/definitions/Service_L4"
+                    }
+                },
+                {
+                    "if": {
                         "properties": {
                             "class": {
                                 "const": "L4_Profile"
                             }
                         }
+                    },
+                    "then": {
+                        "$ref": "#/definitions/L4_Profile"
                     }
-                ]
-            },
-            {
-                "if": {
-                    "properties": {
-                        "class": {
-                            "const": "Pool"
+                }
+            ]
+        },
+        "required": [
+            "class"
+        ],
+        "definitions": {
+            "Pool": {
+                "properties": {
+                    "class": {},
+                    "members": {
+                        "type": "array",
+                        "items": {
+                            "type": "object",
+                            "properties": {
+                                "servicePort": {
+                                    "type": "number"
+                                },
+                                "monitors": {
+                                    "type": "array",
+                                    "default": [
+                                        "tcp"
+                                    ],
+                                    "const": [
+                                        "tcp"
+                                    ]
+                                },
+                                "adminState": {
+                                    "type": "string",
+                                    "default": "enable"
+                                },
+                                "shareNodes": {
+                                    "type": "boolean",
+                                    "default": true,
+                                    "const": true
+                                },
+                                "serverAddresses": {
+                                    "type": "array"
+                                }
+                            }
                         }
+                    },
+                    "monitors": {
+                        "type": "array",
+                        "default": [
+                            "tcp"
+                        ],
+                        "const": [
+                            "tcp"
+                        ]
                     }
                 },
-                "then": {
-                    "$ref": "#/definitions/Pool"
-                }
+                "type": "object",
+                "additionalproperties": false
             },
-            {
-                "if": {
-                    "properties": {
-                        "class": {
-                            "const": "Service_L4"
-                        }
-                    }
-                },
-                "then": {
-                    "$ref": "#/definitions/Service_L4"
-                }
-            },
-            {
-                "if": {
-                    "properties": {
-                        "class": {
-                            "const": "L4_Profile"
-                        }
-                    }
-                },
-                "then": {
-                    "$ref": "#/definitions/L4_Profile"
-                }
-            }
-        ]
-    },
-    "required": [
-        "class"
-    ],
-    "definitions": {
-        "Pool": {
-            "properties": {
-                "class": {},
-                "members": {
-                    "type": "array",
-                    "items": {
+            "Service_L4": {
+                "properties": {
+                    "class": {},
+                    "virtualPort": {
+                        "type": "number",
+                        "default": 8080
+                    },
+                    "virtualAddresses": {
+                        "type": "array"
+                    },
+                    "enable": {
+                        "type": "boolean",
+                        "default": true
+                    },
+                    "pool": {
+                        "type": "string",
+                        "default": "Pool"
+                    },
+                    "profileL4": {
                         "type": "object",
                         "properties": {
-                            "servicePort": {
-                                "type": "number"
-                            },
-                            "monitors": {
-                                "type": "array",
-                                "default": [
-                                    "tcp"
-                                ],
-                                "const": [
-                                    "tcp"
-                                ]
-                            },
-                            "adminState": {
+                            "use": {
                                 "type": "string",
-                                "default": "enable"
-                            },
-                            "shareNodes": {
-                                "type": "boolean",
-                                "default": true,
-                                "const": true
-                            },
-                            "serverAddresses": {
-                                "type": "array"
+                                "default": "L4_Profile"
                             }
                         }
                     }
                 },
-                "monitors": {
-                    "type": "array",
-                    "default": [
-                        "tcp"
-                    ],
-                    "const": [
-                        "tcp"
-                    ]
-                }
+                "type": "object",
+                "additionalProperties": false
             },
-            "type": "object",
-            "additionalproperties": false
-        },
-        "Service_L4": {
-            "properties": {
-                "class": {},
-                "virtualPort": {
-                    "type": "number",
-                    "default": 8080
-                },
-                "virtualAddresses": {
-                    "type": "array"
-                },
-                "pool": {
-                    "type": "string",
-                    "default": "Pool"
-                },
-                "profileL4": {
-                    "type": "object",
-                    "properties": {
-                        "use": {
-                            "type": "string",
-                            "default": "L4_Profile"
-                        }
+            "L4_Profile": {
+                "properties": {
+                    "class": {},
+                    "tcpCloseTimeout": {
+                        "type": "number",
+                        "default": 5
+                    },
+                    "tcpHandshakeTimeout": {
+                        "type": "number",
+                        "default": 5
                     }
-                }
-            },
-            "type": "object",
-            "additionalProperties": false
-        },
-        "L4_Profile": {
-            "properties": {
-                "class": {},
-                "tcpCloseTimeout": {
-                    "type": "number",
-                    "default": 5
                 },
-                "tcpHandshakeTimeout": {
-                    "type": "number",
-                    "default": 5
-                }
-            },
-            "type": "object",
-            "additionalProperties": false
+                "type": "object",
+                "additionalProperties": false
+            }
         }
     }
-}
 }

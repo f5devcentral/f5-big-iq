@@ -1,7 +1,8 @@
 {
     "description": "For load balancing a TCP-based application.",
-    "name": "AS3-F5-TCP-lb-template-default-v5",
+    "name": "AS3-F5-TCP-lb-template-default-v7",
     "published": false,
+    "isUICompatible": true,
     "tenant": {
         "name": "default",
         "override": false,
@@ -158,6 +159,10 @@
                     },
                     "virtualAddresses": {
                         "type": "array"
+                    },
+                    "enable": {
+                        "type": "boolean",
+                        "default": true
                     }
                 },
                 "type": "object",

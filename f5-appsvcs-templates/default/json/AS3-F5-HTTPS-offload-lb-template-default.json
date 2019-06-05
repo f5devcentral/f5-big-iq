@@ -1,7 +1,8 @@
 {
     "description": "For load balancing an HTTPS application on port 443 with SSL offloading on BIG-IP and custom HTTP monitor.",
-    "name": "AS3-F5-HTTPS-offload-lb-template-default-v6",
+    "name": "AS3-F5-HTTPS-offload-lb-template-default-v7",
     "published": false,
+    "isUICompatible": true,
     "tenant": {
         "name": "default",
         "override": false,
@@ -55,6 +56,13 @@
                             "properties": {
                                 "class": {
                                     "const": "TLS_Server"
+                                }
+                            }
+                        },
+                        {
+                            "properties": {
+                                "class": {
+                                    "const": "Monitor"
                                 }
                             }
                         }
@@ -118,6 +126,18 @@
                     },
                     "then": {
                         "$ref": "#/definitions/TLS_Server"
+                    }
+                },
+                {
+                    "if": {
+                        "properties": {
+                            "class": {
+                                "const": "Monitor"
+                            }
+                        }
+                    },
+                    "then": {
+                        "$ref": "#/definitions/Monitor"
                     }
                 }
             ]
@@ -198,12 +218,15 @@
                     },
                     "monitors": {
                         "type": "array",
-                        "default": [
-                            "http"
-                        ],
-                        "const": [
-                            "http"
-                        ]
+                        "items": {
+                            "type": "object",
+                            "properties": {
+                                "use": {
+                                    "type": "string",
+                                    "default": "Monitor"
+                                }
+                            }
+                        }
                     }
                 },
                 "type": "object",
@@ -235,6 +258,10 @@
                     "serverTLS": {
                         "type": "string",
                         "default": "TLS_Server"
+                    },
+                    "enable": {
+                        "type": "boolean",
+                        "default": true
                     }
                 },
                 "type": "object",
@@ -277,6 +304,26 @@
                                 }
                             }
                         }
+                    }
+                },
+                "type": "object",
+                "additionalProperties": false
+            },
+            "Monitor": {
+                "properties": {
+                    "class": {},
+                    "monitorType": {
+                        "type": "string",
+                        "default": "http",
+                        "const": "http"
+                    },
+                    "receive": {
+                        "type": "string",
+                        "default": "HTTP/1."
+                    },
+                    "send": {
+                        "type": "string",
+                        "default": "HEAD / HTTP/1.0\\r\\n\\r\\n"
                     }
                 },
                 "type": "object",

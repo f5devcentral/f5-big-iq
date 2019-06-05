@@ -1,7 +1,8 @@
 {
     "description": "For load balancing an HTTPS application on port 443 with a Web Application Firewall using an OWASP protection settings with minimum false positive.",
-    "name": "AS3-F5-HTTPS-WAF-lb-template-default-v6",
+    "name": "AS3-F5-HTTPS-WAF-lb-template-default-v7",
     "published": false,
+    "isUICompatible": true,
     "tenant": {
         "name": "default",
         "override": false,
@@ -262,6 +263,10 @@
                     "virtualAddresses": {
                         "type": "array"
                     },
+                    "enable": {
+                        "type": "boolean",
+                        "default": true
+                    },
                     "pool": {
                         "type": "string",
                         "default": "Pool"
@@ -358,10 +363,25 @@
                     "application": {
                         "type": "object",
                         "properties": {
+                            "localStorage": {
+                                "type": "boolean",
+                                "default": false,
+                                "const": false
+                            },
                             "maxEntryLength": {
                                 "type": "string",
                                 "default": "64k",
                                 "const": "64k"
+                            },
+                            "remoteStorage": {
+                                "type": "string",
+                                "default": "bigiq",
+                                "const": "bigiq"
+                            },
+                            "reportAnomaliesEnabled": {
+                                "type": "boolean",
+                                "default": true,
+                                "const": true
                             },
                             "servers": {
                                 "type": "array",
@@ -378,21 +398,6 @@
                                         }
                                     }
                                 }
-                            },
-                            "localStorage": {
-                                "type": "boolean",
-                                "default": false,
-                                "const": false
-                            },
-                            "remoteStorage": {
-                                "type": "string",
-                                "default": "bigiq",
-                                "const": "bigiq"
-                            },
-                            "reportAnomaliesEnabled": {
-                                "type": "boolean",
-                                "default": true,
-                                "const": true
                             },
                             "storageFilter": {
                                 "type": "object",
