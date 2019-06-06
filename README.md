@@ -17,9 +17,7 @@ Templates | Description
 | AS3-F5-FastL4-TCP-lb-template-default | For load balancing a TCP-based application with a FastL4 profile.
 | AS3-F5-UDP-lb-template-default | For load balancing a UDP-based application.
 | AS3-F5-HTTP-url-routing-lb-template-default | For load balancing an HTTP application with url routing.
-| AS3-F5-DNS-FQDN-A-template-default | For global load balancing distribution of DNS name resolution requests A type.
-| AS3-F5-DNS-FQDN-AAAA-template-default | For global load balancing distribution of DNS name resolution requests AAAA type.
-| AS3-F5-DNS-FQDN-MX-template-default |  For global load balancing distribution of DNS name resolution requests MX type.
+| AS3-F5-DNS-FQDN-template-default | For global load balancing distribution of DNS name resolution requests A, AAAA, CNAME or MX types.
 
 
 The AS3 templates in this repository are available in 2 formats:
