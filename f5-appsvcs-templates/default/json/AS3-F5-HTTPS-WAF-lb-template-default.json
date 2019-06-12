@@ -1,5 +1,5 @@
 {
-    "description": "For load balancing an HTTPS application on port 443 with a Web Application Firewall using an OWASP protection settings with minimum false positive.",
+    "description": "For load balancing an HTTPS application on port 443 with a Web Application Firewall using an OWASP protection settings with minimum false positive (v13.1).",
     "name": "AS3-F5-HTTPS-WAF-lb-template-default-v7",
     "published": false,
     "isUICompatible": true,
@@ -332,7 +332,7 @@
                     "class": {},
                     "url": {
                         "type": "string",
-                        "default": "https://raw.githubusercontent.com/f5devcentral/f5-asm-policy-template-v13/master/owasp_ready_template/owasp-autotune.xml"
+                        "default": "https://raw.githubusercontent.com/f5devcentral/f5-asm-policy-template-v13/master/owasp_ready_template/v1/ASMv131/owasp-auto-tune-v131.xml"
                     }
                 },
                 "type": "object",
