@@ -175,6 +175,18 @@
                     "lbModeFallback": {
                         "type": "string",
                         "default": "return-to-dns"
+                    },
+                    "monitors": {
+                        "type": "array",
+                        "items": {
+                            "type": "object",
+                            "properties": {
+                                "use": {
+                                    "type": "string",
+                                    "default": "GSLB_Monitor"
+                                }
+                            }
+                        }
                     }
                 },
                 "type": "object",
