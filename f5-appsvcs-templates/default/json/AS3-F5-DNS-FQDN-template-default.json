@@ -1,10 +1,10 @@
 {
     "description": "For global load balancing distribution of DNS name resolution requests A, AAAA, CNAME and MX types.",
-    "name": "AS3-F5-DNS-FQDN-template-default-v7",
+    "name": "AS3-F5-DNS-FQDN-template-default-v8",
     "published": false,
     "isUICompatible": true,
     "tenant": {
-        "name": "default",
+        "name": "partitionOnBIGIP",
         "override": false,
         "editable": true
     },

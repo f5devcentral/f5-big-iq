@@ -1,10 +1,10 @@
 {
     "description": "For load balancing an HTTPS application on port 443 with SSL offloading on BIG-IP and custom HTTP monitor.",
-    "name": "AS3-F5-HTTPS-offload-lb-template-default-v7",
+    "name": "AS3-F5-HTTPS-offload-lb-template-default-v8",
     "published": false,
     "isUICompatible": true,
     "tenant": {
-        "name": "default",
+        "name": "partitionOnBIGIP",
         "override": false,
         "editable": true
     },
@@ -190,7 +190,8 @@
                             "type": "object",
                             "properties": {
                                 "servicePort": {
-                                    "type": "number"
+                                    "type": "number",
+                                    "default": 80
                                 },
                                 "monitors": {
                                     "type": "array",

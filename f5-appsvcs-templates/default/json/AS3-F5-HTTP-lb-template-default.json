@@ -1,10 +1,10 @@
 {
     "description": "For load balancing an HTTP application on port 80.",
-    "name": "AS3-F5-HTTP-lb-template-default-v7",
+    "name": "AS3-F5-HTTP-lb-template-default-v8",
     "published": false,
     "isUICompatible": true,
     "tenant": {
-        "name": "default",
+        "name": "partitionOnBIGIP",
         "override": false,
         "editable": true
     },
@@ -169,7 +169,8 @@
                             "type": "object",
                             "properties": {
                                 "servicePort": {
-                                    "type": "number"
+                                    "type": "number",
+                                    "default": 80
                                 },
                                 "monitors": {
                                     "type": "array",
