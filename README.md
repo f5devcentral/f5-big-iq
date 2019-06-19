@@ -35,7 +35,7 @@ Importing AS3 templates to your BIG-IQ using Postman
    1. Click the **Import** button.
    1. Click **Import From Link**.
    1. Paste in the following for the Postman Collection: `https://raw.githubusercontent.com/f5devcentral/f5-big-iq/7.0.0/f5-appsvcs-templates/default/postman/default-as3-f5-all-templates.postman_collection.json` and then click **Import**.
-   1. Repeast the last 3 sub-steps, but this type paste in the following for the Postman Environment:  `https://raw.githubusercontent.com/f5devcentral/f5-big-iq/7.0.0/f5-appsvcs-templates/default/postman/default-as3-f5-all-templates.postman_environment.json`.
+   1. Repeast the last 3 sub-steps, but this time paste in the following for the Postman Environment:  `https://raw.githubusercontent.com/f5devcentral/f5-big-iq/7.0.0/f5-appsvcs-templates/default/postman/default-as3-f5-all-templates.postman_environment.json`.
 
 ![postman_collection_import](./images/postman_collection_import.png)
 
