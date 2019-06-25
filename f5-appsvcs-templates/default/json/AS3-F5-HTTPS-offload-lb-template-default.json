@@ -272,20 +272,10 @@
                 "properties": {
                     "class": {},
                     "certificate": {
-                        "type": "object",
-                        "properties": {
-                            "text": {
-                                "type": "string"
-                            }
-                        }
+                        "type": "string"
                     },
                     "privateKey": {
-                        "type": "object",
-                        "properties": {
-                            "text": {
-                                "type": "string"
-                            }
-                        }
+                        "type": "string"
                     }
                 },
                 "type": "object",
