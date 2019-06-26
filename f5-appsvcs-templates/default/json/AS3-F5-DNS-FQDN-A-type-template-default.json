@@ -1,6 +1,6 @@
 {
-    "description": "For global load balancing distribution of DNS name resolution requests A, AAAA, CNAME and MX types.",
-    "name": "AS3-F5-DNS-FQDN-template-default-v8",
+    "description": "For global load balancing distribution of DNS name resolution requests A type.",
+    "name": "AS3-F5-DNS-FQDN-template-default-v9",
     "published": false,
     "isUICompatible": true,
     "tenant": {
@@ -101,7 +101,8 @@
                     },
                     "resourceRecordType": {
                         "type": "string",
-                        "default": "A"
+                        "default": "A",
+                        "const": "A"
                     },
                     "pools": {
                         "type": "array",
@@ -143,7 +144,8 @@
                     "class": {},
                     "resourceRecordType": {
                         "type": "string",
-                        "default": "A"
+                        "default": "A",
+                        "const": "A"
                     },
                     "members": {
                         "type": "array",

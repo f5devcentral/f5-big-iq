@@ -1,6 +1,6 @@
 {
     "description": "For load balancing an HTTP application on port 80 with HTTP traffic capture.",
-    "name": "AS3-F5-HTTP-lb-template-traffic-capture-default-v8",
+    "name": "AS3-F5-HTTP-lb-template-traffic-capture-default-v9",
     "published": false,
     "isUICompatible": true,
     "tenant": {

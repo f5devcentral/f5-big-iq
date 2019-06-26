@@ -1,6 +1,6 @@
 {
     "description": "For load balancing an HTTP application with url routing.",
-    "name": "AS3-F5-HTTP-url-routing-lb-template-default-v8",
+    "name": "AS3-F5-HTTP-url-routing-lb-template-default-v9",
     "published": false,
     "isUICompatible": true,
     "tenant": {
