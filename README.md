@@ -42,7 +42,7 @@ Importing AS3 templates to your BIG-IQ using Postman
 3. Set your `Primary BIG-IQ CM IP address` in the Postman Environment. To do this:
    1. Click the Settings icon to open the Manage Environments screen.
    1. Click `default-as3-f5-all-templates`.
-   1. For the `bigiq_mgmt` variable, type the management IP address of your BIG-IQ.
+   1. For the `bigiq_mgmt` variable, type the management IP address of your BIG-IQ in the `CURRENT VALUE`
    1. Click **Update**.
    1. Close the Manage Environments screen.
 
