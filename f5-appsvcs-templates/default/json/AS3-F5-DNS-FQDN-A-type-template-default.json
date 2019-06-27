@@ -129,11 +129,11 @@
                     },
                     "send": {
                         "type": "string",
-                        "default": "HEAD / HTTP/1.0\\\\r\\\\n"
+                        "default": "GET / HTTP/1.0"
                     },
                     "receive": {
                         "type": "string",
-                        "default": "HTTP"
+                        "default": "HTTP/1.1 200 OK"
                     }
                 },
                 "type": "object",
