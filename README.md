@@ -90,6 +90,7 @@ Importing AS3 templates to your BIG-IQ using CLI
 2. Execute (copy/paste)
 
 ```
+bash
 cd /home/admin
 rm -rf f5-big-iq*.tar.gz
 curl -L https://github.com/f5devcentral/f5-big-iq/tarball/7.0.0 > f5-big-iq.tar.gz
