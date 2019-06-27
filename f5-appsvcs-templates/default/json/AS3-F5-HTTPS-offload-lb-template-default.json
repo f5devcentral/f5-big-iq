@@ -310,11 +310,11 @@
                     },
                     "receive": {
                         "type": "string",
-                        "default": "HTTP/1."
+                        "default": "HTTP/1.1 200 OK"
                     },
                     "send": {
                         "type": "string",
-                        "default": "HEAD / HTTP/1.0\\r\\n\\r\\n"
+                        "default": "GET / HTTP/1.0"
                     }
                 },
                 "type": "object",
