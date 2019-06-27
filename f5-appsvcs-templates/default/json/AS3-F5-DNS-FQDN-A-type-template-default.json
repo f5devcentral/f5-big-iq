@@ -1,6 +1,6 @@
 {
     "description": "For global load balancing distribution of DNS name resolution requests A type.",
-    "name": "AS3-F5-DNS-FQDN-template-default-v9",
+    "name": "AS3-F5-DNS-FQDN-A-type-template-default-v9",
     "published": false,
     "isUICompatible": true,
     "tenant": {
