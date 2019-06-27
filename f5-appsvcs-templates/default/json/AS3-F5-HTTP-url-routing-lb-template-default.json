@@ -250,19 +250,18 @@
                                                 "type": "string",
                                                 "default": "httpUri"
                                             },
-                                            "event": {
-                                                "type": "string",
-                                                "default": "ssl-client-hello"
-                                            },
                                             "path": {
                                                 "type": "object",
                                                 "properties": {
                                                     "operand": {
                                                         "type": "string",
-                                                        "default": "starts-with"
+                                                        "default": "contains"
                                                     },
                                                     "values": {
-                                                        "type": "array"
+                                                        "type": "array",
+                                                        "default": [
+                                                            "example.com"
+                                                        ]
                                                     }
                                                 }
                                             }
@@ -292,6 +291,11 @@
                                                         }
                                                     }
                                                 }
+                                            },
+                                            "event": {
+                                                "type": "string",
+                                                "default": "request",
+                                                "const": "request"
                                             }
                                         }
                                     }
