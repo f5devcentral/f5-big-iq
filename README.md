@@ -13,7 +13,7 @@ Templates | Description
 | AS3-F5-HTTP-lb-template-default | For load balancing an HTTP application on port 80.
 | AS3-F5-HTTP-lb-template-traffic-capture-default | For load balancing an HTTP application on port 80 with HTTP traffic capture.
 | AS3-F5-HTTPS-offload-lb-template-default | For load balancing an HTTPS application on port 443 with SSL offloading on BIG-IP and using a custom HTTP monitor.
-| AS3-F5-HTTPS-WAF-lb-template-default | For load balancing an HTTPS application on port 443 with a Web Application Firewall using an OWASP protection settings with minimum false positive (v13.1). [Look for other ASM Policy Available on DevCentral](https://github.com/f5devcentral/f5-asm-policy-template-v13)
+| AS3-F5-HTTPS-WAF-lb-template-default | For load balancing an HTTPS application on port 443 with a Web Application Firewall using an OWASP protection settings with minimum false positive (v13.1). [Look for other ASM Policy Available on DevCentral](https://github.com/f5devcentral/f5-asm-policy-templates)
 | AS3-F5-TCP-lb-template-default | For load balancing a TCP-based application.
 | AS3-F5-FastL4-TCP-lb-template-default | For load balancing a TCP-based application with a FastL4 profile.
 | AS3-F5-UDP-lb-template-default | For load balancing a UDP-based application.
