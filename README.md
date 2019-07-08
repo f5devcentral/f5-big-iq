@@ -3,7 +3,7 @@ BIG-IQ AS3 Template Library
 
 **Note:** These templates are supported only with BIG-IQ 7.0.0 and above.
 
-F5 maintains this BIG-IQ Application Services 3 Extension (AS3) template library to provide you with templates that you can either use directly or with just a few changes of your own. Use the instructions here to download these templates to your BIG-IQ system. Once downloaded, you can use these templates just as you would any other AS3 application template. AS3 templates perform on the BIG-IQ in uch  the same way as they do on BIG-IP. For more detail on how AS3 and how it works, refer to the CloudDocs content: [Using AS3 with BIG-IQ](https://clouddocs.f5.com/products/extensions/f5-appsvcs-extension/latest/userguide/big-iq.html). 
+F5 maintains this BIG-IQ Application Services 3 Extension (AS3) template library to provide you with templates that you can either use directly or with just a few changes of your own. Use the instructions here to download these templates to your BIG-IQ system. Once downloaded, you can use these templates just as you would any other AS3 application template. AS3 templates perform on the BIG-IQ in much  the same way as they do on BIG-IP. For more detail on AS3 and how it works, refer to the CloudDocs content: [Using AS3 with BIG-IQ](https://clouddocs.f5.com/products/extensions/f5-appsvcs-extension/latest/userguide/big-iq.html). 
 
 List of AS3 Templates
 ---------------------
@@ -21,19 +21,17 @@ Templates | Description
 | AS3-F5-DNS-FQDN-A-type-template-default | For global load balancing distribution of DNS name resolution requests A type.
 
 
-The AS3 templates in this repository are available in 2 formats:
+There are two methods you can use to download these templates and import then into your BIG-IQ so that you can use them. 
 
-* A Postman Collection & Environment.
-* A JSON file. Instructions for using this JSON file and API calls to use AS3 templates are provided in our CloudDocs content: [BIG-IQ API documentation](https://clouddocs.f5.com/products/big-iq/mgmt-api/latest/ApiReferences/bigiq_public_api_ref/r_as3_template.html).
+- If you are comfortable logging in to your BIG-IQ via SSH and executing a script, use **Importing AS3 templates to your BIG-IQ using a script**. This method uses an API call to access a JSON file.
+- If you are more comfortable with an application with a graphical user interface, use **Importing AS3 templates to your BIG-IQ using Postman**. This method uses an application named Postman to import the templates directly to your BIG-IQ.
 
-Instructions for downloading and importing these templates to your BIG-IQ user interface are provided below.
-
-Importing AS3 templates to your BIG-IQ using CLI
+Importing AS3 templates to your BIG-IQ using a script
 ------------------------------------------------
 
-1. Open a SSH session to your BIG-IQ as admin user.
+1. Open an SSH session to your BIG-IQ, and log in as an admin.
 
-2. Execute below commands (copy/paste).
+2. From the command prompt, run the following sequence of commands. (You can copy and paste the entire sequence directly to the command line.)
 
 ```
 bash
@@ -47,13 +45,13 @@ for json in *.json; do
 curl -s -k -H "Content-Type: application/json" -X POST -d @$json http://localhost:8100/cm/global/appsvcs-templates
 done
 ```
-3. Log in to your primary BIG-IQ device and navigate to **Applications > APPLICATION TEMPLATES > AS3 Templates** and verify that the AS3 templates you imported are listed.
+3. Log in to your primary BIG-IQ device and navigate to **Applications > APPLICATION TEMPLATES** and verify that the templates you imported are listed under **AS3 Templates**.
 
 ![bigiq_as3_templates_ui](./images/bigiq_as3_templates_ui.png)
 
-**Note:** Before you can use a AS3 template, it must be Published (read-only).
+**Note:** Before you can use an AS3 template, it must be Published (read-only).
 
-4. For more information on how to use the AS3 template to deploy an AS3 Application using the BIG-IQ, see [BIG-IQ documentation](https://support.f5.com/csp/knowledge-center/software/BIG-IQ?module=BIG-IQ%20Centralized%20Management&version=7.0.0)
+4. For more information on how to use an AS3 template to deploy an AS3 Application using the BIG-IQ, see [BIG-IQ documentation](https://support.f5.com/csp/knowledge-center/software/BIG-IQ?module=BIG-IQ%20Centralized%20Management&version=7.0.0)
 
 Importing AS3 templates to your BIG-IQ using Postman
 ----------------------------------------------------
@@ -63,7 +61,7 @@ Importing AS3 templates to your BIG-IQ using Postman
 2. Use the Postman Import feature to import the Postman Collection and Environment. To do this:
    1. Click the **Import** button.
    1. Click **Import From Link**.
-   1. Paste in the following for the Postman Collection: `https://raw.githubusercontent.com/f5devcentral/f5-big-iq/7.0.0/f5-appsvcs-templates/default/postman/default-as3-f5-all-templates.postman_collection.json` and then click **Import**.
+   1. For the Postman Collection, paste in the following: `https://raw.githubusercontent.com/f5devcentral/f5-big-iq/7.0.0/f5-appsvcs-templates/default/postman/default-as3-f5-all-templates.postman_collection.json` and then click **Import**.
    1. Repeat the last 3 sub-steps, but this time paste in the following for the Postman Environment:  `https://raw.githubusercontent.com/f5devcentral/f5-big-iq/7.0.0/f5-appsvcs-templates/default/postman/default-as3-f5-all-templates.postman_environment.json`.
 
 ![postman_collection_import](./images/postman_collection_import.png)
@@ -103,13 +101,13 @@ Importing AS3 templates to your BIG-IQ using Postman
 
 ![postman_collection_runner_passed](./images/postman_collection_runner_passed.png)
 
-7. Log in to your primary BIG-IQ device and navigate to **Applications > APPLICATION TEMPLATES > AS3 Templates** and verify that the AS3 templates you imported are listed.
+7. Log in to your primary BIG-IQ device and navigate to **Applications > APPLICATION TEMPLATES** and verify that the templates you imported are listed under **AS3 Templates**.
 
 ![bigiq_as3_templates_ui](./images/bigiq_as3_templates_ui.png)
 
-**Note:** Before you can use a AS3 template, it must be Published (read-only).
+**Note:** Before you can use an AS3 template, it must be Published (read-only).
 
-8. For more information on how to use the AS3 template to deploy an AS3 Application using the BIG-IQ, see [BIG-IQ documentation](https://support.f5.com/csp/knowledge-center/software/BIG-IQ?module=BIG-IQ%20Centralized%20Management&version=7.0.0)
+8. For more information on how to use an AS3 template to deploy an AS3 Application using the BIG-IQ, see [BIG-IQ documentation](https://support.f5.com/csp/knowledge-center/software/BIG-IQ?module=BIG-IQ%20Centralized%20Management&version=7.0.0)
 
 Support
 -------
