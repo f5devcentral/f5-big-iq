@@ -34,15 +34,15 @@ Importing AS3 templates to your BIG-IQ using a script
 2. From the command prompt, run the following sequence of commands. (You can copy and paste the entire sequence directly to the command line.)
 
 ```
-bash
-cd /home/admin
-rm -rf f5-big-iq*.tar.gz
-curl -L https://github.com/f5devcentral/f5-big-iq/tarball/7.0.0 > f5-big-iq.tar.gz
-tar -xzvf f5-big-iq.tar.gz
-cd f5devcentral-f5-big-iq-*/f5-appsvcs-templates/default/json/
+bash;
+cd /home/admin;
+rm -rf f5-big-iq*.tar.gz;
+curl -L https://github.com/f5devcentral/f5-big-iq/tarball/7.0.0 > f5-big-iq.tar.gz;
+tar -xzvf f5-big-iq.tar.gz;
+cd f5devcentral-f5-big-iq-*/f5-appsvcs-templates/default/json/;
 
-for json in *.json; do
-curl -s -k -H "Content-Type: application/json" -X POST -d @$json http://localhost:8100/cm/global/appsvcs-templates
+for json in *.json; do 
+curl -s -k -H "Content-Type: application/json" -X POST -d @$json http://localhost:8100/cm/global/appsvcs-templates ;
 done
 ```
 3. Log in to your primary BIG-IQ device and navigate to **Applications > APPLICATION TEMPLATES** and verify that the templates you imported are listed under **AS3 Templates**.
