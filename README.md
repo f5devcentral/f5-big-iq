@@ -1,7 +1,7 @@
 BIG-IQ AS3 Template Library
 ===========================
 
-**Note:** These templates are supported only with BIG-IQ 7.0.0 and above.
+**Note:** For BIG-IQ 7.0.0 and above.
 
 F5 maintains this BIG-IQ Application Services 3 Extension (AS3) template library to provide you with templates that you can either use directly or with just a few changes of your own. Use the instructions here to download these templates to your BIG-IQ system. Once downloaded, you can use these templates just as you would any other AS3 application template. AS3 templates perform on the BIG-IQ in much  the same way as they do on BIG-IP. For more detail on AS3 and how it works, refer to the CloudDocs content: [Using AS3 with BIG-IQ](https://clouddocs.f5.com/products/extensions/f5-appsvcs-extension/latest/userguide/big-iq.html). 
 
