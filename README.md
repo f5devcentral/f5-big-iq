@@ -3,22 +3,22 @@ BIG-IQ AS3 Template Library
 
 **Note:** For BIG-IQ 7.0.0 and above.
 
-F5 maintains this BIG-IQ Application Services 3 Extension (AS3) template library to provide you with templates that you can either use directly or with just a few changes of your own. Use the instructions here to download these templates to your BIG-IQ system. Once downloaded, you can use these templates just as you would any other AS3 application template. AS3 templates perform on the BIG-IQ in much  the same way as they do on BIG-IP. For more detail on AS3 and how it works, refer to the CloudDocs content: [Using AS3 with BIG-IQ](https://clouddocs.f5.com/products/extensions/f5-appsvcs-extension/latest/userguide/big-iq.html). 
+F5 maintains this BIG-IQ Application Services 3 Extension (AS3) template (schemaOverlay) library to provide you with templates that you can either use directly or with just a few changes of your own. Use the instructions here to download these templates to your BIG-IQ system. Once downloaded, you can use these templates just as you would any other AS3 application template. AS3 templates perform on the BIG-IQ in much  the same way as they do on BIG-IP. For more detail on AS3 and how it works, refer to the CloudDocs content: [Using AS3 with BIG-IQ](https://clouddocs.f5.com/products/extensions/f5-appsvcs-extension/latest/userguide/big-iq.html). 
 
-List of AS3 Templates
----------------------
+List of AS3 Templates (schemaOverlay)
+-------------------------------------
 
 Templates | Description
 --------- | -----------
-| AS3-F5-HTTP-lb-template-default | For load balancing an HTTP application on port 80.
-| AS3-F5-HTTP-lb-template-traffic-capture-default | For load balancing an HTTP application on port 80 with HTTP traffic capture.
-| AS3-F5-HTTPS-offload-lb-template-default | For load balancing an HTTPS application on port 443 with SSL offloading on BIG-IP and using a custom HTTP monitor.
-| AS3-F5-HTTPS-WAF-lb-template-default | For load balancing an HTTPS application on port 443 with a Web Application Firewall using an OWASP protection settings with minimum false positive (v13.1). [Look for other ASM Policy Available on DevCentral](https://github.com/f5devcentral/f5-asm-policy-templates)
-| AS3-F5-TCP-lb-template-default | For load balancing a TCP-based application.
-| AS3-F5-FastL4-TCP-lb-template-default | For load balancing a TCP-based application with a FastL4 profile.
-| AS3-F5-UDP-lb-template-default | For load balancing a UDP-based application.
-| AS3-F5-HTTP-url-routing-lb-template-default | For load balancing an HTTP application with url routing.
-| AS3-F5-DNS-FQDN-A-type-template-default | For global load balancing distribution of DNS name resolution requests A type.
+| AS3-F5-HTTP-lb-template-big-iq-default | For load balancing an HTTP application on port 80.
+| AS3-F5-HTTP-lb-traffic-capture-template-big-iq-default | For load balancing an HTTP application on port 80 with HTTP traffic capture.
+| AS3-F5-HTTPS-offload-lb-template-big-iq-default | For load balancing an HTTPS application on port 443 with SSL offloading on BIG-IP and using a custom HTTP monitor.
+| AS3-F5-HTTPS-WAF-lb-template-big-iq-default | For load balancing an HTTPS application on port 443 with a Web Application Firewall using an OWASP protection settings with minimum false positive (v13.1). [Look for other ASM Policy Available on DevCentral](https://github.com/f5devcentral/f5-asm-policy-templates)
+| AS3-F5-TCP-lb-template-big-iq-default | For load balancing a TCP-based application.
+| AS3-F5-FastL4-TCP-lb-template-big-iq-default | For load balancing a TCP-based application with a FastL4 profile.
+| AS3-F5-UDP-lb-template-big-iq-default | For load balancing a UDP-based application.
+| AS3-F5-HTTP-url-routing-lb-template-big-iq-default | For load balancing an HTTP application with url routing.
+| AS3-F5-DNS-FQDN-A-type-template-big-iq-default | For global load balancing distribution of DNS name resolution requests A type.
 
 
 There are two methods you can use to download these templates and import then into your BIG-IQ so that you can use them. 
@@ -27,7 +27,7 @@ There are two methods you can use to download these templates and import then in
 - If you are more comfortable with an application with a graphical user interface, use **Importing AS3 templates to your BIG-IQ using Postman**. This method uses an application named Postman to import the templates directly to your BIG-IQ.
 
 Importing AS3 templates to your BIG-IQ using a script
-------------------------------------------------
+-----------------------------------------------------
 
 1. Open an SSH session to your BIG-IQ, and log in as an admin.
 
@@ -68,7 +68,7 @@ Importing AS3 templates to your BIG-IQ using Postman
 
 3. Set your `Primary BIG-IQ CM IP address` in the Postman Environment. To do this:
    1. Click the Settings icon to open the Manage Environments screen.
-   1. Click `default-as3-f5-all-templates`.
+   1. Click `default-as3-f5-all-templates-big-iq`.
    1. For the `bigiq_mgmt` variable, type the management IP address of your BIG-IQ in the `CURRENT VALUE`
    1. Click **Update**.
    1. Close the Manage Environments screen.
@@ -91,9 +91,9 @@ Importing AS3 templates to your BIG-IQ using Postman
 
 5. Run the Import Collection in this environment. To do this:
    1. Open the Postman Runner.
-   1. For the Collection, select **default-as3-f5-all-templates**.
-   1. For the Environment, select **default-as3-f5-all-templates**.
-   1. Click **Run default-as3-f5-all-templates**.
+   1. For the Collection, select **default-as3-f5-all-templates-big-iq**.
+   1. For the Environment, select **default-as3-f5-all-templates-big-iq**.
+   1. Click **Run default-as3-f5-all-templates-big-iq**.
 
 ![postman_collection_runner](./images/postman_collection_runner.png)
 
