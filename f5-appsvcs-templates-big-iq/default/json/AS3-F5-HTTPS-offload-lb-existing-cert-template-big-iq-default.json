@@ -1,0 +1,286 @@
+{
+    "description": "For load balancing an HTTPS application on port 443 with SSL offloading on BIG-IP using existing Certificate and Key",
+    "name": "AS3-F5-HTTPS-offload-lb-existing-cert-template-big-iq-default",
+    "published": false,
+    "isUICompatible": true,
+    "tenant": {
+        "name": "partitionOnBIGIP",
+        "override": false,
+        "editable": true
+    },
+    "schemaOverlay": {
+        "type": "object",
+        "properties": {
+            "class": {
+                "type": "string",
+                "const": "Application"
+            },
+            "template": {},
+            "schemaOverlay": {},
+            "label": {},
+            "remark": {}
+        },
+        "additionalProperties": {
+            "allOf": [
+                {
+                    "anyOf": [
+                        {
+                            "properties": {
+                                "class": {
+                                    "const": "Pool"
+                                }
+                            }
+                        },
+                        {
+                            "properties": {
+                                "class": {
+                                    "const": "Service_HTTPS"
+                                }
+                            }
+                        },
+                        {
+                            "properties": {
+                                "class": {
+                                    "const": "Certificate"
+                                }
+                            }
+                        },
+                        {
+                            "properties": {
+                                "class": {
+                                    "const": "TLS_Server"
+                                }
+                            }
+                        },
+                        {
+                            "properties": {
+                                "class": {
+                                    "const": "Analytics_Profile"
+                                }
+                            }
+                        }
+                    ]
+                },
+                {
+                    "if": {
+                        "properties": {
+                            "class": {
+                                "const": "Pool"
+                            }
+                        }
+                    },
+                    "then": {
+                        "$ref": "#/definitions/Pool"
+                    }
+                },
+                {
+                    "if": {
+                        "properties": {
+                            "class": {
+                                "const": "Service_HTTPS"
+                            }
+                        }
+                    },
+                    "then": {
+                        "$ref": "#/definitions/Service_HTTPS"
+                    }
+                },
+                {
+                    "if": {
+                        "properties": {
+                            "class": {
+                                "const": "Certificate"
+                            }
+                        }
+                    },
+                    "then": {
+                        "$ref": "#/definitions/Certificate"
+                    }
+                },
+                {
+                    "if": {
+                        "properties": {
+                            "class": {
+                                "const": "TLS_Server"
+                            }
+                        }
+                    },
+                    "then": {
+                        "$ref": "#/definitions/TLS_Server"
+                    }
+                },
+                {
+                    "if": {
+                        "properties": {
+                            "class": {
+                                "const": "Analytics_Profile"
+                            }
+                        }
+                    },
+                    "then": {
+                        "$ref": "#/definitions/Analytics_Profile"
+                    }
+                }
+            ]
+        },
+        "required": [
+            "class"
+        ],
+        "definitions": {
+            "Analytics_Profile": {
+                "properties": {
+                    "class": {},
+                    "collectUserAgent": {
+                        "type": "boolean"
+                    },
+                    "collectResponseCode": {
+                        "type": "boolean",
+                        "default": true
+                    },
+                    "collectMethod": {
+                        "type": "boolean",
+                        "default": false
+                    },
+                    "collectOsAndBrowser": {
+                        "type": "boolean",
+                        "default": false
+                    },
+                    "collectGeo": {
+                        "type": "boolean"
+                    },
+                    "collectUrl": {
+                        "type": "boolean"
+                    },
+                    "collectClientSideStatistics": {
+                        "type": "boolean",
+                        "default": true
+                    },
+                    "collectPageLoadTime": {
+                        "type": "boolean"
+                    }
+                },
+                "type": "object",
+                "additionalProperties": false
+            },
+            "Pool": {
+                "properties": {
+                    "class": {},
+                    "members": {
+                        "type": "array",
+                        "items": {
+                            "type": "object",
+                            "properties": {
+                                "servicePort": {
+                                    "type": "number",
+                                    "default": 80
+                                },
+                                "monitors": {
+                                    "type": "array",
+                                    "default": [
+                                        "http"
+                                    ],
+                                    "const": [
+                                        "http"
+                                    ]
+                                },
+                                "adminState": {
+                                    "type": "string",
+                                    "default": "enable"
+                                },
+                                "shareNodes": {
+                                    "type": "boolean",
+                                    "default": true,
+                                    "const": true
+                                },
+                                "serverAddresses": {
+                                    "type": "array"
+                                }
+                            }
+                        }
+                    }
+                },
+                "type": "object",
+                "additionalproperties": false
+            },
+            "Service_HTTPS": {
+                "properties": {
+                    "class": {},
+                    "virtualAddresses": {
+                        "type": "array"
+                    },
+                    "pool": {
+                        "type": "string",
+                        "default": "Pool"
+                    },
+                    "virtualPort": {
+                        "type": "number",
+                        "default": 443
+                    },
+                    "enable": {
+                        "type": "boolean",
+                        "default": true
+                    },
+                    "serverTLS": {
+                        "type": "string",
+                        "default": "TLS_Server"
+                    },
+                    "profileAnalytics": {
+                        "type": "object",
+                        "properties": {
+                            "use": {
+                                "type": "string",
+                                "default": "Analytics_Profile"
+                            }
+                        }
+                    }
+                },
+                "type": "object",
+                "additionalProperties": false
+            },
+            "Certificate": {
+                "properties": {
+                    "class": {},
+                    "certificate": {
+                        "type": "object",
+                        "properties": {
+                            "bigip": {
+                                "type": "string",
+                                "default": "/Common/cert.f5.com"
+                            }
+                        }
+                    },
+                    "privateKey": {
+                        "type": "object",
+                        "properties": {
+                            "bigip": {
+                                "type": "string",
+                                "default": "/Common/key.f5.com"
+                            }
+                        }
+                    }
+                },
+                "type": "object",
+                "additionalProperties": false
+            },
+            "TLS_Server": {
+                "properties": {
+                    "class": {},
+                    "certificates": {
+                        "type": "array",
+                        "items": {
+                            "type": "object",
+                            "properties": {
+                                "certificate": {
+                                    "type": "string",
+                                    "default": "Certificate"
+                                }
+                            }
+                        }
+                    }
+                },
+                "type": "object",
+                "additionalProperties": false
+            }
+        }
+    }
+}
