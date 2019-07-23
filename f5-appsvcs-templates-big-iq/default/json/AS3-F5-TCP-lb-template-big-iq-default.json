@@ -98,7 +98,8 @@
                             "type": "object",
                             "properties": {
                                 "servicePort": {
-                                    "type": "number"
+                                    "type": "number",
+                                    "default": 8081
                                 },
                                 "monitors": {
                                     "type": "array",

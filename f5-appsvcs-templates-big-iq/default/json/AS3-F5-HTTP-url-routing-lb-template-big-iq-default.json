@@ -260,7 +260,7 @@
                                                     "values": {
                                                         "type": "array",
                                                         "default": [
-                                                            "example.com"
+                                                            "/app1"
                                                         ]
                                                     }
                                                 }

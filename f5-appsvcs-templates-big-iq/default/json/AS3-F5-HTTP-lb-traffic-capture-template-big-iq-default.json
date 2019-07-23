@@ -165,7 +165,7 @@
                     "class": {},
                     "fallbackRedirect": {
                         "type": "string",
-                        "default": "https://www.f5.com/filenotfound"
+                        "default": "https://www.example.com/404"
                     },
                     "fallbackStatusCodes": {
                         "type": "array",
