@@ -1,6 +1,6 @@
 {
     "description": "For load balancing an HTTPS application on port 443 with SSL offloading on BIG-IP using existing Certificate and Key",
-    "name": "AS3-F5-HTTPS-offload-lb-existing-cert-template-big-iq-default",
+    "name": "AS3-F5-HTTPS-offload-lb-existing-cert-template-big-iq-default-v9",
     "published": false,
     "isUICompatible": true,
     "tenant": {
