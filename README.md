@@ -18,7 +18,6 @@ Templates | Description
 | AS3-F5-TCP-lb-template-big-iq-default | For load balancing a TCP-based application.
 | AS3-F5-FastL4-TCP-lb-template-big-iq-default | For load balancing a TCP-based application with a FastL4 profile.
 | AS3-F5-UDP-lb-template-big-iq-default | For load balancing a UDP-based application.
-| AS3-F5-HTTP-url-routing-lb-template-big-iq-default | For load balancing an HTTP application with url routing.
 | AS3-F5-DNS-FQDN-A-type-template-big-iq-default | For global load balancing distribution of DNS name resolution requests A type.
 | AS3-F5-DCD-lb-ASM-request-logging-events-template-big-iq-default | For ASM request logging events load balancing to BIG-IQ DCDs.
 
