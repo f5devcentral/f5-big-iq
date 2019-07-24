@@ -1,6 +1,6 @@
 {
     "description": "For load balancing a UDP-based application.",
-    "name": "AS3-F5-UDP-lb-template-big-iq-default-v9",
+    "name": "AS3-F5-UDP-lb-template-big-iq-default-v1",
     "published": false,
     "isUICompatible": true,
     "tenant": {

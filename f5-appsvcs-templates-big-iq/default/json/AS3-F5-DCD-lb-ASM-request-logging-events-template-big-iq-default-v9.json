@@ -1,6 +1,6 @@
 {
     "description": "For ASM request logging events load balancing to BIG-IQ DCDs.",
-    "name": "AS3-F5-DCD-lb-ASM-request-logging-events-template-big-iq-default-v9",
+    "name": "AS3-F5-DCD-lb-ASM-request-logging-events-template-big-iq-default-v1",
     "published": false,
     "isUICompatible": true,
     "tenant": {

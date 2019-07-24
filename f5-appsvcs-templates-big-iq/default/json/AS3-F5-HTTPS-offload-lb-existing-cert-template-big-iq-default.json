@@ -1,6 +1,6 @@
 {
     "description": "For load balancing an HTTPS application on port 443 with SSL offloading on BIG-IP using existing Certificate and Key",
-    "name": "AS3-F5-HTTPS-offload-lb-existing-cert-template-big-iq-default-v9",
+    "name": "AS3-F5-HTTPS-offload-lb-existing-cert-template-big-iq-default-v1",
     "published": false,
     "isUICompatible": true,
     "tenant": {
@@ -133,17 +133,9 @@
                     "collectUserAgent": {
                         "type": "boolean"
                     },
-                    "collectResponseCode": {
+                    "collectClientSideStatistics": {
                         "type": "boolean",
                         "default": true
-                    },
-                    "collectMethod": {
-                        "type": "boolean",
-                        "default": false
-                    },
-                    "collectOsAndBrowser": {
-                        "type": "boolean",
-                        "default": false
                     },
                     "collectGeo": {
                         "type": "boolean"
@@ -151,11 +143,22 @@
                     "collectUrl": {
                         "type": "boolean"
                     },
-                    "collectClientSideStatistics": {
+                    "collectPageLoadTime": {
+                        "type": "boolean"
+                    },
+                    "collectOsAndBrowser": {
+                        "type": "boolean",
+                        "default": false
+                    },
+                    "collectMethod": {
+                        "type": "boolean",
+                        "default": false
+                    },
+                    "collectResponseCode": {
                         "type": "boolean",
                         "default": true
                     },
-                    "collectPageLoadTime": {
+                    "collectIp": {
                         "type": "boolean"
                     }
                 },

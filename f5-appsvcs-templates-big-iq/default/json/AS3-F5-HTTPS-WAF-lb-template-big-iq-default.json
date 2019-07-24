@@ -1,6 +1,6 @@
 {
     "description": "For load balancing an HTTPS application on port 443 with a Web Application Firewall using an OWASP protection settings with minimum false positive (v13.1).",
-    "name": "AS3-F5-HTTPS-WAF-lb-template-big-iq-default-v9",
+    "name": "AS3-F5-HTTPS-WAF-lb-template-big-iq-default-v1",
     "published": false,
     "isUICompatible": true,
     "tenant": {
@@ -195,6 +195,9 @@
                     "collectResponseCode": {
                         "type": "boolean",
                         "default": true
+                    },
+                    "collectIp": {
+                        "type": "boolean"
                     }
                 },
                 "type": "object",

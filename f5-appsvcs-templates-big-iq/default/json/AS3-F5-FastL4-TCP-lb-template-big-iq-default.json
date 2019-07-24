@@ -1,6 +1,6 @@
 {
     "description": "For load balancing a TCP-based application with a FastL4 profile.",
-    "name": "AS3-F5-FastL4-TCP-lb-template-default-v9",
+    "name": "AS3-F5-FastL4-TCP-lb-template-default-v1",
     "published": false,
     "isUICompatible": true,
     "tenant": {

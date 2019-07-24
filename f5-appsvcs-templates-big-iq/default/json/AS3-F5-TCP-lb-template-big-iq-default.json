@@ -1,6 +1,6 @@
 {
     "description": "For load balancing a TCP-based application.",
-    "name": "AS3-F5-TCP-lb-template-big-iq-default-v9",
+    "name": "AS3-F5-TCP-lb-template-big-iq-default-v1",
     "published": false,
     "isUICompatible": true,
     "tenant": {

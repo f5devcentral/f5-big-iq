@@ -1,6 +1,6 @@
 {
     "description": "For load balancing an HTTP application on port 80.",
-    "name": "AS3-F5-HTTP-lb-template-big-iq-default-v9",
+    "name": "AS3-F5-HTTP-lb-template-big-iq-default-v1",
     "published": false,
     "isUICompatible": true,
     "tenant": {
@@ -138,6 +138,9 @@
                     "collectResponseCode": {
                         "type": "boolean",
                         "default": true
+                    },
+                    "collectIp": {
+                        "type": "boolean"
                     }
                 },
                 "type": "object",
