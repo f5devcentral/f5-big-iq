@@ -113,10 +113,10 @@
                     "monitors": {
                         "type": "array",
                         "default": [
-                            "http"
+                            "tcp"
                         ],
                         "const": [
-                            "http"
+                            "tcp"
                         ]
                     }
                 },
