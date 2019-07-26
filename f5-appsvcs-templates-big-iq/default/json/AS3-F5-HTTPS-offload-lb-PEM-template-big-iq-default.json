@@ -1,6 +1,6 @@
 {
-    "description": "For load balancing an HTTPS application on port 443 with SSL offloading on BIG-IP and custom HTTP monitor.",
-    "name": "AS3-F5-HTTPS-offload-lb-template-big-iq-default-v1",
+    "description": "For load balancing an HTTPS application on port 443 with SSL offloading on BIG-IP and custom HTTP monitor (Certificate and Key in PEM format).",
+    "name": "AS3-F5-HTTPS-offload-lb-PEM-template-big-iq-default-v1",
     "published": false,
     "isUICompatible": true,
     "tenant": {
