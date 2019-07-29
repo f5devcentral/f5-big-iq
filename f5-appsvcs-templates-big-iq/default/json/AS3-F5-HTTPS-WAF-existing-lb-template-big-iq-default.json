@@ -4,7 +4,7 @@
     "published": false,
     "isUICompatible": true,
     "tenant": {
-        "name": "partitionOnBIGIP",
+        "name": "",
         "override": false,
         "editable": true
     },
