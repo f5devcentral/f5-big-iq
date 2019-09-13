@@ -22,7 +22,7 @@ Templates (schemaOverlay) | Description
 | AS3-F5-DNS-FQDN-A-type-template-big-iq-default | For global load balancing distribution of DNS name resolution requests A type.
 | AS3-F5-DCD-lb-ASM-request-logging-events-template-big-iq-default | For ASM request logging events load balancing to BIG-IQ DCDs.
 
-[Look for AS3 templates submitted by the community!](./community/f5-appsvcs-templates-big-iq)
+[Look for AS3 templates submitted by the community!](./f5-appsvcs-templates-big-iq/community)
 
 There are two methods you can use to download these templates and import then into your BIG-IQ so that you can use them. 
 
