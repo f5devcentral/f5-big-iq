@@ -1,11 +1,11 @@
-Browse through Community templates submited by users.
+Community templates submited by users.
 
 List of AS3 Community Templates 
---------------------------------
+-------------------------------
 
 Templates (schemaOverlay) | Description
 ------------------------- | -----------
-| AS3-HTTPS-offload-lb-LTM-policy-ASM-splunk-template-big-iq-community| For load balancing an HTTPS application on port 443 with SSL offloading on BIG-IP using existing Certificate and Key on BIG-IP, custom TCP monitor and LTM Policy with a WAF sending the logs to Splunk.
+| AS3-HTTPS-offload-lb-LTM-policy-ASM-splunk-template-big-iq-community| For load balancing an HTTPS application on port 443 with SSL offloading on BIG-IP using existing Certificate and Key on BIG-IP, custom TCP monitor and LTM Policy with a WAF policy sending its logs to Splunk.
 
 Importing AS3 templates to your BIG-IQ using a script
 -----------------------------------------------------

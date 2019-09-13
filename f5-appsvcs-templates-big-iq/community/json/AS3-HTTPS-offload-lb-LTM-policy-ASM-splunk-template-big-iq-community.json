@@ -1,5 +1,5 @@
 {
-    "description": "For load balancing an HTTPS application on port 443 with SSL offloading on BIG-IP using existing Certificate and Key on BIG-IP, custom TCP monitor and LTM Policy with a WAF sending the logs to Splunk.",
+    "description": "For load balancing an HTTPS application on port 443 with SSL offloading on BIG-IP using existing Certificate and Key on BIG-IP, custom TCP monitor and LTM Policy with a WAF policy sending its logs to Splunk.",
     "name": "AS3-HTTPS-offload-lb-LTM-policy-ASM-splunk-template-big-iq-community-v1",
     "published": false,
     "isUICompatible": true,
