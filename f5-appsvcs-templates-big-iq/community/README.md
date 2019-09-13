@@ -1,4 +1,5 @@
-Community templates submited by users.
+Templates submited by the Community
+===================================
 
 List of AS3 Community Templates 
 -------------------------------
