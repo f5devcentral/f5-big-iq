@@ -1,8 +1,11 @@
-BIG-IQ AS3 Community Templates
-==============================
+Browse through Community templates submited by users.
 
-Browse through Community templates below submited by users.
+List of AS3 Community Templates 
+--------------------------------
 
+Templates (schemaOverlay) | Description
+------------------------- | -----------
+| AS3-HTTPS-offload-lb-LTM-policy-ASM-splunk-template-big-iq-community| For load balancing an HTTPS application on port 443 with SSL offloading on BIG-IP using existing Certificate and Key on BIG-IP, custom TCP monitor and LTM Policy with a WAF sending the logs to Splunk.
 
 Importing AS3 templates to your BIG-IQ using a script
 -----------------------------------------------------
@@ -10,6 +13,8 @@ Importing AS3 templates to your BIG-IQ using a script
 1. Open an SSH session to your BIG-IQ, and log in as an admin.
 
 2. From the command prompt, run the following sequence of commands. (You can copy and paste the entire sequence directly to the command line.)
+
+**Note:** Replace ``*.json`` in the ``for`` loop with the name of the template you want to import if you don't want to import all the community templates present in the json folder.
 
 ```
 bash
@@ -24,8 +29,6 @@ curl -s -k -H "Content-Type: application/json" -X POST -d @$json http://localhos
 done
 ```
 3. Log in to your primary BIG-IQ device and navigate to **Applications > APPLICATION TEMPLATES** and verify that the templates you imported are listed under **AS3 Templates**.
-
-![bigiq_as3_templates_ui](./images/bigiq_as3_templates_ui.png)
 
 **Note:** Before you can use an AS3 template, it must be Published (read-only).
 
