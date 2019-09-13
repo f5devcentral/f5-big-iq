@@ -1,0 +1,482 @@
+{
+    "description": "For load balancing an HTTPS application on port 443 with SSL offloading on BIG-IP using existing Certificate and Key on BIG-IP, custom TCP monitor and LTM Policy with a WAF sending the logs to Splunk.",
+    "name": "AS3-HTTPS-offload-lb-LTM-policy-ASM-splunk-template-big-iq-community-v1",
+    "published": false,
+    "isUICompatible": true,
+    "tenant": {
+        "name": "",
+        "override": false,
+        "editable": true
+    },
+    "schemaOverlay": {
+        "type": "object",
+        "properties": {
+            "class": {
+                "type": "string",
+                "const": "Application"
+            },
+            "template": {},
+            "schemaOverlay": {},
+            "label": {},
+            "remark": {}
+        },
+        "additionalProperties": {
+            "allOf": [
+                {
+                    "anyOf": [
+                        {
+                            "properties": {
+                                "class": {
+                                    "const": "Analytics_Profile"
+                                }
+                            }
+                        },
+                        {
+                            "properties": {
+                                "class": {
+                                    "const": "Pool"
+                                }
+                            }
+                        },
+                        {
+                            "properties": {
+                                "class": {
+                                    "const": "Service_HTTPS"
+                                }
+                            }
+                        },
+                        {
+                            "properties": {
+                                "class": {
+                                    "const": "Certificate"
+                                }
+                            }
+                        },
+                        {
+                            "properties": {
+                                "class": {
+                                    "const": "TLS_Server"
+                                }
+                            }
+                        },
+                        {
+                            "properties": {
+                                "class": {
+                                    "const": "Monitor"
+                                }
+                            }
+                        },
+                        {
+                            "properties": {
+                                "class": {
+                                    "const": "Endpoint_Policy"
+                                }
+                            }
+                        },
+                        {
+                            "properties": {
+                                "class": {
+                                    "const": "Security_Log_Profile"
+                                }
+                            }
+                        }
+                    ]
+                },
+                {
+                    "if": {
+                        "properties": {
+                            "class": {
+                                "const": "Analytics_Profile"
+                            }
+                        }
+                    },
+                    "then": {
+                        "$ref": "#/definitions/Analytics_Profile"
+                    }
+                },
+                {
+                    "if": {
+                        "properties": {
+                            "class": {
+                                "const": "Pool"
+                            }
+                        }
+                    },
+                    "then": {
+                        "$ref": "#/definitions/Pool"
+                    }
+                },
+                {
+                    "if": {
+                        "properties": {
+                            "class": {
+                                "const": "Service_HTTPS"
+                            }
+                        }
+                    },
+                    "then": {
+                        "$ref": "#/definitions/Service_HTTPS"
+                    }
+                },
+                {
+                    "if": {
+                        "properties": {
+                            "class": {
+                                "const": "Certificate"
+                            }
+                        }
+                    },
+                    "then": {
+                        "$ref": "#/definitions/Certificate"
+                    }
+                },
+                {
+                    "if": {
+                        "properties": {
+                            "class": {
+                                "const": "TLS_Server"
+                            }
+                        }
+                    },
+                    "then": {
+                        "$ref": "#/definitions/TLS_Server"
+                    }
+                },
+                {
+                    "if": {
+                        "properties": {
+                            "class": {
+                                "const": "Monitor"
+                            }
+                        }
+                    },
+                    "then": {
+                        "$ref": "#/definitions/Monitor"
+                    }
+                },
+                {
+                    "if": {
+                        "properties": {
+                            "class": {
+                                "const": "Endpoint_Policy"
+                            }
+                        }
+                    },
+                    "then": {
+                        "$ref": "#/definitions/Endpoint_Policy"
+                    }
+                },
+                {
+                    "if": {
+                        "properties": {
+                            "class": {
+                                "const": "Security_Log_Profile"
+                            }
+                        }
+                    },
+                    "then": {
+                        "$ref": "#/definitions/Security_Log_Profile"
+                    }
+                }
+            ]
+        },
+        "required": [
+            "class"
+        ],
+        "definitions": {
+            "Analytics_Profile": {
+                "properties": {
+                    "class": {},
+                    "collectUserAgent": {
+                        "type": "boolean"
+                    },
+                    "collectClientSideStatistics": {
+                        "type": "boolean",
+                        "default": true
+                    },
+                    "collectGeo": {
+                        "type": "boolean"
+                    },
+                    "collectUrl": {
+                        "type": "boolean"
+                    },
+                    "collectPageLoadTime": {
+                        "type": "boolean"
+                    },
+                    "collectOsAndBrowser": {
+                        "type": "boolean",
+                        "default": false
+                    },
+                    "collectMethod": {
+                        "type": "boolean",
+                        "default": false
+                    },
+                    "collectResponseCode": {
+                        "type": "boolean",
+                        "default": true
+                    },
+                    "collectIp": {
+                        "type": "boolean"
+                    }
+                },
+                "type": "object",
+                "additionalproperties": false
+            },
+            "Pool": {
+                "properties": {
+                    "class": {},
+                    "members": {
+                        "type": "array",
+                        "items": {
+                            "type": "object",
+                            "properties": {
+                                "servicePort": {
+                                    "type": "number",
+                                    "default": 80
+                                },
+                                "adminState": {
+                                    "type": "string",
+                                    "default": "enable"
+                                },
+                                "shareNodes": {
+                                    "type": "boolean",
+                                    "default": true,
+                                    "const": true
+                                },
+                                "serverAddresses": {
+                                    "type": "array"
+                                }
+                            }
+                        }
+                    },
+                    "monitors": {
+                        "type": "array",
+                        "items": {
+                            "type": "object",
+                            "properties": {
+                                "use": {
+                                    "type": "string",
+                                    "default": "Monitor"
+                                }
+                            }
+                        }
+                    }
+                },
+                "type": "object",
+                "additionalproperties": false
+            },
+            "Service_HTTPS": {
+                "properties": {
+                    "class": {},
+                    "profileAnalytics": {
+                        "type": "object",
+                        "properties": {
+                            "use": {
+                                "type": "string",
+                                "default": "Analytics_Profile"
+                            }
+                        }
+                    },
+                    "virtualAddresses": {
+                        "type": "array"
+                    },
+                    "pool": {
+                        "type": "string",
+                        "default": "Pool"
+                    },
+                    "virtualPort": {
+                        "type": "number",
+                        "default": 443
+                    },
+                    "serverTLS": {
+                        "type": "string",
+                        "default": "TLS_Server"
+                    },
+                    "enable": {
+                        "type": "boolean",
+                        "default": true
+                    },
+                    "securityLogProfiles": {
+                        "type": "array",
+                        "items": {
+                            "type": "object",
+                            "properties": {
+                                "use": {
+                                    "type": "string",
+                                    "default": "Security_Log_Profile"
+                                }
+                            }
+                        }
+                    },
+                    "policyEndpoint": {
+                        "type": "array",
+                        "default": [
+                            "Endpoint_Policy"
+                        ]
+                    }
+                },
+                "type": "object",
+                "additionalProperties": false
+            },
+            "Certificate": {
+                "properties": {
+                    "class": {},
+                    "certificate": {
+                        "type": "object",
+                        "properties": {
+                            "bigip": {
+                                "type": "string",
+                                "default": "/Common/default.crt"
+                            }
+                        }
+                    },
+                    "privateKey": {
+                        "type": "object",
+                        "properties": {
+                            "bigip": {
+                                "type": "string",
+                                "default": "/Common/default.key"
+                            }
+                        }
+                    }
+                },
+                "type": "object",
+                "additionalProperties": false
+            },
+            "TLS_Server": {
+                "properties": {
+                    "class": {},
+                    "certificates": {
+                        "type": "array",
+                        "items": {
+                            "type": "object",
+                            "properties": {
+                                "certificate": {
+                                    "type": "string",
+                                    "default": "Certificate"
+                                }
+                            }
+                        }
+                    }
+                },
+                "type": "object",
+                "additionalProperties": false
+            },
+            "Monitor": {
+                "properties": {
+                    "class": {},
+                    "monitorType": {
+                        "type": "string",
+                        "default": "tcp-half-open",
+                        "const": "tcp-half-open"
+                    },
+                    "interval": {
+                        "type": "number",
+                        "default": 30
+                    },
+                    "timeout": {
+                        "type": "number",
+                        "default": 91
+                    }
+                },
+                "type": "object",
+                "additionalProperties": false
+            },
+            "Endpoint_Policy": {
+                "properties": {
+                    "class": {},
+                    "rules": {
+                        "type": "array",
+                        "items": {
+                            "type": "object",
+                            "properties": {
+                                "name": {
+                                    "type": "string",
+                                    "default": "rule1"
+                                },
+                                "actions": {
+                                    "type": "array",
+                                    "items": {
+                                        "type": "object",
+                                        "properties": {
+                                            "type": {
+                                                "type": "string",
+                                                "default": "waf"
+                                            },
+                                            "policy": {
+                                                "type": "object",
+                                                "properties": {
+                                                    "bigip": {
+                                                        "type": "string",
+                                                        "default": "/Common/templates-default"
+                                                    }
+                                                }
+                                            },
+                                            "event": {
+                                                "type": "string",
+                                                "default": "request"
+                                            }
+                                        }
+                                    }
+                                }
+                            }
+                        }
+                    }
+                },
+                "type": "object",
+                "additionalProperties": false
+            },
+            "Security_Log_Profile": {
+                "properties": {
+                    "class": {},
+                    "application": {
+                        "type": "object",
+                        "properties": {
+                            "storageFilter": {
+                                "type": "object",
+                                "properties": {
+                                    "requestType": {
+                                        "type": "string",
+                                        "default": "illegal"
+                                    }
+                                }
+                            },
+                            "maxEntryLength": {
+                                "type": "string",
+                                "default": "64k",
+                                "const": "64k"
+                            },
+                            "remoteStorage": {
+                                "type": "string",
+                                "default": "splunk"
+                            },
+                            "reportAnomaliesEnabled": {
+                                "type": "boolean",
+                                "default": true,
+                                "const": true
+                            },
+                            "servers": {
+                                "type": "array",
+                                "items": {
+                                    "type": "object",
+                                    "properties": {
+                                        "port": {
+                                            "type": "string",
+                                            "default": "9997"
+                                        },
+                                        "address": {
+                                            "type": "string",
+                                            "default": "10.1.10.66"
+                                        }
+                                    }
+                                }
+                            }
+                        }
+                    }
+                },
+                "type": "object",
+                "additionalProperties": false
+            }
+        }
+    }
+}
