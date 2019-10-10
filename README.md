@@ -31,6 +31,7 @@ There are two methods you can use to download these templates and import then in
 
 Importing AS3 templates to your BIG-IQ using a script
 -----------------------------------------------------
+The following steps assume that you have completed the initial setup for your BIG-IQ and have admin permissions to log in to it via SSH. Additionally, for the script to run successfully, the DNS lookup server addresses must be correctly specified. 
 
 1. Open an SSH session to your BIG-IQ, and log in as an admin.
 
