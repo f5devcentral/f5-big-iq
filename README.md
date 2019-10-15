@@ -8,19 +8,19 @@ F5 maintains this BIG-IQ Application Services 3 Extension (AS3) template library
 List of AS3 F5 Default Templates 
 --------------------------------
 
-Templates (schemaOverlay) | Description
-------------------------- | -----------
-| AS3-F5-HTTP-lb-template-big-iq-default | For load balancing an HTTP application on port 80.
-| AS3-F5-HTTP-lb-traffic-capture-template-big-iq-default | For load balancing an HTTP application on port 80 with HTTP traffic capture.
-| AS3-F5-HTTPS-offload-lb-PEM-template-big-iq-default | For load balancing an HTTPS application on port 443 with SSL offloading on BIG-IP and using a custom HTTP monitor (Certificate and Key in PEM format).
-| AS3-F5-HTTPS-offload-lb-existing-cert-template-big-iq-default | For load balancing an HTTPS application on port 443 with SSL offloading on BIG-IP using existing Certificate and Key on BIG-IP.
-| AS3-F5-HTTPS-WAF-existing-lb-template-big-iq-default | For load balancing an HTTPS application on port 443 with a Web Application Firewall policy & certificates existing on BIG-IP.
-| AS3-F5-HTTPS-WAF-external-url-lb-template-big-iq-default | For load balancing an HTTPS application on port 443 with a Web Application Firewall (external URL) policy using an OWASP protection settings with minimum false positive (v13.1). [Look for other ASM Policies Available on DevCentral](https://github.com/f5devcentral/f5-asm-policy-templates)
-| AS3-F5-TCP-lb-template-big-iq-default | For load balancing a TCP-based application.
-| AS3-F5-FastL4-TCP-lb-template-big-iq-default | For load balancing a TCP-based application with a FastL4 profile.
-| AS3-F5-UDP-lb-template-big-iq-default | For load balancing a UDP-based application.
-| AS3-F5-DNS-FQDN-A-type-template-big-iq-default | For global load balancing distribution of DNS name resolution requests A type.
-| AS3-F5-DCD-lb-ASM-request-logging-events-template-big-iq-default | For ASM request logging events load balancing to BIG-IQ DCDs.
+Templates (schemaOverlay) | Description | Min AS3 version
+------------------------- | ----------- | ---------------
+| AS3-F5-HTTP-lb-template-big-iq-default | For load balancing an HTTP application on port 80. | 3.12
+| AS3-F5-HTTP-lb-traffic-capture-template-big-iq-default | For load balancing an HTTP application on port 80 with HTTP traffic capture. | 3.12
+| AS3-F5-HTTPS-offload-lb-PEM-template-big-iq-default | For load balancing an HTTPS application on port 443 with SSL offloading on BIG-IP and using a custom HTTP monitor (Certificate and Key in PEM format). | 3.12
+| AS3-F5-HTTPS-offload-lb-existing-cert-template-big-iq-default | For load balancing an HTTPS application on port 443 with SSL offloading on BIG-IP using existing Certificate and Key on BIG-IP. | 3.12
+| AS3-F5-HTTPS-WAF-existing-lb-template-big-iq-default | For load balancing an HTTPS application on port 443 with a Web Application Firewall policy & certificates existing on BIG-IP. | 3.12
+| AS3-F5-HTTPS-WAF-external-url-lb-template-big-iq-default | For load balancing an HTTPS application on port 443 with a Web Application Firewall (external URL) policy using an OWASP protection settings with minimum false positive (v13.1). [Look for other ASM Policies Available on DevCentral](https://github.com/f5devcentral/f5-asm-policy-templates) | 3.12
+| AS3-F5-TCP-lb-template-big-iq-default | For load balancing a TCP-based application. | 3.12
+| AS3-F5-FastL4-TCP-lb-template-big-iq-default | For load balancing a TCP-based application with a FastL4 profile. | 3.12
+| AS3-F5-UDP-lb-template-big-iq-default | For load balancing a UDP-based application. | 3.12
+| AS3-F5-DNS-FQDN-A-type-template-big-iq-default | For global load balancing distribution of DNS name resolution requests A type. | 3.12
+| AS3-F5-DCD-lb-ASM-request-logging-events-template-big-iq-default | For ASM request logging events load balancing to BIG-IQ DCDs. | 3.12
 
 [Look for AS3 templates submitted by the community!](./f5-appsvcs-templates-big-iq/community)
 
