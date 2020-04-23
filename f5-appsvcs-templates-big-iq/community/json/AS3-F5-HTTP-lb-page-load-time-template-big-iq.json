@@ -1,6 +1,6 @@
 {
-    "description": "For load balancing a TCP-based application with a FastL4 profile.",
-    "name": "AS3-F5-FastL4-TCP-lb-template-default-v2",
+    "description": "For load balancing an HTTP application on port 80 with Page Load Time HTTP analytics and CSPM enabled (Client side Perf Monitoring javascript injection).",
+    "name": "AS3-F5-HTTP-lb-page-load-time-template-big-iq-v1",
     "published": false,
     "isUICompatible": true,
     "tenant": {
@@ -36,10 +36,10 @@
                                 "monitors": {
                                     "type": "array",
                                     "const": [
-                                        "tcp"
+                                        "http"
                                     ],
                                     "default": [
-                                        "tcp"
+                                        "http"
                                     ]
                                 },
                                 "adminState": {
@@ -52,7 +52,8 @@
                                     "default": true
                                 },
                                 "servicePort": {
-                                    "type": "number"
+                                    "type": "number",
+                                    "default": 80
                                 },
                                 "serverAddresses": {
                                     "type": "array"
@@ -63,31 +64,28 @@
                     "monitors": {
                         "type": "array",
                         "const": [
-                            "tcp"
+                            "http"
                         ],
                         "default": [
-                            "tcp"
+                            "http"
                         ]
                     }
                 },
                 "additionalproperties": false
             },
-            "L4_Profile": {
+            "HTTP_Profile": {
                 "type": "object",
+                "default": {},
                 "properties": {
                     "class": {},
-                    "tcpCloseTimeout": {
-                        "type": "number",
-                        "default": 5
-                    },
-                    "tcpHandshakeTimeout": {
-                        "type": "number",
-                        "default": 5
+                    "whiteOutHeader": {
+                        "type": "string",
+                        "default": "Accept-Encoding"
                     }
                 },
-                "additionalProperties": false
+                "additionalproperties": false
             },
-            "Service_L4": {
+            "Service_HTTP": {
                 "type": "object",
                 "properties": {
                     "pool": {
@@ -99,82 +97,97 @@
                         "type": "boolean",
                         "default": true
                     },
-                    "profileL4": {
+                    "profileHTTP": {
                         "type": "object",
                         "properties": {
                             "use": {
                                 "type": "string",
-                                "default": "L4_Profile"
+                                "default": "HTTP_Profile"
                             }
                         }
                     },
                     "virtualPort": {
                         "type": "number",
-                        "default": 8080
+                        "default": 80
                     },
-                    "virtualAddresses": {
-                        "type": "array"
-                    },
-                    "profileAnalyticsTcp": {
+                    "profileAnalytics": {
                         "type": "object",
                         "properties": {
                             "use": {
                                 "type": "string",
-                                "default": "Analytics_TCP_Profile"
+                                "default": "Analytics_Profile"
                             }
                         }
+                    },
+                    "virtualAddresses": {
+                        "type": "array"
                     }
                 },
-                "additionalProperties": false
+                "additionalproperties": false
             },
-            "Analytics_TCP_Profile": {
+            "Analytics_Profile": {
                 "type": "object",
+                "default": {},
                 "properties": {
                     "class": {},
-                    "collectCity": {
-                        "type": "boolean"
-                    },
-                    "collectRegion": {
+                    "collectUrl": {
                         "type": "boolean",
                         "default": true
                     },
-                    "collectCountry": {
+                    "captureFilter": {
+                        "type": "object",
+                        "properties": {
+                            "clientIps": {
+                                "type": "array",
+                                "default": [
+                                    "10.1.10.100"
+                                ]
+                            }
+                        }
+                    },
+                    "collectMethod": {
+                        "type": "boolean",
+                        "const": false,
+                        "default": false
+                    },
+                    "collectOsAndBrowser": {
+                        "type": "boolean",
+                        "default": false
+                    },
+                    "collectPageLoadTime": {
                         "type": "boolean",
                         "default": true
                     },
-                    "collectNexthop": {
-                        "type": "boolean"
-                    },
-                    "collectPostCode": {
-                        "type": "boolean"
-                    },
-                    "collectContinent": {
+                    "collectResponseCode": {
                         "type": "boolean",
-                        "default": true
+                        "default": false
                     },
-                    "collectRemoteHostIp": {
-                        "type": "boolean"
-                    },
-                    "collectedByClientSide": {
-                        "type": "boolean",
-                        "default": true
-                    },
-                    "collectedByServerSide": {
-                        "type": "boolean",
-                        "default": true
-                    },
-                    "collectRemoteHostSubnet": {
+                    "collectClientSideStatistics": {
                         "type": "boolean",
                         "default": true
                     }
                 },
-                "additionalProperties": false
+                "additionalproperties": false
             }
         },
         "additionalProperties": {
             "allOf": [
                 {
                     "anyOf": [
+                        {
+                            "properties": {
+                                "class": {
+                                    "const": "Analytics_Profile"
+                                }
+                            }
+                        },
+                        {
+                            "properties": {
+                                "class": {
+                                    "const": "HTTP_Profile"
+                                }
+                            }
+                        },
                         {
                             "properties": {
                                 "class": {
@@ -185,21 +198,7 @@
                         {
                             "properties": {
                                 "class": {
-                                    "const": "Service_L4"
-                                }
-                            }
-                        },
-                        {
-                            "properties": {
-                                "class": {
-                                    "const": "L4_Profile"
-                                }
-                            }
-                        },
-                        {
-                            "properties": {
-                                "class": {
-                                    "const": "Analytics_TCP_Profile"
+                                    "const": "Service_HTTP"
                                 }
                             }
                         }
@@ -209,12 +208,24 @@
                     "if": {
                         "properties": {
                             "class": {
-                                "const": "Analytics_TCP_Profile"
+                                "const": "Analytics_Profile"
                             }
                         }
                     },
                     "then": {
-                        "$ref": "#/definitions/Analytics_TCP_Profile"
+                        "$ref": "#/definitions/Analytics_Profile"
+                    }
+                },
+                {
+                    "if": {
+                        "properties": {
+                            "class": {
+                                "const": "HTTP_Profile"
+                            }
+                        }
+                    },
+                    "then": {
+                        "$ref": "#/definitions/HTTP_Profile"
                     }
                 },
                 {
@@ -233,24 +244,12 @@
                     "if": {
                         "properties": {
                             "class": {
-                                "const": "Service_L4"
+                                "const": "Service_HTTP"
                             }
                         }
                     },
                     "then": {
-                        "$ref": "#/definitions/Service_L4"
-                    }
-                },
-                {
-                    "if": {
-                        "properties": {
-                            "class": {
-                                "const": "L4_Profile"
-                            }
-                        }
-                    },
-                    "then": {
-                        "$ref": "#/definitions/L4_Profile"
+                        "$ref": "#/definitions/Service_HTTP"
                     }
                 }
             ]

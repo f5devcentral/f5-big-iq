@@ -1,6 +1,6 @@
 {
-    "description": "For load balancing a TCP-based application with a FastL4 profile.",
-    "name": "AS3-F5-FastL4-TCP-lb-template-default-v2",
+    "description": "For load balancing a TCP-based application using one of the built-in TCP profile.",
+    "name": "AS3-F5-TCP-lb-built-in-profile-template-big-iq-v1",
     "published": false,
     "isUICompatible": true,
     "tenant": {
@@ -52,7 +52,8 @@
                                     "default": true
                                 },
                                 "servicePort": {
-                                    "type": "number"
+                                    "type": "number",
+                                    "default": 8081
                                 },
                                 "serverAddresses": {
                                     "type": "array"
@@ -72,22 +73,7 @@
                 },
                 "additionalproperties": false
             },
-            "L4_Profile": {
-                "type": "object",
-                "properties": {
-                    "class": {},
-                    "tcpCloseTimeout": {
-                        "type": "number",
-                        "default": 5
-                    },
-                    "tcpHandshakeTimeout": {
-                        "type": "number",
-                        "default": 5
-                    }
-                },
-                "additionalProperties": false
-            },
-            "Service_L4": {
+            "Service_TCP": {
                 "type": "object",
                 "properties": {
                     "pool": {
@@ -99,14 +85,9 @@
                         "type": "boolean",
                         "default": true
                     },
-                    "profileL4": {
-                        "type": "object",
-                        "properties": {
-                            "use": {
-                                "type": "string",
-                                "default": "L4_Profile"
-                            }
-                        }
+                    "profileTCP": {
+                        "type": "string",
+                        "default": "normal"
                     },
                     "virtualPort": {
                         "type": "number",
@@ -185,14 +166,7 @@
                         {
                             "properties": {
                                 "class": {
-                                    "const": "Service_L4"
-                                }
-                            }
-                        },
-                        {
-                            "properties": {
-                                "class": {
-                                    "const": "L4_Profile"
+                                    "const": "Service_TCP"
                                 }
                             }
                         },
@@ -233,24 +207,12 @@
                     "if": {
                         "properties": {
                             "class": {
-                                "const": "Service_L4"
+                                "const": "Service_TCP"
                             }
                         }
                     },
                     "then": {
-                        "$ref": "#/definitions/Service_L4"
-                    }
-                },
-                {
-                    "if": {
-                        "properties": {
-                            "class": {
-                                "const": "L4_Profile"
-                            }
-                        }
-                    },
-                    "then": {
-                        "$ref": "#/definitions/L4_Profile"
+                        "$ref": "#/definitions/Service_TCP"
                     }
                 }
             ]

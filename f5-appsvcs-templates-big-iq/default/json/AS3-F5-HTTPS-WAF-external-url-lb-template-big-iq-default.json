@@ -1,6 +1,6 @@
 {
-    "description": "For load balancing an HTTPS application on port 443 with a Web Application Firewall (external URL) policy using an OWASP protection settings with minimum false positive (v13.1).",
-    "name": "AS3-F5-HTTPS-WAF-external-url-lb-template-big-iq-default-v1",
+    "description": "For load balancing an HTTPS application on port 443 with a Web Application Firewall using an OWASP protection settings with minimum false positive (v13.1).",
+    "name": "AS3-F5-HTTPS-WAF-external-url-lb-template-big-iq-default-v2",
     "published": false,
     "isUICompatible": true,
     "tenant": {
@@ -10,15 +10,272 @@
     },
     "schemaOverlay": {
         "type": "object",
+        "required": [
+            "class"
+        ],
         "properties": {
             "class": {
                 "type": "string",
                 "const": "Application"
             },
-            "template": {},
-            "schemaOverlay": {},
             "label": {},
-            "remark": {}
+            "remark": {},
+            "template": {},
+            "schemaOverlay": {}
+        },
+        "definitions": {
+            "Pool": {
+                "type": "object",
+                "properties": {
+                    "class": {},
+                    "members": {
+                        "type": "array",
+                        "items": {
+                            "type": "object",
+                            "properties": {
+                                "monitors": {
+                                    "type": "array",
+                                    "const": [
+                                        "http"
+                                    ],
+                                    "default": [
+                                        "http"
+                                    ]
+                                },
+                                "adminState": {
+                                    "type": "string",
+                                    "default": "enable"
+                                },
+                                "shareNodes": {
+                                    "type": "boolean",
+                                    "const": true,
+                                    "default": true
+                                },
+                                "servicePort": {
+                                    "type": "number",
+                                    "default": 80
+                                },
+                                "serverAddresses": {
+                                    "type": "array"
+                                }
+                            }
+                        }
+                    },
+                    "monitors": {
+                        "type": "array",
+                        "const": [
+                            "http"
+                        ],
+                        "default": [
+                            "http"
+                        ]
+                    }
+                },
+                "additionalproperties": false
+            },
+            "TLS_Server": {
+                "type": "object",
+                "properties": {
+                    "class": {},
+                    "certificates": {
+                        "type": "array",
+                        "items": {
+                            "type": "object",
+                            "properties": {
+                                "certificate": {
+                                    "type": "string",
+                                    "default": "Certificate"
+                                }
+                            }
+                        }
+                    }
+                },
+                "additionalProperties": false
+            },
+            "WAF_Policy": {
+                "type": "object",
+                "properties": {
+                    "class": {},
+                    "url": {
+                        "type": "object",
+                        "properties": {
+                            "url": {
+                                "type": "string",
+                                "default": "https://raw.githubusercontent.com/f5devcentral/f5-asm-policy-templates/master/owasp_ready_template/owasp-auto-tune-v1.1.xml"
+                            }
+                        }
+                    },
+                    "enforcementMode": {
+                        "type": "string",
+                        "default": "transparent"
+                    }
+                },
+                "additionalProperties": false
+            },
+            "Certificate": {
+                "type": "object",
+                "properties": {
+                    "class": {},
+                    "privateKey": {
+                        "type": "string"
+                    },
+                    "certificate": {
+                        "type": "string"
+                    }
+                },
+                "additionalProperties": false
+            },
+            "Service_HTTPS": {
+                "type": "object",
+                "properties": {
+                    "pool": {
+                        "type": "string",
+                        "default": "Pool"
+                    },
+                    "class": {},
+                    "enable": {
+                        "type": "boolean",
+                        "default": true
+                    },
+                    "policyWAF": {
+                        "type": "object",
+                        "properties": {
+                            "use": {
+                                "type": "string",
+                                "default": "WAF_Policy"
+                            }
+                        }
+                    },
+                    "serverTLS": {
+                        "type": "string",
+                        "default": "TLS_Server"
+                    },
+                    "virtualPort": {
+                        "type": "number",
+                        "default": 443
+                    },
+                    "profileAnalytics": {
+                        "type": "object",
+                        "properties": {
+                            "use": {
+                                "type": "string",
+                                "default": "Analytics_Profile"
+                            }
+                        }
+                    },
+                    "virtualAddresses": {
+                        "type": "array"
+                    },
+                    "securityLogProfiles": {
+                        "type": "array",
+                        "items": {
+                            "type": "object",
+                            "properties": {
+                                "use": {
+                                    "type": "string",
+                                    "default": "Security_Log_Profile"
+                                }
+                            }
+                        }
+                    }
+                },
+                "additionalProperties": false
+            },
+            "Analytics_Profile": {
+                "type": "object",
+                "properties": {
+                    "class": {},
+                    "collectIp": {
+                        "type": "boolean"
+                    },
+                    "collectGeo": {
+                        "type": "boolean"
+                    },
+                    "collectUrl": {
+                        "type": "boolean"
+                    },
+                    "collectMethod": {
+                        "type": "boolean",
+                        "default": false
+                    },
+                    "collectUserAgent": {
+                        "type": "boolean"
+                    },
+                    "collectOsAndBrowser": {
+                        "type": "boolean",
+                        "default": false
+                    },
+                    "collectPageLoadTime": {
+                        "type": "boolean"
+                    },
+                    "collectResponseCode": {
+                        "type": "boolean",
+                        "default": true
+                    },
+                    "collectClientSideStatistics": {
+                        "type": "boolean",
+                        "default": true
+                    }
+                },
+                "additionalproperties": false
+            },
+            "Security_Log_Profile": {
+                "type": "object",
+                "properties": {
+                    "class": {},
+                    "application": {
+                        "type": "object",
+                        "properties": {
+                            "servers": {
+                                "type": "array",
+                                "items": {
+                                    "type": "object",
+                                    "properties": {
+                                        "port": {
+                                            "type": "string",
+                                            "default": "8514"
+                                        },
+                                        "address": {
+                                            "type": "string",
+                                            "default": "10.1.10.6"
+                                        }
+                                    }
+                                }
+                            },
+                            "localStorage": {
+                                "type": "boolean",
+                                "const": false,
+                                "default": false
+                            },
+                            "remoteStorage": {
+                                "type": "string",
+                                "const": "bigiq",
+                                "default": "bigiq"
+                            },
+                            "storageFilter": {
+                                "type": "object",
+                                "properties": {
+                                    "requestType": {
+                                        "type": "string",
+                                        "default": "illegal"
+                                    }
+                                }
+                            },
+                            "maxEntryLength": {
+                                "type": "string",
+                                "const": "64k",
+                                "default": "64k"
+                            },
+                            "reportAnomaliesEnabled": {
+                                "type": "boolean",
+                                "const": true,
+                                "default": true
+                            }
+                        }
+                    }
+                },
+                "additionalProperties": false
+            }
         },
         "additionalProperties": {
             "allOf": [
@@ -55,13 +312,6 @@
                         {
                             "properties": {
                                 "class": {
-                                    "const": "WAF_Policy"
-                                }
-                            }
-                        },
-                        {
-                            "properties": {
-                                "class": {
                                     "const": "TLS_Server"
                                 }
                             }
@@ -70,6 +320,13 @@
                             "properties": {
                                 "class": {
                                     "const": "Security_Log_Profile"
+                                }
+                            }
+                        },
+                        {
+                            "properties": {
+                                "class": {
+                                    "const": "WAF_Policy"
                                 }
                             }
                         }
@@ -127,18 +384,6 @@
                     "if": {
                         "properties": {
                             "class": {
-                                "const": "WAF_Policy"
-                            }
-                        }
-                    },
-                    "then": {
-                        "$ref": "#/definitions/WAF_Policy"
-                    }
-                },
-                {
-                    "if": {
-                        "properties": {
-                            "class": {
                                 "const": "TLS_Server"
                             }
                         }
@@ -158,256 +403,20 @@
                     "then": {
                         "$ref": "#/definitions/Security_Log_Profile"
                     }
+                },
+                {
+                    "if": {
+                        "properties": {
+                            "class": {
+                                "const": "WAF_Policy"
+                            }
+                        }
+                    },
+                    "then": {
+                        "$ref": "#/definitions/WAF_Policy"
+                    }
                 }
             ]
-        },
-        "required": [
-            "class"
-        ],
-        "definitions": {
-            "Analytics_Profile": {
-                "properties": {
-                    "class": {},
-                    "collectUserAgent": {
-                        "type": "boolean"
-                    },
-                    "collectClientSideStatistics": {
-                        "type": "boolean",
-                        "default": true
-                    },
-                    "collectGeo": {
-                        "type": "boolean"
-                    },
-                    "collectUrl": {
-                        "type": "boolean"
-                    },
-                    "collectPageLoadTime": {
-                        "type": "boolean"
-                    },
-                    "collectOsAndBrowser": {
-                        "type": "boolean",
-                        "default": false
-                    },
-                    "collectMethod": {
-                        "type": "boolean",
-                        "default": false
-                    },
-                    "collectResponseCode": {
-                        "type": "boolean",
-                        "default": true
-                    },
-                    "collectIp": {
-                        "type": "boolean"
-                    }
-                },
-                "type": "object",
-                "additionalproperties": false
-            },
-            "Pool": {
-                "properties": {
-                    "class": {},
-                    "members": {
-                        "type": "array",
-                        "items": {
-                            "type": "object",
-                            "properties": {
-                                "servicePort": {
-                                    "type": "number",
-                                    "default": 80
-                                },
-                                "monitors": {
-                                    "type": "array",
-                                    "default": [
-                                        "http"
-                                    ],
-                                    "const": [
-                                        "http"
-                                    ]
-                                },
-                                "adminState": {
-                                    "type": "string",
-                                    "default": "enable"
-                                },
-                                "shareNodes": {
-                                    "type": "boolean",
-                                    "default": true,
-                                    "const": true
-                                },
-                                "serverAddresses": {
-                                    "type": "array"
-                                }
-                            }
-                        }
-                    },
-                    "monitors": {
-                        "type": "array",
-                        "default": [
-                            "http"
-                        ],
-                        "const": [
-                            "http"
-                        ]
-                    }
-                },
-                "type": "object",
-                "additionalproperties": false
-            },
-            "Service_HTTPS": {
-                "properties": {
-                    "class": {},
-                    "profileAnalytics": {
-                        "type": "object",
-                        "properties": {
-                            "use": {
-                                "type": "string",
-                                "default": "Analytics_Profile"
-                            }
-                        }
-                    },
-                    "virtualAddresses": {
-                        "type": "array"
-                    },
-                    "enable": {
-                        "type": "boolean",
-                        "default": true
-                    },
-                    "pool": {
-                        "type": "string",
-                        "default": "Pool"
-                    },
-                    "virtualPort": {
-                        "type": "number",
-                        "default": 443
-                    },
-                    "policyWAF": {
-                        "type": "object",
-                        "properties": {
-                            "use": {
-                                "type": "string",
-                                "default": "WAF_Policy"
-                            }
-                        }
-                    },
-                    "serverTLS": {
-                        "type": "string",
-                        "default": "TLS_Server"
-                    },
-                    "securityLogProfiles": {
-                        "type": "array",
-                        "items": {
-                            "type": "object",
-                            "properties": {
-                                "use": {
-                                    "type": "string",
-                                    "default": "Security_Log_Profile"
-                                }
-                            }
-                        }
-                    }
-                },
-                "type": "object",
-                "additionalProperties": false
-            },
-            "Certificate": {
-                "properties": {
-                    "class": {},
-                    "certificate": {
-                        "type": "string"
-                    },
-                    "privateKey": {
-                        "type": "string"
-                    }
-                },
-                "type": "object",
-                "additionalProperties": false
-            },
-            "WAF_Policy": {
-                "properties": {
-                    "class": {},
-                    "url": {
-                        "type": "string",
-                        "default": "https://raw.githubusercontent.com/f5devcentral/f5-asm-policy-templates/master/owasp_ready_template/owasp-auto-tune-v1.1.xml"
-                    }
-                },
-                "type": "object",
-                "additionalProperties": false
-            },
-            "TLS_Server": {
-                "properties": {
-                    "class": {},
-                    "certificates": {
-                        "type": "array",
-                        "items": {
-                            "type": "object",
-                            "properties": {
-                                "certificate": {
-                                    "type": "string",
-                                    "default": "Certificate"
-                                }
-                            }
-                        }
-                    }
-                },
-                "type": "object",
-                "additionalProperties": false
-            },
-            "Security_Log_Profile": {
-                "properties": {
-                    "class": {},
-                    "application": {
-                        "type": "object",
-                        "properties": {
-                            "localStorage": {
-                                "type": "boolean",
-                                "default": false,
-                                "const": false
-                            },
-                            "maxEntryLength": {
-                                "type": "string",
-                                "default": "64k",
-                                "const": "64k"
-                            },
-                            "remoteStorage": {
-                                "type": "string",
-                                "default": "bigiq",
-                                "const": "bigiq"
-                            },
-                            "reportAnomaliesEnabled": {
-                                "type": "boolean",
-                                "default": true,
-                                "const": true
-                            },
-                            "servers": {
-                                "type": "array",
-                                "items": {
-                                    "type": "object",
-                                    "properties": {
-                                        "address": {
-                                            "type": "string",
-                                            "default": "10.1.10.6"
-                                        },
-                                        "port": {
-                                            "type": "string",
-                                            "default": "8514"
-                                        }
-                                    }
-                                }
-                            },
-                            "storageFilter": {
-                                "type": "object",
-                                "properties": {
-                                    "requestType": {
-                                        "type": "string",
-                                        "default": "illegal"
-                                    }
-                                }
-                            }
-                        }
-                    }
-                },
-                "type": "object",
-                "additionalProperties": false
-            }
         }
     }
 }

@@ -1,12 +1,15 @@
 BIG-IQ AS3 Templates submited by the Community
 ==============================================
 
-List of AS3 Community Templates 
--------------------------------
+List of AS3 Templates 
+---------------------
 
-Templates (schemaOverlay) | Description
-------------------------- | -----------
-| AS3-HTTPS-offload-lb-LTM-policy-ASM-splunk-template-big-iq-community| For load balancing an HTTPS application on port 443 with SSL offloading on BIG-IP using existing Certificate and Key on BIG-IP, custom TCP monitor and LTM Policy with a WAF policy sending its logs to Splunk.
+Templates (schemaOverlay) | Version | Description | Min AS3 version | Min BIG-IQ version
+------------------------- | ------- | ----------- | --------------- | ------------------
+| AS3-HTTPS-offload-lb-LTM-policy-ASM-splunk-template-big-iq | v2 | For load balancing an HTTPS application on port 443 with SSL offloading on BIG-IP using existing Certificate and Key on BIG-IP, custom TCP monitor and LTM Policy with a WAF policy sending its logs to Splunk. | 3.18 | 7.1
+| AS3-F5-HTTP-lb-page-load-time-template-big-iq | v1 | For load balancing an HTTP application on port 80 with Page Load Time HTTP analytics and CSPM enabled (Client side Perf Monitoring javascript injection) [more details on K13849](https://support.f5.com/csp/article/K13849). | 3.12 | 7.0
+| AS3-F5-TCP-lb-built-in-profile-template-big-iq | v1 | For load balancing a TCP-based application using one of the built-in TCP profile. | 3.18 | 7.1
+| AS3-F5-HTTP-lb-TCP-analytics-key-template-big-iq | v1 | For load balancing an HTTP application on port 80 withTCP analytics using a user-provided key set in an iRule. | 3.18 | 7.1
 
 Importing AS3 templates to your BIG-IQ using a script
 -----------------------------------------------------
@@ -21,7 +24,7 @@ Importing AS3 templates to your BIG-IQ using a script
 bash
 cd /home/admin;
 rm -rf f5-big-iq*.tar.gz f5devcentral-f5-big-iq-*;
-curl -L https://github.com/f5devcentral/f5-big-iq/tarball/7.0.0 > f5-big-iq.tar.gz;
+curl -L https://github.com/f5devcentral/f5-big-iq/tarball/7.1.0 > f5-big-iq.tar.gz;
 tar -xzvf f5-big-iq.tar.gz;
 cd f5devcentral-f5-big-iq-*/f5-appsvcs-templates-big-iq/community/json/;
 

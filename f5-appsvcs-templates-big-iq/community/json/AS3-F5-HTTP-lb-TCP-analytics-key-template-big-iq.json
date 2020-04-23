@@ -1,6 +1,6 @@
 {
-    "description": "For load balancing a TCP-based application with a FastL4 profile.",
-    "name": "AS3-F5-FastL4-TCP-lb-template-default-v2",
+    "description": "For load balancing an HTTP application on port 80 withTCP analytics using a user-provided key set in an iRule.",
+    "name": "AS3-F5-HTTP-lb-TCP-analytics-key-template-big-iq-v1",
     "published": false,
     "isUICompatible": true,
     "tenant": {
@@ -36,10 +36,10 @@
                                 "monitors": {
                                     "type": "array",
                                     "const": [
-                                        "tcp"
+                                        "http"
                                     ],
                                     "default": [
-                                        "tcp"
+                                        "http"
                                     ]
                                 },
                                 "adminState": {
@@ -52,7 +52,8 @@
                                     "default": true
                                 },
                                 "servicePort": {
-                                    "type": "number"
+                                    "type": "number",
+                                    "default": 80
                                 },
                                 "serverAddresses": {
                                     "type": "array"
@@ -63,31 +64,32 @@
                     "monitors": {
                         "type": "array",
                         "const": [
-                            "tcp"
+                            "http"
                         ],
                         "default": [
-                            "tcp"
+                            "http"
                         ]
                     }
                 },
                 "additionalproperties": false
             },
-            "L4_Profile": {
+            "iRule": {
                 "type": "object",
                 "properties": {
                     "class": {},
-                    "tcpCloseTimeout": {
-                        "type": "number",
-                        "default": 5
-                    },
-                    "tcpHandshakeTimeout": {
-                        "type": "number",
-                        "default": 5
+                    "iRule": {
+                        "type": "object",
+                        "properties": {
+                            "text": {
+                                "type": "string",
+                                "default": "when HTTP_REQUEST {\n     # must check subnet again to avoid starting for all\n     # connections\n     if [IP::addr [IP::client_addr]/24 equals 10.1.10.0] {\n         # make stats queryable by URI\n         TCP::analytics key \"[HTTP::uri]\"\n     }\n }"
+                            }
+                        }
                     }
                 },
                 "additionalProperties": false
             },
-            "Service_L4": {
+            "Service_HTTP": {
                 "type": "object",
                 "properties": {
                     "pool": {
@@ -99,18 +101,30 @@
                         "type": "boolean",
                         "default": true
                     },
-                    "profileL4": {
-                        "type": "object",
-                        "properties": {
-                            "use": {
-                                "type": "string",
-                                "default": "L4_Profile"
+                    "iRules": {
+                        "type": "array",
+                        "items": {
+                            "type": "object",
+                            "properties": {
+                                "use": {
+                                    "type": "string",
+                                    "default": "iRule"
+                                }
                             }
                         }
                     },
                     "virtualPort": {
                         "type": "number",
-                        "default": 8080
+                        "default": 80
+                    },
+                    "profileAnalytics": {
+                        "type": "object",
+                        "properties": {
+                            "use": {
+                                "type": "string",
+                                "default": "Analytics_Profile"
+                            }
+                        }
                     },
                     "virtualAddresses": {
                         "type": "array"
@@ -125,35 +139,62 @@
                         }
                     }
                 },
-                "additionalProperties": false
+                "additionalproperties": false
             },
-            "Analytics_TCP_Profile": {
+            "Analytics_Profile": {
                 "type": "object",
                 "properties": {
                     "class": {},
-                    "collectCity": {
+                    "collectIp": {
                         "type": "boolean"
                     },
-                    "collectRegion": {
+                    "collectGeo": {
+                        "type": "boolean"
+                    },
+                    "collectUrl": {
+                        "type": "boolean"
+                    },
+                    "collectResponseCode": {
                         "type": "boolean",
                         "default": true
+                    },
+                    "collectClientSideStatistics": {
+                        "type": "boolean",
+                        "default": true
+                    },
+                    "capturedTrafficInternalLogging": {
+                        "type": "boolean",
+                        "default": true
+                    }
+                },
+                "additionalproperties": false
+            },
+            "Analytics_TCP_Profile": {
+                "type": "object",
+                "default": {},
+                "properties": {
+                    "class": {},
+                    "collectRegion": {
+                        "type": "boolean",
+                        "const": false,
+                        "default": false
                     },
                     "collectCountry": {
                         "type": "boolean",
-                        "default": true
+                        "const": false,
+                        "default": false
                     },
                     "collectNexthop": {
                         "type": "boolean"
                     },
-                    "collectPostCode": {
-                        "type": "boolean"
-                    },
                     "collectContinent": {
                         "type": "boolean",
-                        "default": true
+                        "const": false,
+                        "default": false
                     },
                     "collectRemoteHostIp": {
-                        "type": "boolean"
+                        "type": "boolean",
+                        "default": true
                     },
                     "collectedByClientSide": {
                         "type": "boolean",
@@ -165,7 +206,7 @@
                     },
                     "collectRemoteHostSubnet": {
                         "type": "boolean",
-                        "default": true
+                        "default": false
                     }
                 },
                 "additionalProperties": false
@@ -178,6 +219,13 @@
                         {
                             "properties": {
                                 "class": {
+                                    "const": "Analytics_Profile"
+                                }
+                            }
+                        },
+                        {
+                            "properties": {
+                                "class": {
                                     "const": "Pool"
                                 }
                             }
@@ -185,14 +233,7 @@
                         {
                             "properties": {
                                 "class": {
-                                    "const": "Service_L4"
-                                }
-                            }
-                        },
-                        {
-                            "properties": {
-                                "class": {
-                                    "const": "L4_Profile"
+                                    "const": "Service_HTTP"
                                 }
                             }
                         },
@@ -202,6 +243,13 @@
                                     "const": "Analytics_TCP_Profile"
                                 }
                             }
+                        },
+                        {
+                            "properties": {
+                                "class": {
+                                    "const": "iRule"
+                                }
+                            }
                         }
                     ]
                 },
@@ -209,12 +257,12 @@
                     "if": {
                         "properties": {
                             "class": {
-                                "const": "Analytics_TCP_Profile"
+                                "const": "Analytics_Profile"
                             }
                         }
                     },
                     "then": {
-                        "$ref": "#/definitions/Analytics_TCP_Profile"
+                        "$ref": "#/definitions/Analytics_Profile"
                     }
                 },
                 {
@@ -233,24 +281,36 @@
                     "if": {
                         "properties": {
                             "class": {
-                                "const": "Service_L4"
+                                "const": "Service_HTTP"
                             }
                         }
                     },
                     "then": {
-                        "$ref": "#/definitions/Service_L4"
+                        "$ref": "#/definitions/Service_HTTP"
                     }
                 },
                 {
                     "if": {
                         "properties": {
                             "class": {
-                                "const": "L4_Profile"
+                                "const": "Analytics_TCP_Profile"
                             }
                         }
                     },
                     "then": {
-                        "$ref": "#/definitions/L4_Profile"
+                        "$ref": "#/definitions/Analytics_TCP_Profile"
+                    }
+                },
+                {
+                    "if": {
+                        "properties": {
+                            "class": {
+                                "const": "iRule"
+                            }
+                        }
+                    },
+                    "then": {
+                        "$ref": "#/definitions/iRule"
                     }
                 }
             ]
