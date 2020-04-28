@@ -1,5 +1,5 @@
-BIG-IQ AS3 Templates submited by the Community
-==============================================
+BIG-IQ AS3 Templates submitted by the Community
+===============================================
 
 List of AS3 Community Templates 
 -------------------------------
