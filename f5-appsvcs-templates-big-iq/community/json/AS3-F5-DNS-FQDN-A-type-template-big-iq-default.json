@@ -1,0 +1,163 @@
+{
+    "description": "For global load balancing distribution of DNS name resolution requests A type using default monitors.",
+    "name": "AS3-F5-DNS-FQDN-A-type-default-monitors-template-big-iq-v1",
+    "published": false,
+    "isUICompatible": true,
+    "tenant": {
+        "name": "",
+        "override": false,
+        "editable": true
+    },
+    "schemaOverlay": {
+        "type": "object",
+        "required": [
+            "class"
+        ],
+        "properties": {
+            "class": {
+                "type": "string",
+                "const": "Application"
+            },
+            "label": {},
+            "remark": {},
+            "template": {},
+            "schemaOverlay": {}
+        },
+        "definitions": {
+            "GSLB_Pool": {
+                "type": "object",
+                "properties": {
+                    "class": {},
+                    "members": {
+                        "type": "array",
+                        "items": {
+                            "type": "object",
+                            "properties": {
+                                "server": {
+                                    "type": "object",
+                                    "properties": {
+                                        "bigip": {
+                                            "type": "string",
+                                            "default": "/Common/gslbServerName"
+                                        }
+                                    }
+                                },
+                                "virtualServer": {
+                                    "type": "string",
+                                    "default": "/tenant/appName/serviceMain"
+                                }
+                            }
+                        }
+                    },
+                    "monitors": {
+                        "type": "array",
+                        "items": {
+                            "type": "object",
+                            "properties": {
+                                "bigip": {
+                                    "type": "string",
+                                    "default": "/Common/http"
+                                }
+                            }
+                        }
+                    },
+                    "lbModeFallback": {
+                        "type": "string",
+                        "default": "return-to-dns"
+                    },
+                    "lbModeAlternate": {
+                        "type": "string",
+                        "default": "round-robin"
+                    },
+                    "lbModePreferred": {
+                        "type": "string",
+                        "default": "round-robin"
+                    },
+                    "resourceRecordType": {
+                        "type": "string",
+                        "const": "A",
+                        "default": "A"
+                    }
+                },
+                "additionalProperties": false
+            },
+            "GSLB_Domain": {
+                "type": "object",
+                "properties": {
+                    "class": {},
+                    "pools": {
+                        "type": "array",
+                        "items": {
+                            "type": "object",
+                            "properties": {
+                                "use": {
+                                    "type": "string",
+                                    "default": "GSLB_Pool"
+                                }
+                            }
+                        }
+                    },
+                    "enabled": {
+                        "type": "boolean",
+                        "default": true
+                    },
+                    "domainName": {
+                        "type": "string"
+                    },
+                    "resourceRecordType": {
+                        "type": "string",
+                        "const": "A",
+                        "default": "A"
+                    }
+                },
+                "additionalProperties": false
+            }
+        },
+        "additionalProperties": {
+            "allOf": [
+                {
+                    "anyOf": [
+                        {
+                            "properties": {
+                                "class": {
+                                    "const": "GSLB_Domain"
+                                }
+                            }
+                        },
+                        {
+                            "properties": {
+                                "class": {
+                                    "const": "GSLB_Pool"
+                                }
+                            }
+                        }
+                    ]
+                },
+                {
+                    "if": {
+                        "properties": {
+                            "class": {
+                                "const": "GSLB_Domain"
+                            }
+                        }
+                    },
+                    "then": {
+                        "$ref": "#/definitions/GSLB_Domain"
+                    }
+                },
+                {
+                    "if": {
+                        "properties": {
+                            "class": {
+                                "const": "GSLB_Pool"
+                            }
+                        }
+                    },
+                    "then": {
+                        "$ref": "#/definitions/GSLB_Pool"
+                    }
+                }
+            ]
+        }
+    }
+}
