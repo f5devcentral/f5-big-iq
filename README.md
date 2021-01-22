@@ -8,6 +8,8 @@ F5 maintains this BIG-IQ Application Services 3 Extension (AS3) template library
 List of AS3 F5 Default Templates 
 --------------------------------
 
+[Look for AS3 templates submitted by the community!](./f5-appsvcs-templates-big-iq/community)
+
 Templates (schemaOverlay) | Version | Description | Min AS3 version | Min BIG-IQ version
 ------------------------- | ------- | ----------- | --------------- | ------------------
 | AS3-F5-HTTP-lb-template-big-iq-default | v1 | For load balancing an HTTP application on port 80 with HTTP analytics. | 3.12 | 7.0
@@ -23,7 +25,6 @@ Templates (schemaOverlay) | Version | Description | Min AS3 version | Min BIG-IQ
 | AS3-F5-DNS-FQDN-A-type-template-big-iq-default | v1 | For global load balancing distribution of DNS name resolution requests A type. | 3.12 | 7.0
 | AS3-F5-DCD-lb-ASM-request-logging-events-template-big-iq-default | v1 | For ASM request logging events load balancing to BIG-IQ DCDs. | 3.12 | 7.0
 
-[Look for AS3 templates submitted by the community!](./f5-appsvcs-templates-big-iq/community)
 
 There are two methods you can use to download these templates and import then into your BIG-IQ so that you can use them. 
 
@@ -112,7 +113,7 @@ Importing AS3 templates to your BIG-IQ using Postman
 
 **Note:** Before you can use an AS3 template, it must be Published (read-only).
 
-8. For more information on how to use an AS3 template to deploy an AS3 Application using the BIG-IQ, see [BIG-IQ documentation](https://support.f5.com/csp/knowledge-center/software/BIG-IQ?module=BIG-IQ%20Centralized%20Management&version=7.1.0)
+8. For more information on how to use an AS3 template to deploy an AS3 Application using the BIG-IQ, see [BIG-IQ documentation](https://support.f5.com/csp/knowledge-center/software/BIG-IQ?module=BIG-IQ%20Centralized%20Management)
 
 Support
 -------

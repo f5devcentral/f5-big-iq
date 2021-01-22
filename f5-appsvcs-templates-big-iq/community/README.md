@@ -9,8 +9,30 @@ Templates (schemaOverlay) | Version | Description | Min AS3 version | Min BIG-IQ
 | AS3-HTTPS-offload-lb-LTM-policy-ASM-splunk-template-big-iq | v2 | For load balancing an HTTPS application on port 443 with SSL offloading on BIG-IP using existing Certificate and Key on BIG-IP, custom TCP monitor and LTM Policy with a WAF policy sending its logs to Splunk. | 3.18 | 7.1
 | AS3-F5-HTTP-lb-page-load-time-template-big-iq | v1 | For load balancing an HTTP application on port 80 with Page Load Time HTTP analytics and CSPM enabled (Client side Perf Monitoring javascript injection) [more details on K13849](https://support.f5.com/csp/article/K13849). | 3.12 | 7.0
 | AS3-F5-TCP-lb-built-in-profile-template-big-iq | v1 | For load balancing a TCP-based application using one of the built-in TCP profile. | 3.18 | 7.1
-| AS3-F5-HTTP-lb-TCP-analytics-key-template-big-iq | v1 | For load balancing an HTTP application on port 80 withTCP analytics using a user-provided key set in an iRule. | 3.18 | 7.1
+| AS3-F5-HTTP-lb-TCP-analytics-key-template-big-iq | v1 | For load balancing an HTTP application on port 80 with TCP analytics using a user-provided key set in an iRule. | 3.18 | 7.1
 | AS3-F5-DNS-FQDN-A-type-default-monitors-template-big-iq | v1 | For global load balancing distribution of DNS name resolution requests A type using default monitors. | 3.18 | 7.1
+
+How to submit a new template
+----------------------------
+
+1. Log in to your primary BIG-IQ device and navigate to **Applications > APPLICATION TEMPLATES** and under **AS3 Templates**, click on the AS3 template you want to share.
+
+Under Template JSON in the General Properties, select all (CTRL+A) and copy (Ctrl-C) the AS3 template in JSON format.
+
+![submit_template_01](../images/submit_template_01.gif)
+
+2. Return to the previous screen, on the upper right corner, click the Import Templates link. The link opens this DevCentral GIT repository.
+
+![submit_template_02](../images/submit_template_02.gif)
+
+3. Under the **issue** tab, click on **New issue**, then **Get Started**.
+
+![submit_template_01](../images/submit_template_03.gif)
+
+4. Fill out the template request by providing the necessary information including pasting (Ctrl-V) the AS3 template copied in step 1.
+
+![submit_template_01](../images/submit_template_03.gif)
+
 
 Importing AS3 templates to your BIG-IQ using a script
 -----------------------------------------------------
@@ -37,7 +59,7 @@ done
 
 **Note:** Before you can use an AS3 template, it must be Published (read-only).
 
-4. For more information on how to use an AS3 template to deploy an AS3 Application using the BIG-IQ, see [BIG-IQ documentation](https://support.f5.com/csp/knowledge-center/software/BIG-IQ?module=BIG-IQ%20Centralized%20Management&version=7.0.0)
+4. For more information on how to use an AS3 template to deploy an AS3 Application using the BIG-IQ, see [BIG-IQ documentation](https://support.f5.com/csp/knowledge-center/software/BIG-IQ?module=BIG-IQ%20Centralized%20Management)
 
 Support
 -------
