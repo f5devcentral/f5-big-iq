@@ -19,19 +19,19 @@ How to submit a new template
 
 Under Template JSON in the General Properties, select all (CTRL+A) and copy (Ctrl-C) the AS3 template in JSON format.
 
-![submit_template_01](../images/submit_template_01.gif)
+![submit_template_01](../../images/submit_template_01.gif)
 
 2. Return to the previous screen, on the upper right corner, click the Import Templates link. The link opens this DevCentral GIT repository.
 
-![submit_template_02](../images/submit_template_02.gif)
+![submit_template_02](../../images/submit_template_02.gif)
 
 3. Under the **issue** tab, click on **New issue**, then **Get Started**.
 
-![submit_template_01](../images/submit_template_03.gif)
+![submit_template_03](../../images/submit_template_03.gif)
 
 4. Fill out the template request by providing the necessary information including pasting (Ctrl-V) the AS3 template copied in step 1.
 
-![submit_template_01](../images/submit_template_03.gif)
+![submit_template_04](../../images/submit_template_04.gif)
 
 
 Importing AS3 templates to your BIG-IQ using a script
