@@ -5,10 +5,10 @@ BIG-IQ AS3 Template Library
 
 F5 maintains this BIG-IQ Application Services 3 Extension (AS3) template library to provide you with templates that you can either use directly or with just a few changes of your own. Use the instructions here to download these templates to your BIG-IQ system. Once downloaded, you can use these templates just as you would any other AS3 application template. AS3 templates perform on the BIG-IQ in much  the same way as they do on BIG-IP. For more detail on AS3 and how it works, refer to the CloudDocs content: [Using AS3 with BIG-IQ](https://clouddocs.f5.com/products/extensions/f5-appsvcs-extension/latest/userguide/big-iq.html). 
 
+[Look for AS3 templates submitted by the community!](./f5-appsvcs-templates-big-iq/community)
+
 List of AS3 F5 Default Templates 
 --------------------------------
-
-[Look for AS3 templates submitted by the community!](./f5-appsvcs-templates-big-iq/community)
 
 Templates (schemaOverlay) | Version | Description | Min AS3 version | Min BIG-IQ version
 ------------------------- | ------- | ----------- | --------------- | ------------------
@@ -24,7 +24,6 @@ Templates (schemaOverlay) | Version | Description | Min AS3 version | Min BIG-IQ
 | AS3-F5-UDP-lb-template-big-iq-default | v1 | For load balancing a UDP-based application. | 3.12 | 7.0
 | AS3-F5-DNS-FQDN-A-type-template-big-iq-default | v1 | For global load balancing distribution of DNS name resolution requests A type. | 3.12 | 7.0
 | AS3-F5-DCD-lb-ASM-request-logging-events-template-big-iq-default | v1 | For ASM request logging events load balancing to BIG-IQ DCDs. | 3.12 | 7.0
-
 
 There are two methods you can use to download these templates and import then into your BIG-IQ so that you can use them. 
 
