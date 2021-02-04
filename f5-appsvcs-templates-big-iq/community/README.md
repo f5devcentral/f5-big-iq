@@ -1,6 +1,18 @@
 BIG-IQ AS3 Templates submitted by the Community
 ===============================================
 
+Welcome to the repository for community-submitted BIG-IQ Application Services 3 (AS3) templates! 
+
+Just like the [default AS3 templates for BIG-IQ](https://github.com/f5devcentral/f5-big-iq) — produced by the F5 product group for more common use cases—the AS3 templates listed below are meant to be installed on BIG-IQ and will be used to configure and deploy L4-L7 services on BIG-IPs being managed by your BIG-IQ. And just like the default templates, you’ll need the following components to get started:
+•	BIG-IQ Centralized Management
+•	Application Services 3 Extensions (AS3) installed on BIG-IQ
+
+In addition to the software components, you’ll need to ensure that you’re running the appropriate versions—this information can be found in the template list below.
+
+Please note that all of the templates listed below are submitted and supported by the **community** (F5 sales and customers) and may not fall under your support contract. These templates are for more specialized BIG-IQ + AS3 use cases—identified by our user community. 
+
+To submit bugs and enhancements, you’ll need to open an issue withing the GitHub repository. 
+
 List of AS3 Templates 
 ---------------------
 
@@ -11,6 +23,11 @@ Templates (schemaOverlay) | Version | Description | Min AS3 version | Min BIG-IQ
 | AS3-F5-TCP-lb-built-in-profile-template-big-iq | v1 | For load balancing a TCP-based application using one of the built-in TCP profile. | 3.18 | 7.1
 | AS3-F5-HTTP-lb-TCP-analytics-key-template-big-iq | v1 | For load balancing an HTTP application on port 80 with TCP analytics using a user-provided key set in an iRule. | 3.18 | 7.1
 | AS3-F5-DNS-FQDN-A-type-default-monitors-template-big-iq | v1 | For global load balancing distribution of DNS name resolution requests A type using default monitors. | 3.18 | 7.1
+| AS3-EPIC-BCA-HTTPS-template-big-iq | v1 | Epic BCA (Business Continuity Access) HTTPS App Services. | 3.26 | 7.1
+| AS3-EPIC-BCA-FTP-template-big-iq | v1 | Epic BCA (Business Continuity Access) FTP App Services. | 3.26 | 7.1
+| AS3-EPIC-EpicCare-HTTPS-template-big-iq | v1 | Epic BCA (Business Continuity Access) FTP App Services. | 3.25 | 7.1
+
+**Note:** [Need to upgrade AS3 on BIG-IQ?](https://support.f5.com/csp/article/K54909607)
 
 How to submit a new template
 ----------------------------
