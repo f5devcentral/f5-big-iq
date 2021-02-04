@@ -1,0 +1,411 @@
+{
+    "description": "Epic BCA (Business Continuity Access) FTP App Services.",
+    "name": "AS3-EPIC-BCA-FTP-template-big-iq-v1",
+    "published": false,
+    "isUICompatible": true,
+    "tenant": {
+        "name": "",
+        "override": false,
+        "editable": true
+    },
+    "schemaOverlay": {
+        "type": "object",
+        "required": [
+            "class"
+        ],
+        "properties": {
+            "class": {
+                "type": "string",
+                "const": "Application"
+            },
+            "label": {},
+            "remark": {},
+            "template": {},
+            "schemaOverlay": {}
+        },
+        "definitions": {
+            "Pool": {
+                "type": "object",
+                "properties": {
+                    "class": {},
+                    "members": {
+                        "type": "array",
+                        "items": {
+                            "type": "object",
+                            "properties": {
+                                "monitors": {
+                                    "type": "array",
+                                    "items": {
+                                        "type": "object",
+                                        "properties": {
+                                            "use": {
+                                                "type": "string",
+                                                "default": "Monitor"
+                                            }
+                                        }
+                                    }
+                                },
+                                "adminState": {
+                                    "type": "string",
+                                    "default": "enable"
+                                },
+                                "shareNodes": {
+                                    "type": "boolean",
+                                    "const": true,
+                                    "default": true
+                                },
+                                "servicePort": {
+                                    "type": "number",
+                                    "default": 21
+                                },
+                                "serverAddresses": {
+                                    "type": "array"
+                                }
+                            }
+                        }
+                    },
+                    "monitors": {
+                        "type": "array",
+                        "const": [
+                            "http"
+                        ],
+                        "default": [
+                            "http"
+                        ]
+                    }
+                },
+                "additionalproperties": false
+            },
+            "iRule": {
+                "type": "object",
+                "properties": {
+                    "class": {},
+                    "iRule": {
+                        "type": "object",
+                        "properties": {
+                            "text": {
+                                "type": "string",
+                                "default": "# BCA_FTP_Whitelist_irule\n# Purpose:\n# This rule should be added to a network virtual server to catch all requests\n# which do not match a more specific virtual server. This allows for centralized\n# management of access through the BIG&#8208;IP. The rule will optionally log rejected\n# and accepted requests. By default, log entries are written to /var/log/ltm.\n#\n# This rule expects a data group called BCA_FTP_ServerList with the\n# IP addresses of all Operational Database instances used to send BCA jobs.\nwhen RULE_INIT {\n# Drop unknown source IP addresses? 0 = no, 1 = yes\nset static::drop_unknown_sources 1\n# Log accepted requests? 0 = no, 1 = yes\nset static::log_accepted_requests 1\n# Log accepted requests? 0 = no, 1 = yes\nset static::log_dropped_requests 1\n}\n# This event is triggered when a client &#8208; BIG&#8208;IP TCP connection is established\nwhen CLIENT_ACCEPTED {\n# Is client IP address defined in the BCA_FTP_ServerList data group?\nif { [class match [IP::client_addr] equals /Tenant/App/BCA_FTP_ServerList] }{\n# Log accepted admin request\nif {$static::log_accepted_requests==1}{\n# Log the client IP address:port &#8208;> destination IP address:port\nlog local0. \"admin request accepted from client: [IP::client_addr]:[TCP::client_port]\n&#8208;> [IP::local_addr]:[TCP::local_port]\"\n}\n} else {\n# Request didn't match the conditions for allowing the request\nif {$static::log_dropped_requests==1}{\n# Log the client IP address:port &#8208;> destination IP address:port\nlog local0. \"unknown request rejected from client: [IP::client_addr]:[TCP::client_port\n] &#8208;> [IP::local_addr]:[TCP::local_port]\"\n}\n# Drop request if the option is enabled. Could also send a reset using 'reject'\nif {$static::drop_unknown_sources==1}{\nreject\n}\n}\n}"
+                            }
+                        }
+                    }
+                },
+                "additionalProperties": false
+            },
+            "Monitor": {
+                "type": "object",
+                "default": {},
+                "properties": {
+                    "class": {},
+                    "timeout": {
+                        "type": "number",
+                        "default": 31
+                    },
+                    "filename": {
+                        "type": "string",
+                        "default": "canary.txt"
+                    },
+                    "interval": {
+                        "type": "number",
+                        "default": 10
+                    },
+                    "username": {
+                        "type": "string",
+                        "default": "epicbca"
+                    },
+                    "passphrase": {
+                        "type": "object",
+                        "properties": {
+                            "protected": {
+                                "type": "string",
+                                "default": "eyJhbGciOiJkaXIiLCJlbmMiOiJub25lIn0"
+                            },
+                            "ciphertext": {
+                                "type": "string"
+                            }
+                        }
+                    },
+                    "monitorType": {
+                        "type": "string",
+                        "const": "ftp",
+                        "default": "ftp"
+                    }
+                },
+                "additionalProperties": false
+            },
+            "Data_Group": {
+                "type": "object",
+                "default": {},
+                "properties": {
+                    "class": {},
+                    "records": {
+                        "type": "array",
+                        "items": {
+                            "type": "object",
+                            "properties": {
+                                "key": {
+                                    "type": "string",
+                                    "default": "1.2.3.4/32"
+                                }
+                            }
+                        }
+                    },
+                    "keyDataType": {
+                        "type": "string",
+                        "const": "ip",
+                        "default": "ip"
+                    }
+                },
+                "additionalProperties": false
+            },
+            "Service_TCP": {
+                "type": "object",
+                "properties": {
+                    "pool": {
+                        "type": "string",
+                        "default": "Pool"
+                    },
+                    "class": {},
+                    "enable": {
+                        "type": "boolean",
+                        "default": true
+                    },
+                    "iRules": {
+                        "type": "array",
+                        "default": [
+                            "iRule"
+                        ]
+                    },
+                    "profileTCP": {
+                        "type": "object",
+                        "properties": {
+                            "use": {
+                                "type": "string",
+                                "default": "TCP_Profile"
+                            }
+                        }
+                    },
+                    "virtualPort": {
+                        "type": "number",
+                        "default": 21
+                    },
+                    "virtualAddresses": {
+                        "type": "array"
+                    },
+                    "persistenceMethods": {
+                        "type": "array"
+                    },
+                    "profileAnalyticsTcp": {
+                        "type": "object",
+                        "properties": {
+                            "use": {
+                                "type": "string",
+                                "default": "Analytics_TCP_Profile"
+                            }
+                        }
+                    }
+                },
+                "additionalProperties": false
+            },
+            "TCP_Profile": {
+                "type": "object",
+                "default": {},
+                "properties": {
+                    "class": {},
+                    "nagle": {
+                        "type": "string",
+                        "const": "disable",
+                        "default": "disable"
+                    },
+                    "slowStart": {
+                        "type": "boolean",
+                        "const": false,
+                        "default": false
+                    }
+                },
+                "additionalProperties": false
+            },
+            "Analytics_TCP_Profile": {
+                "type": "object",
+                "properties": {
+                    "class": {},
+                    "collectCity": {
+                        "type": "boolean"
+                    },
+                    "collectRegion": {
+                        "type": "boolean",
+                        "default": false
+                    },
+                    "collectCountry": {
+                        "type": "boolean",
+                        "default": false
+                    },
+                    "collectNexthop": {
+                        "type": "boolean"
+                    },
+                    "collectContinent": {
+                        "type": "boolean",
+                        "default": false
+                    },
+                    "collectRemoteHostIp": {
+                        "type": "boolean"
+                    },
+                    "collectedByClientSide": {
+                        "type": "boolean",
+                        "default": true
+                    },
+                    "collectedByServerSide": {
+                        "type": "boolean",
+                        "default": true
+                    },
+                    "collectRemoteHostSubnet": {
+                        "type": "boolean",
+                        "default": false
+                    }
+                },
+                "additionalProperties": false
+            }
+        },
+        "additionalProperties": {
+            "allOf": [
+                {
+                    "anyOf": [
+                        {
+                            "properties": {
+                                "class": {
+                                    "const": "Pool"
+                                }
+                            }
+                        },
+                        {
+                            "properties": {
+                                "class": {
+                                    "const": "Data_Group"
+                                }
+                            }
+                        },
+                        {
+                            "properties": {
+                                "class": {
+                                    "const": "iRule"
+                                }
+                            }
+                        },
+                        {
+                            "properties": {
+                                "class": {
+                                    "const": "Monitor"
+                                }
+                            }
+                        },
+                        {
+                            "properties": {
+                                "class": {
+                                    "const": "TCP_Profile"
+                                }
+                            }
+                        },
+                        {
+                            "properties": {
+                                "class": {
+                                    "const": "Service_TCP"
+                                }
+                            }
+                        },
+                        {
+                            "properties": {
+                                "class": {
+                                    "const": "Analytics_TCP_Profile"
+                                }
+                            }
+                        }
+                    ]
+                },
+                {
+                    "if": {
+                        "properties": {
+                            "class": {
+                                "const": "Pool"
+                            }
+                        }
+                    },
+                    "then": {
+                        "$ref": "#/definitions/Pool"
+                    }
+                },
+                {
+                    "if": {
+                        "properties": {
+                            "class": {
+                                "const": "Data_Group"
+                            }
+                        }
+                    },
+                    "then": {
+                        "$ref": "#/definitions/Data_Group"
+                    }
+                },
+                {
+                    "if": {
+                        "properties": {
+                            "class": {
+                                "const": "iRule"
+                            }
+                        }
+                    },
+                    "then": {
+                        "$ref": "#/definitions/iRule"
+                    }
+                },
+                {
+                    "if": {
+                        "properties": {
+                            "class": {
+                                "const": "Monitor"
+                            }
+                        }
+                    },
+                    "then": {
+                        "$ref": "#/definitions/Monitor"
+                    }
+                },
+                {
+                    "if": {
+                        "properties": {
+                            "class": {
+                                "const": "TCP_Profile"
+                            }
+                        }
+                    },
+                    "then": {
+                        "$ref": "#/definitions/TCP_Profile"
+                    }
+                },
+                {
+                    "if": {
+                        "properties": {
+                            "class": {
+                                "const": "Service_TCP"
+                            }
+                        }
+                    },
+                    "then": {
+                        "$ref": "#/definitions/Service_TCP"
+                    }
+                },
+                {
+                    "if": {
+                        "properties": {
+                            "class": {
+                                "const": "Analytics_TCP_Profile"
+                            }
+                        }
+                    },
+                    "then": {
+                        "$ref": "#/definitions/Analytics_TCP_Profile"
+                    }
+                }
+            ]
+        }
+    }
+}

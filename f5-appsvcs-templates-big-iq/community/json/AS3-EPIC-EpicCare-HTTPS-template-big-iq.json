@@ -1,0 +1,489 @@
+{
+    "description": "EpicCare Link HTTPS App Services.",
+    "name": "AS3-EPIC-EpicCare-HTTPS-template-big-iq-v1",
+    "published": false,
+    "isUICompatible": true,
+    "tenant": {
+        "name": "",
+        "override": false,
+        "editable": true
+    },
+    "schemaOverlay": {
+        "type": "object",
+        "required": [
+            "class"
+        ],
+        "properties": {
+            "class": {
+                "type": "string",
+                "const": "Application"
+            },
+            "label": {},
+            "remark": {},
+            "template": {},
+            "schemaOverlay": {}
+        },
+        "definitions": {
+            "Pool": {
+                "type": "object",
+                "properties": {
+                    "class": {},
+                    "members": {
+                        "type": "array",
+                        "items": {
+                            "type": "object",
+                            "properties": {
+                                "monitors": {
+                                    "type": "array",
+                                    "items": {
+                                        "type": "object",
+                                        "properties": {
+                                            "use": {
+                                                "type": "string",
+                                                "default": "Monitor"
+                                            }
+                                        }
+                                    }
+                                },
+                                "adminState": {
+                                    "type": "string",
+                                    "default": "enable"
+                                },
+                                "shareNodes": {
+                                    "type": "boolean",
+                                    "const": true,
+                                    "default": true
+                                },
+                                "servicePort": {
+                                    "type": "number",
+                                    "default": 443
+                                },
+                                "serverAddresses": {
+                                    "type": "array"
+                                }
+                            }
+                        }
+                    },
+                    "monitors": {
+                        "type": "array",
+                        "const": [
+                            "http"
+                        ],
+                        "default": [
+                            "http"
+                        ]
+                    }
+                },
+                "additionalproperties": false
+            },
+            "Monitor": {
+                "type": "object",
+                "default": {},
+                "properties": {
+                    "send": {
+                        "type": "string",
+                        "default": "GET /{EpicCareLinkWebsiteName}/common/healthcheck.asp HTTP/1.0\\r\\n\\r\\n"
+                    },
+                    "class": {},
+                    "receive": {
+                        "type": "string",
+                        "default": "OK‐ECL"
+                    },
+                    "timeout": {
+                        "type": "number",
+                        "default": 91
+                    },
+                    "interval": {
+                        "type": "number",
+                        "default": 30
+                    },
+                    "monitorType": {
+                        "type": "string",
+                        "const": "https",
+                        "default": "https"
+                    }
+                },
+                "additionalProperties": false
+            },
+            "TLS_Client": {
+                "type": "object",
+                "default": {},
+                "properties": {
+                    "class": {},
+                    "tls1_0Enabled": {
+                        "type": "boolean",
+                        "const": false,
+                        "default": false
+                    },
+                    "clientCertificate": {
+                        "type": "string",
+                        "default": "Certificate"
+                    }
+                },
+                "additionalProperties": false
+            },
+            "TLS_Server": {
+                "type": "object",
+                "default": {},
+                "properties": {
+                    "class": {},
+                    "certificates": {
+                        "type": "array",
+                        "items": {
+                            "type": "object",
+                            "properties": {
+                                "certificate": {
+                                    "type": "string",
+                                    "default": "Certificate"
+                                }
+                            }
+                        }
+                    },
+                    "tls1_0Enabled": {
+                        "type": "boolean",
+                        "const": false,
+                        "default": false
+                    }
+                },
+                "additionalProperties": false
+            },
+            "Certificate": {
+                "type": "object",
+                "properties": {
+                    "class": {},
+                    "privateKey": {
+                        "type": "object",
+                        "properties": {
+                            "bigip": {
+                                "type": "string",
+                                "default": "/Common/default.key"
+                            }
+                        }
+                    },
+                    "certificate": {
+                        "type": "object",
+                        "properties": {
+                            "bigip": {
+                                "type": "string",
+                                "default": "/Common/default.crt"
+                            }
+                        }
+                    }
+                },
+                "additionalProperties": false
+            },
+            "TCP_Profile": {
+                "type": "object",
+                "default": {},
+                "properties": {
+                    "class": {},
+                    "nagle": {
+                        "type": "string",
+                        "const": "disable",
+                        "default": "disable"
+                    },
+                    "slowStart": {
+                        "type": "boolean",
+                        "const": false,
+                        "default": false
+                    }
+                },
+                "additionalProperties": false
+            },
+            "HTTP_Profile": {
+                "type": "object",
+                "default": {},
+                "properties": {
+                    "class": {},
+                    "rewriteRedirects": {
+                        "type": "string",
+                        "const": "matching",
+                        "default": "matching"
+                    }
+                },
+                "additionalProperties": false
+            },
+            "Service_HTTPS": {
+                "type": "object",
+                "default": {},
+                "properties": {
+                    "pool": {
+                        "type": "string",
+                        "default": "Pool"
+                    },
+                    "class": {},
+                    "enable": {
+                        "type": "boolean",
+                        "default": true
+                    },
+                    "clientTLS": {
+                        "type": "string",
+                        "default": "TLS_Client"
+                    },
+                    "serverTLS": {
+                        "type": "string",
+                        "default": "TLS_Server"
+                    },
+                    "profileTCP": {
+                        "type": "object",
+                        "properties": {
+                            "use": {
+                                "type": "string",
+                                "default": "TCP_Profile"
+                            }
+                        }
+                    },
+                    "profileHTTP": {
+                        "type": "object",
+                        "properties": {
+                            "use": {
+                                "type": "string",
+                                "default": "HTTP_Profile"
+                            }
+                        }
+                    },
+                    "profileAnalytics": {
+                        "type": "object",
+                        "properties": {
+                            "use": {
+                                "type": "string",
+                                "default": "Analytics_Profile"
+                            }
+                        }
+                    },
+                    "profileMultiplex": {
+                        "type": "string",
+                        "default": "basic"
+                    },
+                    "virtualAddresses": {
+                        "type": "array"
+                    },
+                    "translateClientPort": {
+                        "type": "string",
+                        "const": "preserve",
+                        "default": "preserve"
+                    }
+                },
+                "additionalProperties": false
+            },
+            "Analytics_Profile": {
+                "type": "object",
+                "properties": {
+                    "class": {},
+                    "collectIp": {
+                        "type": "boolean"
+                    },
+                    "collectGeo": {
+                        "type": "boolean"
+                    },
+                    "collectUrl": {
+                        "type": "boolean"
+                    },
+                    "collectMethod": {
+                        "type": "boolean",
+                        "default": false
+                    },
+                    "collectUserAgent": {
+                        "type": "boolean"
+                    },
+                    "collectOsAndBrowser": {
+                        "type": "boolean",
+                        "default": false
+                    },
+                    "collectResponseCode": {
+                        "type": "boolean",
+                        "default": true
+                    },
+                    "collectClientSideStatistics": {
+                        "type": "boolean",
+                        "default": true
+                    },
+                    "collectedStatsInternalLogging": {
+                        "type": "boolean",
+                        "default": true
+                    }
+                },
+                "additionalProperties": false
+            }
+        },
+        "additionalProperties": {
+            "allOf": [
+                {
+                    "anyOf": [
+                        {
+                            "properties": {
+                                "class": {
+                                    "const": "Pool"
+                                }
+                            }
+                        },
+                        {
+                            "properties": {
+                                "class": {
+                                    "const": "Monitor"
+                                }
+                            }
+                        },
+                        {
+                            "properties": {
+                                "class": {
+                                    "const": "TLS_Client"
+                                }
+                            }
+                        },
+                        {
+                            "properties": {
+                                "class": {
+                                    "const": "TLS_Server"
+                                }
+                            }
+                        },
+                        {
+                            "properties": {
+                                "class": {
+                                    "const": "Certificate"
+                                }
+                            }
+                        },
+                        {
+                            "properties": {
+                                "class": {
+                                    "const": "HTTP_Profile"
+                                }
+                            }
+                        },
+                        {
+                            "properties": {
+                                "class": {
+                                    "const": "Service_HTTPS"
+                                }
+                            }
+                        },
+                        {
+                            "properties": {
+                                "class": {
+                                    "const": "TCP_Profile"
+                                }
+                            }
+                        },
+                        {
+                            "properties": {
+                                "class": {
+                                    "const": "Analytics_Profile"
+                                }
+                            }
+                        }
+                    ]
+                },
+                {
+                    "if": {
+                        "properties": {
+                            "class": {
+                                "const": "Pool"
+                            }
+                        }
+                    },
+                    "then": {
+                        "$ref": "#/definitions/Pool"
+                    }
+                },
+                {
+                    "if": {
+                        "properties": {
+                            "class": {
+                                "const": "Monitor"
+                            }
+                        }
+                    },
+                    "then": {
+                        "$ref": "#/definitions/Monitor"
+                    }
+                },
+                {
+                    "if": {
+                        "properties": {
+                            "class": {
+                                "const": "TLS_Client"
+                            }
+                        }
+                    },
+                    "then": {
+                        "$ref": "#/definitions/TLS_Client"
+                    }
+                },
+                {
+                    "if": {
+                        "properties": {
+                            "class": {
+                                "const": "TLS_Server"
+                            }
+                        }
+                    },
+                    "then": {
+                        "$ref": "#/definitions/TLS_Server"
+                    }
+                },
+                {
+                    "if": {
+                        "properties": {
+                            "class": {
+                                "const": "Certificate"
+                            }
+                        }
+                    },
+                    "then": {
+                        "$ref": "#/definitions/Certificate"
+                    }
+                },
+                {
+                    "if": {
+                        "properties": {
+                            "class": {
+                                "const": "HTTP_Profile"
+                            }
+                        }
+                    },
+                    "then": {
+                        "$ref": "#/definitions/HTTP_Profile"
+                    }
+                },
+                {
+                    "if": {
+                        "properties": {
+                            "class": {
+                                "const": "Service_HTTPS"
+                            }
+                        }
+                    },
+                    "then": {
+                        "$ref": "#/definitions/Service_HTTPS"
+                    }
+                },
+                {
+                    "if": {
+                        "properties": {
+                            "class": {
+                                "const": "TCP_Profile"
+                            }
+                        }
+                    },
+                    "then": {
+                        "$ref": "#/definitions/TCP_Profile"
+                    }
+                },
+                {
+                    "if": {
+                        "properties": {
+                            "class": {
+                                "const": "Analytics_Profile"
+                            }
+                        }
+                    },
+                    "then": {
+                        "$ref": "#/definitions/Analytics_Profile"
+                    }
+                }
+            ]
+        }
+    }
+}

@@ -1,0 +1,274 @@
+{
+    "description": "Epic BCA (Business Continuity Access) HTTPS App Services.",
+    "name": "AS3-EPIC-BCA-HTTPS-template-big-iq-v1",
+    "published": false,
+    "isUICompatible": true,
+    "tenant": {
+        "name": "",
+        "override": false,
+        "editable": true
+    },
+    "schemaOverlay": {
+        "type": "object",
+        "required": [
+            "class"
+        ],
+        "properties": {
+            "class": {
+                "type": "string",
+                "const": "Application"
+            },
+            "label": {},
+            "remark": {},
+            "template": {},
+            "schemaOverlay": {}
+        },
+        "definitions": {
+            "Pool": {
+                "type": "object",
+                "properties": {
+                    "class": {},
+                    "members": {
+                        "type": "array",
+                        "items": {
+                            "type": "object",
+                            "properties": {
+                                "monitors": {
+                                    "type": "array",
+                                    "items": {
+                                        "type": "object",
+                                        "properties": {
+                                            "use": {
+                                                "type": "string",
+                                                "default": "Monitor"
+                                            }
+                                        }
+                                    }
+                                },
+                                "adminState": {
+                                    "type": "string",
+                                    "default": "enable"
+                                },
+                                "shareNodes": {
+                                    "type": "boolean",
+                                    "const": true,
+                                    "default": true
+                                },
+                                "servicePort": {
+                                    "type": "number",
+                                    "default": 443
+                                },
+                                "serverAddresses": {
+                                    "type": "array"
+                                }
+                            }
+                        }
+                    },
+                    "monitors": {
+                        "type": "array",
+                        "const": [
+                            "http"
+                        ],
+                        "default": [
+                            "http"
+                        ]
+                    }
+                },
+                "additionalproperties": false
+            },
+            "Monitor": {
+                "type": "object",
+                "default": {},
+                "properties": {
+                    "send": {
+                        "type": "string",
+                        "default": "HEAD / HTTP/1.0\\r\\n\\r\\n"
+                    },
+                    "class": {},
+                    "receive": {
+                        "type": "string",
+                        "default": "OK‐WBS"
+                    },
+                    "timeout": {
+                        "type": "number",
+                        "default": 91
+                    },
+                    "interval": {
+                        "type": "number",
+                        "default": 5
+                    },
+                    "targetPort": {
+                        "type": "number",
+                        "const": 443,
+                        "default": 443
+                    },
+                    "monitorType": {
+                        "type": "string",
+                        "const": "https",
+                        "default": "https"
+                    },
+                    "receiveDown": {
+                        "type": "string"
+                    }
+                },
+                "additionalProperties": false
+            },
+            "Service_L4": {
+                "type": "object",
+                "properties": {
+                    "pool": {
+                        "type": "string",
+                        "default": "Pool"
+                    },
+                    "class": {},
+                    "virtualPort": {
+                        "type": "number",
+                        "default": 443
+                    },
+                    "addressStatus": {
+                        "type": "boolean",
+                        "default": true
+                    },
+                    "virtualAddresses": {
+                        "type": "array"
+                    },
+                    "persistenceMethods": {
+                        "type": "array",
+                        "default": []
+                    },
+                    "profileAnalyticsTcp": {
+                        "type": "object",
+                        "properties": {
+                            "use": {
+                                "type": "string",
+                                "default": "Analytics_TCP_Profile"
+                            }
+                        }
+                    }
+                },
+                "additionalProperties": false
+            },
+            "Analytics_TCP_Profile": {
+                "type": "object",
+                "properties": {
+                    "class": {},
+                    "collectCity": {
+                        "type": "boolean"
+                    },
+                    "collectRegion": {
+                        "type": "boolean",
+                        "default": false
+                    },
+                    "collectCountry": {
+                        "type": "boolean",
+                        "default": false
+                    },
+                    "collectContinent": {
+                        "type": "boolean",
+                        "default": false
+                    },
+                    "collectRemoteHostIp": {
+                        "type": "boolean"
+                    },
+                    "collectedByClientSide": {
+                        "type": "boolean",
+                        "default": true
+                    },
+                    "collectedByServerSide": {
+                        "type": "boolean",
+                        "default": true
+                    },
+                    "collectRemoteHostSubnet": {
+                        "type": "boolean",
+                        "default": false
+                    }
+                },
+                "additionalProperties": false
+            }
+        },
+        "additionalProperties": {
+            "allOf": [
+                {
+                    "anyOf": [
+                        {
+                            "properties": {
+                                "class": {
+                                    "const": "Pool"
+                                }
+                            }
+                        },
+                        {
+                            "properties": {
+                                "class": {
+                                    "const": "Analytics_TCP_Profile"
+                                }
+                            }
+                        },
+                        {
+                            "properties": {
+                                "class": {
+                                    "const": "Service_L4"
+                                }
+                            }
+                        },
+                        {
+                            "properties": {
+                                "class": {
+                                    "const": "Monitor"
+                                }
+                            }
+                        }
+                    ]
+                },
+                {
+                    "if": {
+                        "properties": {
+                            "class": {
+                                "const": "Pool"
+                            }
+                        }
+                    },
+                    "then": {
+                        "$ref": "#/definitions/Pool"
+                    }
+                },
+                {
+                    "if": {
+                        "properties": {
+                            "class": {
+                                "const": "Analytics_TCP_Profile"
+                            }
+                        }
+                    },
+                    "then": {
+                        "$ref": "#/definitions/Analytics_TCP_Profile"
+                    }
+                },
+                {
+                    "if": {
+                        "properties": {
+                            "class": {
+                                "const": "Service_L4"
+                            }
+                        }
+                    },
+                    "then": {
+                        "$ref": "#/definitions/Service_L4"
+                    }
+                },
+                {
+                    "if": {
+                        "properties": {
+                            "class": {
+                                "const": "Monitor"
+                            }
+                        }
+                    },
+                    "then": {
+                        "$ref": "#/definitions/Monitor"
+                    }
+                }
+            ]
+        }
+    }
+}
