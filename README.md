@@ -5,7 +5,7 @@ Welcome to the repository for BIG-IQ Application Services 3 Extension (AS3) temp
 
 If you’re here, that means you want to leverage F5’s declarative technology and automation tools in your use of BIG-IQ Centralized Management to manage your F5 portfolio — which is a great choice! F5 will continue aligning behind declarative frameworks and toolsets — simplifying the process of provisioning and configuring BIG-IP application services. This is because declarative interfaces and APIs require only that you know what you end state configuration requirements are — not the steps to achieve that end state. So, members of your team who don’t have a ton of networking, security, or F5 knowledge can still work with F5 technologies to ensure the protection and performance of their applications.
 
-The AS3 templates listed below are meant to be installed on BIG-IQ and will be used to configure and deploy L4-L7 services on BIG-IPs being managed by your BIG-IQ—similarly to how you would use AS3 on BIG-IP. You can use these templates as is or make custom changes to suit your specific needs. 
+The AS3 templates listed below are meant to be installed on BIG-IQ and will be used to configure and deploy L4-L7 services on BIG-IPs being managed by your BIG-IQ — similarly to how you would use AS3 on BIG-IP. You can use these templates as is or make custom changes to suit your specific needs. 
 
 To use these templates, you’ll need the following components:
 
