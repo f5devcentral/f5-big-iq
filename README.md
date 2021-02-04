@@ -1,11 +1,23 @@
 BIG-IQ AS3 Template Library
 ===========================
 
-**Note:** If you are looking for 7.0.0 AS3 Templates, select the [7.0.0](https://github.com/f5devcentral/f5-big-iq/tree/7.0.0) branch.
+Welcome to the repository for BIG-IQ Application Services 3 Extension (AS3) templates! 
 
-F5 maintains this BIG-IQ Application Services 3 Extension (AS3) template library to provide you with templates that you can either use directly or with just a few changes of your own. Use the instructions here to download these templates to your BIG-IQ system. Once downloaded, you can use these templates just as you would any other AS3 application template. AS3 templates perform on the BIG-IQ in much  the same way as they do on BIG-IP. For more detail on AS3 and how it works, refer to the CloudDocs content: [Using AS3 with BIG-IQ](https://clouddocs.f5.com/products/extensions/f5-appsvcs-extension/latest/userguide/big-iq.html). 
+If you’re here, that means you want to leverage F5’s declarative technology and automation tools in your use of BIG-IQ Centralized Management to manage your F5 portfolio — which is a great choice! F5 will continue aligning behind declarative frameworks and toolsets — simplifying the process of provisioning and configuring BIG-IP application services. This is because declarative interfaces and APIs require only that you know what you end state configuration requirements are — not the steps to achieve that end state. So, members of your team who don’t have a ton of networking, security, or F5 knowledge can still work with F5 technologies to ensure the protection and performance of their applications.
 
-[Look for AS3 templates submitted by the community!](./f5-appsvcs-templates-big-iq/community)
+The AS3 templates listed below are meant to be installed on BIG-IQ and will be used to configure and deploy L4-L7 services on BIG-IPs being managed by your BIG-IQ—similarly to how you would use AS3 on BIG-IP. You can use these templates as is or make custom changes to suit your specific needs. 
+
+To use these templates, you’ll need the following components:
+
+* BIG-IQ Centralized Management
+* Application Services 3 Extensions (AS3) installed on BIG-IQ
+
+In addition to the software components, you’ll need to ensure that you’re running the appropriate versions—this information can be found in the template list below. If you would like more information on AS3, how it works, and how to use it with BIG-IQ, check out this article on CloudDocs: [Using AS3 with BIG-IQ](https://clouddocs.f5.com/products/extensions/f5-appsvcs-extension/latest/userguide/big-iq.html).
+
+Not finding the specific template use case you’re looking for? Check out additional, [community-submitted AS3 templates for BIG-IQ](./f5-appsvcs-templates-big-iq/community).
+
+Now, it’s time to get automating!
+
 
 List of AS3 F5 Default Templates 
 --------------------------------
