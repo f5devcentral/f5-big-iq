@@ -29,7 +29,7 @@ Templates (schemaOverlay) | Version | Description | Min AS3 version | Min BIG-IQ
 
 Do you [need to upgrade AS3 on BIG-IQ](https://support.f5.com/csp/article/K54909607)?
 
-**Note:** The AS3 naming convention for **TLS Server** and **TLS Client** differs from traditional BIG-IP terminology to better comply with industry usage, but may be slightly confusing for long-time BIG-IP users. The AS3 TLS_Server class is for connections arriving to the BIG-IP, which creates a “client SSL profile” object on the BIG-IP. The AS3 TLS_Client class if for connections leaving the BIG-IP, which creates a “server SSL profile” on the BIG-IP. See TLS_Server and TLS_Client in the Schema Reference for more information ([More Tips and Warning](https://clouddocs.f5.com/products/extensions/f5-appsvcs-extension/latest/userguide/tips-warnings.html)).
+**Note:** The AS3 naming convention for **TLS Server** and **TLS Client** differs from traditional BIG-IP terminology to better comply with industry usage, but may be slightly confusing for long-time BIG-IP users. The AS3 TLS_Server class is for connections arriving to the BIG-IP, which creates a “client SSL profile” object on the BIG-IP. The AS3 TLS_Client class if for connections leaving the BIG-IP, which creates a “server SSL profile” on the BIG-IP. See TLS_Server and TLS_Client in the Schema Reference for more information ([more tips and warnings](https://clouddocs.f5.com/products/extensions/f5-appsvcs-extension/latest/userguide/tips-warnings.html)).
 
 How to submit a new template
 ----------------------------
