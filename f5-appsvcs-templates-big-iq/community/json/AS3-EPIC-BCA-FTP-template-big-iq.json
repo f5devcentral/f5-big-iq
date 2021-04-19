@@ -63,15 +63,6 @@
                                 }
                             }
                         }
-                    },
-                    "monitors": {
-                        "type": "array",
-                        "const": [
-                            "http"
-                        ],
-                        "default": [
-                            "http"
-                        ]
                     }
                 },
                 "additionalproperties": false
